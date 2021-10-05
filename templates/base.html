@@ -19,31 +19,31 @@
         <!-- Top navbar-->
         <nav>
             <div class="nav-wrapper nav-extended black white-text">
-                <a href="{{ url_for('')}}" class="brand-logo center">CellarClub</a>
+                <a href="#" class="brand-logo logo-font center">CellarClub</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left-align hide-on-med-and-down">
-                    <li><a href="{{ url_for('')}}">Wines</a></li>
-                    <li><a href="{{ url_for('')}}">Add Wine</a></li>
-                    <li><a href="{{ url_for('')}}">Add Review</a></li>
+                    <li><a href="#">Wines</a></li>
+                    <li><a href="#">Add Wine</a></li>
+                    <li><a href="#">Add Review</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ url_for('')}}">Profile</a></li>
-                    <li><a href="{{ url_for('')}}">Log in</a></li>
-                    <li><a href="{{ url_for('')}}">Sign Up</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Log in</a></li>
+                    <li><a href="#">Sign Up</a></li>
                 </ul>
             </div>
         </nav>
 
         <!-- Mobile Sidenav-->
-        <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align black white-text">CellarClub</h4></li>
-            <li><a href="{{ url_for('get_tasks')}}">Home</a></li>
-            <li><a href="{{ url_for('')}}">Wines</a></li>
-            <li><a href="{{ url_for('')}}">Add Wine</a></li>
-            <li><a href="{{ url_for('')}}">Add Review</a></li>
-            <li><a href="{{ url_for('')}}">Profile</a></li>
-            <li><a href="{{ url_for('')}}">Log in</a></li>
-            <li><a href="{{ url_for('')}}">Sign Up</a></li>
+        <ul class="sidenav black white-text" id="mobile-demo">
+            <li><h4 class="center-align logo-font">CellarClub</h4></li>
+            <li><a class="white-text" href="#">Home</a></li>
+            <li><a class="white-text" href="#">Wines</a></li>
+            <li><a class="white-text" href="#">Add Wine</a></li>
+            <li><a class="white-text" href="#">Add Review</a></li>
+            <li><a class="white-text" href="#">Profile</a></li>
+            <li><a class="white-text" href="#">Log in</a></li>
+            <li><a class="white-text" href="#">Sign Up</a></li>
         </ul>
     </header>
 
@@ -68,6 +68,34 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <footer class="page-footer bg-wine">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text logo-font">CellarClub</h5>
+              <p class="white-text">cellarclub@gmail.com</p>
+              <p class="white-text">2 Main Street Rathmines</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+              <h5 class="white-text">Links</h5>
+              <ul>
+                <li><a class="grey-text" href="#!">Link 1</a></li>
+                <li><a class="grey-text" href="#!">Link 2</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+            &copy; 2021 AM Murphy
+            <a href="www.instagram.com"><i class="fab fa-instagram white-text right"></i></a>
+            <a href="www.facebook.com"><i class="fab fa-facebook white-text right"></i></a>
+            <a href="www.twitter.com"><i class="fab fa-twitter white-text right"></i></a>
+            <a href="www.pinterest.com"><i class="fab fa-pinterest white-text right"></i></a>
+          </div>
+        </div>
+      </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

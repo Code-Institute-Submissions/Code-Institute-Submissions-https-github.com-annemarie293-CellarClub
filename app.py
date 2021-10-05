@@ -22,10 +22,10 @@ def base():
     return render_template("base.html")
 
 
-@app.route("/all_wines")
-def all_wines():
-    wines = mongo.db.wines.find()
-    return render_template("wines.html", wines=wines)
+# @app.route("/all_wines")
+# def all_wines():
+# wines = mongo.db.wines.find()
+# return render_template("wines.html", wines=wines)
 
 
 if __name__ == "__main__":
