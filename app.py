@@ -22,6 +22,39 @@ def base():
     return render_template("base.html")
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        # Check if user already exists in DB
+        user_exists = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if user_exists:
+            flash("Username already exists")
+            return redirect(url_for('register'))
+
+        # Check if passwords are matching
+        password1 = request.form.get("password")
+        password2 = request.form.get("password-check")
+
+        if password1 != password2:
+            flash("Passwords do not match, please re-check")
+            return redirect(url_for('register'))
+    
+        # Create new username/password dictionary to add to DB
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+
+        # Add the new user into 'session' cookie
+        session["user"] = request.form.get("username").lower()
+        flash("Registration successful")
+        return redirect(url_for('base', username=session["user"]))
+
+    return render_template("register.html")
+
 # @app.route("/all_wines")
 # def all_wines():
 # wines = mongo.db.wines.find()

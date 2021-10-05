@@ -29,7 +29,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#">Profile</a></li>
                     <li><a href="#">Log in</a></li>
-                    <li><a href="#">Sign Up</a></li>
+                    <li><a href="{{ url_for('register')}}">Sign Up</a></li>
                 </ul>
             </div>
         </nav>
@@ -43,7 +43,7 @@
             <li><a class="white-text" href="#">Add Review</a></li>
             <li><a class="white-text" href="#">Profile</a></li>
             <li><a class="white-text" href="#">Log in</a></li>
-            <li><a class="white-text" href="#">Sign Up</a></li>
+            <li><a class="white-text" href="{{ url_for('register')}}">Sign Up</a></li>
         </ul>
     </header>
 
@@ -101,9 +101,6 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js')}}"></script>
-
-    {% block js %}
-    {% endblock %}
 
 </body>
 

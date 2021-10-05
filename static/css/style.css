@@ -6,7 +6,8 @@
     font-weight: 700;
 }
 
-body {
+body, 
+.corben-font {
     font-family: 'Corben', cursive;
     font-weight: 400;
 }

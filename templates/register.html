@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h4 class="center-align">Sign up to join the club today!</h4>
+
+<div class="row">
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register')}}">
+        <div class="card-panel center-align">
+            <!--Username input field-->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-user prefix black-text"></i>
+                    <input id="username" name="username" type="text" class="validate" minlength="5" maxlength="20"
+                        required pattern="^[a-zA-Z0-9]{5,20}$">
+                    <label for="username">Username</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <i class="fas fa-user-lock prefix black-text"></i>
+                    <input id="password" type="password" name="password" class="validate" minlength="5" maxlength="20"
+                        required pattern="^[a-zA-Z0-9]{5,20}$">
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="fas fa-user-check prefix black-text"></i>
+                    <input id="password-check" type="password" name="password-check" class="validate" minlength="5"
+                        maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$">
+                    <label for="password-check">Re-enter your password</label>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="col s12 btn-large black white-text center-align corben-font">
+                    Register <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
