@@ -3,11 +3,11 @@
 {% block content %}
 
 <div class="row ">
-    <h4 class="page-header col s12 m8 offset-m2 center-align amber accent-4">Sign up to join our club!</h4>
+    <h4 class="page-header col s12 m8 offset-m2 center-align amber accent-4">Sign in to your account</h4>
 </div>
 
 <div class="row">
-    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register')}}">
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('sign_in')}}">
         <div class="card-panel center-align">
             <!--Username input field-->
             <div class="row">
@@ -18,26 +18,19 @@
                     <label for="username">Username</label>
                 </div>
             </div>
+            <!--Username input field-->
             <div class="row">
-                <!--Password input field-->
-                <div class="input-field col s12 m6">
+                <div class="input-field col s12">
                     <i class="fas fa-user-lock prefix black-text"></i>
                     <input id="password" type="password" name="password" class="validate" minlength="5" maxlength="20"
                         required pattern="^[a-zA-Z0-9]{5,20}$">
                     <label for="password">Password</label>
                 </div>
-                <!--Repeat password input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-user-check prefix black-text"></i>
-                    <input id="password-check" type="password" name="password-check" class="validate" minlength="5"
-                        maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$">
-                    <label for="password-check">Re-enter your password</label>
-                </div>
             </div>
-            <!--Submit Button-->
+            <!--Submit Button -->
             <div class="row">
                 <button type="submit" class="col s12 btn-large black white-text center-align corben-font">
-                    Register <i class="fas fa-sign-in-alt"></i>
+                    Sign In <i class="fas fa-sign-in-alt"></i>
                 </button>
             </div>
         </div>
