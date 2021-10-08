@@ -11,20 +11,12 @@
         type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}" type="text/css">
     <title>CellarClub</title>
-
     <style>
         body {
-            background-image: url({{ url_for('static', filename='images/wine-smaller.png') }} );
-        }
-
-        @media only screen and (max-width: 767px) {
-            body {
-                /* The file size of this background image is 93% smaller
-                    to improve page load speed on mobile internet connections */
-                background-image: url({{ url_for('static', filename='images/wine-wallpaper.png') }} );
-            }
+            background-image: url("{{ url_for('static', filename='images/wine-smaller.png') }}");
         }
     </style>
+
 </head>
 
 <body>
@@ -36,7 +28,7 @@
                 <a href="#" class="brand-logo logo-font center">CellarClub</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left-align hide-on-med-and-down">
-                    <li><a href="#">Wines</a></li>
+                    <li><a href="{{ url_for('wines')}}">Wines</a></li>
                     <li><a href="#">Add Wine</a></li>
                     <li><a href="#">Add Review</a></li>
                 </ul>
@@ -54,7 +46,7 @@
                 <h4 class="center-align logo-font">CellarClub</h4>
             </li>
             <li><a class="white-text" href="#">Home</a></li>
-            <li><a class="white-text" href="#">Wines</a></li>
+            <li><a class="white-text" href="{{ url_for('wines')}}">Wines</a></li>
             <li><a class="white-text" href="#">Add Wine</a></li>
             <li><a class="white-text" href="#">Add Review</a></li>
             <li><a class="white-text" href="#">Profile</a></li>

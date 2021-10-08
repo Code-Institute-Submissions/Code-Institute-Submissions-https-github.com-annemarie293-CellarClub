@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap');
 
+
+body {
+    background-image: url("static/images/wine-smaller.png");
+}
+
 /*-----Fonts------*/
 .logo-font {
     font-family: 'Corben', cursive;
@@ -11,8 +16,6 @@ body,
     font-family: 'Corben', cursive;
     font-weight: 400;
 }
-
-
 
 /*-----Colours------*/
 .text-wine {

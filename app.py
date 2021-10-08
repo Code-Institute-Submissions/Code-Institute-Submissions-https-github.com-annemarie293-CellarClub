@@ -82,10 +82,10 @@ def sign_in():
     return render_template("sign-in.html")
 
 
-# @app.route("/all_wines")
-# def all_wines():
-# wines = mongo.db.wines.find()
-# return render_template("wines.html", wines=wines)
+@app.route("/wines")
+def wines():
+    wines = mongo.db.wines.find()
+    return render_template("wines.html", wines=wines)
 
 
 if __name__ == "__main__":
