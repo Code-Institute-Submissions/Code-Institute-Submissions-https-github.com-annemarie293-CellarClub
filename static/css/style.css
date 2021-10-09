@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap');
 
 
-body {
-    background-image: url("static/images/wine-smaller.png");
-}
-
 /*-----Fonts------*/
 .logo-font {
     font-family: 'Corben', cursive;
@@ -50,3 +46,35 @@ body,
         line-height: 2.5rem;
     }
     }
+
+/*-- Cards on Wines Page --*/
+.card img {
+    background-color: #923A49;
+    padding-top: 2rem;
+}
+
+.wine-info{
+    padding-top: 3rem;
+}
+
+.wine-info p{
+    padding-bottom: 2rem;
+}
+
+.card-content .card-header{
+    height: 2rem;
+    width: 3rem;
+}
+
+/* for card container on tablets and larger */
+@media only screen and (min-width: 601px){
+    .container {
+        width: 90% !important;
+    }
+}
+
+@media only screen and (min-width: 1024px){
+    .container {
+        width: 75% !important;
+    }
+}

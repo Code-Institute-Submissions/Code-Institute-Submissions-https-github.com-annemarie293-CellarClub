@@ -1,22 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wines</title>
-</head>
-<body>
-    
-<h3>Wines</h3>
+{% extends "base.html" %}
 
-{% for wine in wines %}
-    {{ wine.wine_type }}</br>
-    {{ wine.wine_name }}</br>
-    {{ wine.vintage }}</br>
-    {{ wine.country }}</br>
-    {{ wine.grape }}</br>
-{% endfor %}
+{% block content %}
 
-</body>
-</html>
+<div class="row ">
+    <h4 class="page-header col s12 m8 offset-m2 center-align amber accent-4">Wines</h4>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        {% for wine in wines %}
+
+            <div class="col s12 m4">
+                <div class="card horizontal">
+                    <div class="card-image bg-wine">
+                        {% if wine.wine_type == "red" %}
+                        <img src="static/images/red.png">
+                        {% elif wine.wine_type == "white" %}
+                        <img src="static/images/white.png">
+                        {% elif wine.wine_type == "rose" %}
+                        <img src="static/images/rose.png">
+                        {% elif wine.wine_type == "sparkling" %}
+                        <img src="static/images/champagne.png">
+                        {% endif %}
+                    </div>
+                    <div class="card-stacked black">
+                        <div class="card-content">
+                            <h6 class="card-header amber-text text-darken-2"><strong>{{ wine.wine_name }}</strong></h6>
+                            <div class="wine-info">
+                                <p class="white-text"><i class="fas fa-wine-glass"></i> {{ wine.grape }}</p>
+                                <p class="white-text"><i class="fas fa-flag"></i> {{ wine.country }}</p>
+                                <p class="white-text"><i class="fas fa-wine-bottle"></i> {{ wine.vintage }}</p>
+                            </div>
+                        </div>
+                        <div class="center-align">
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                        </div>
+                        <div class="card-action center-align">
+                            <a href="#{{ wine._id }}" class="btn-small amber accent-2 modal-trigger center-align grey-text text-darken-4">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Structure -->
+            <div id="{{ wine._id }}" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>{{ wine.wine_name }}</h4>
+                    <p>A bunch of text</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}
