@@ -56,7 +56,7 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/sign_in", methods=["GET","POST"])
+@app.route("/sign_in", methods=["GET", "POST"])
 def sign_in():
     if request.method == "POST":
         # Check if user already exists in DB
@@ -86,6 +86,27 @@ def sign_in():
 def wines():
     wines = mongo.db.wines.find()
     return render_template("wines.html", wines=wines)
+
+
+@app.route("/add_wine", methods=["GET", "POST"])
+def add_wine():
+    if request.method == "POST":
+        # Create new task dictionary to add to DB
+        wine = {
+            "wine_type": request.form.get("wine_type"),
+            "wine_name": request.form.get("wine_name").lower(),
+            "grape": request.form.get("grape").lower(),
+            "vintage": request.form.get("vintage").lower(),
+            "country": request.form.get("country").lower(),
+            "region": request.form.get("region").lower(),
+            "submitted_by": session["user"]
+        }
+        mongo.db.wines.insert_one(wine)
+        flash("Your wine has been added to our collection!")
+        return redirect(url_for('wines'))
+
+    types = mongo.db.wine_type.find().sort("wine_type", 1)
+    return render_template("add-wine.html", types=types)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row ">
+    <h4 class="page-header col s12 m8 offset-m2 center-align amber accent-4">Submit a new wine</h4>
+</div>
+
+<div class="row">
+    <form class="col s12 m8 offset-m2 card-panel center-align" method="POST" action="{{ url_for('add_wine')}}">
+            <!--Wine type selection-->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-bars prefix black-tex"></i>
+                    <select id="wine_type" name="wine_type" class="validate" required>
+                      <option value="" disabled selected>Select Wine Type</option>
+                      {% for type in types %}
+                        <option value="{{ type.wine_type }}">{{ type.wine_type.capitalize() }}</option>
+                      {% endfor %}
+                    </select>
+                    <label for="wine_type">Wine Type</label>
+                  </div>
+            </div>
+            
+            <!--Wine Name input field-->
+                <div class="input-field col s12">
+                    <i class="fas fa-award prefix black-text"></i>
+                    <input id="wine_name"type="text" name="wine_name" class="validate" required>
+                    <label for="wine_name">Wine Name</label>
+                </div>
+            <!--Grape input field-->
+                <div class="input-field col s12 m6">
+                    <i class="fas fa-wine-glass prefix black-text"></i>
+                    <input id="grape"type="text" name="grape" class="validate" required>
+                    <label for="grape">Grape</label>
+                </div>
+            <!--Vintage input field-->
+                <div class="input-field col s12 m6">
+                    <i class="fas fa-wine-bottle prefix black-text"></i>
+                    <input id="vintage"type="text" name="vintage" class="validate"
+                    minlength="4" maxlength="4" required pattern="^[0-9]{4,4}$" required>
+                    <label for="vintage">Vintage</label>
+                </div>
+            <!--Country input field-->
+                <div class="input-field col s12 m6">
+                    <i class="fas fa-flag prefix black-text"></i>
+                    <input id="country"type="text" name="country" class="validate" required>
+                    <label for="country">Country</label>
+                </div>
+            <!--Region input field-->
+    
+                <div class="input-field col s12 m6">
+                    <i class="fas fa-map-marker-alt prefix black-text"></i>
+                    <input id="region"type="text" name="region" class="region">
+                    <label for="region">Region (optional)</label>
+                </div>
+            <!--Submit Button -->
+            <div class="row">
+                <button type="submit" class="col s12 btn-large black white-text center-align corben-font">
+                    Submit Wine <i class="fas fa-plus-circle"></i>
+                </button>
+            </div>
+    </form>
+</div>
+
+{% endblock %}

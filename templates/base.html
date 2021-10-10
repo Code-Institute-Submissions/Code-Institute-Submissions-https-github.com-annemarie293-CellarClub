@@ -29,7 +29,7 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left-align hide-on-med-and-down">
                     <li><a href="{{ url_for('wines')}}">Wines</a></li>
-                    <li><a href="#">Add Wine</a></li>
+                    <li><a href="{{ url_for('add_wine')}}">Add Wine</a></li>
                     <li><a href="#">Add Review</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down">
@@ -47,7 +47,7 @@
             </li>
             <li><a class="white-text" href="#">Home</a></li>
             <li><a class="white-text" href="{{ url_for('wines')}}">Wines</a></li>
-            <li><a class="white-text" href="#">Add Wine</a></li>
+            <li><a class="white-text" href="{{ url_for('add_wine')}}">Add Wine</a></li>
             <li><a class="white-text" href="#">Add Review</a></li>
             <li><a class="white-text" href="#">Profile</a></li>
             <li><a class="white-text" href="{{ url_for('sign_in')}}">Sign in</a></li>
@@ -82,15 +82,7 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text logo-font">CellarClub</h5>
-                    <p class="white-text">cellarclub@gmail.com</p>
-                    <p class="white-text">2 Main Street Rathmines</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-                        <li><a class="grey-text" href="#!">Link 1</a></li>
-                        <li><a class="grey-text" href="#!">Link 2</a></li>
-                    </ul>
+                    <p class="white-text">2 Main Street Rathmines, cellarclub@gmail.com</p>
                 </div>
             </div>
         </div>
