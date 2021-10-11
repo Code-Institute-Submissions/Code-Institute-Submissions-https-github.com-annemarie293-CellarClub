@@ -40,7 +40,7 @@ def register():
         if password1 != password2:
             flash("Passwords do not match, please re-check")
             return redirect(url_for('register'))
-            
+
         # Create new username/password dictionary to add to DB
         register = {
             "username": request.form.get("username").lower(),
@@ -78,20 +78,35 @@ def sign_in():
             # If user does not exist/username is incorrect
             flash("Username or password is incorrect, Please try again")
             return redirect(url_for('sign_in'))
-    
+
     return render_template("sign-in.html")
+
+
+@app.route("/profile")
+def profile():
+    wines = mongo.db.wines.find()
+    users = mongo.db.users.find()
+    return render_template("profile.html", wines=wines, users=users)
 
 
 @app.route("/wines")
 def wines():
-    wines = mongo.db.wines.find()
+    wines = mongo.db.wines.find().sort("wine_name", 1)
     return render_template("wines.html", wines=wines)
 
 
 @app.route("/add_wine", methods=["GET", "POST"])
 def add_wine():
     if request.method == "POST":
-        # Create new task dictionary to add to DB
+        # Check if wine and vintage pair already exists in DB
+        wine_vintage_exists = mongo.db.wines.find_one(
+                      {"wine_name": request.form.get("wine_name").lower()})
+        
+        if wine_vintage_exists:
+            flash("Wine/Vintage already exists, please add a review")
+            return redirect(url_for("wines"))
+
+        # Create new wine dictionary to add to DB
         wine = {
             "wine_type": request.form.get("wine_type"),
             "wine_name": request.form.get("wine_name").lower(),
