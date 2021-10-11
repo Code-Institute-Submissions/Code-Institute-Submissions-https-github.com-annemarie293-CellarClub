@@ -55,7 +55,7 @@ def register():
 
     return render_template("register.html")
 
-
+# Function to Sign-In
 @app.route("/sign_in", methods=["GET", "POST"])
 def sign_in():
     if request.method == "POST":
@@ -81,7 +81,16 @@ def sign_in():
 
     return render_template("sign-in.html")
 
+# Function to Sign Out
+@app.route("/sign_out")
+def sign_out():
+    # Clear the session user cookie
+    flash("You have been Logged out")
+    session.pop("user")
+    return redirect(url_for('sign_in'))
 
+
+# function to view Profile page
 @app.route("/profile")
 def profile():
     wines = mongo.db.wines.find()
@@ -89,12 +98,14 @@ def profile():
     return render_template("profile.html", wines=wines, users=users)
 
 
+# Function to view all wines
 @app.route("/wines")
 def wines():
     wines = mongo.db.wines.find().sort("wine_name", 1)
     return render_template("wines.html", wines=wines)
 
 
+# Function to add a new wine to the DB
 @app.route("/add_wine", methods=["GET", "POST"])
 def add_wine():
     if request.method == "POST":
