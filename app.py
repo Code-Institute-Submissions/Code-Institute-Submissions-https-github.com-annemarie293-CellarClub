@@ -175,6 +175,26 @@ def add_wine():
     return render_template("add-wine.html", types=types)
 
 
+# Function to add a new review to the wine
+@app.route("/add_review/<wine_id>", methods=["GET", "POST"])
+def add_review(wine_id):
+    if request.method == "POST":
+        # Create new review dictionary to add to reviews DB
+        review = {
+            "wine_name": request.form.get("wine_name"),
+            "vintage": request.form.get("vintage"),
+            "review": request.form.get("review"),
+            "rating": int(request.form.get("rating")),
+            "reviewed_by": session["user"]
+        }
+        mongo.db.reviews.insert_one(review)
+        flash("Review successfully submitted")
+        return redirect(url_for('view_wines'))
+
+    wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
+    return render_template("add-review.html", wine=wine)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

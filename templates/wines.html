@@ -64,6 +64,9 @@
                     
                 </div>
                 <div class="modal-footer">
+                    {% if session.user %}
+                        <a href="{{ url_for('add_review', wine_id=wine._id) }}" class="btn-small amber accent-2 center-align grey-text text-darken-4">Add Review</a>
+                    {% endif %}
                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
                 </div>
             </div>
