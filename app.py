@@ -4,6 +4,7 @@ from flask import (Flask, flash, render_template,
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import date, datetime
 if os.path.exists("env.py"):
     import env
 
@@ -41,6 +42,17 @@ def register():
             flash("Passwords do not match, please re-check")
             return redirect(url_for('register'))
 
+        # Check if user is over 18
+        dob = request.form.get("dob")
+        dob_date = datetime.strptime(dob, '%Y-%m-%d').date()
+        today = date.today()
+        # To Calcuate user age from dob input on form Source: https://www.geeksforgeeks.org/python-program-to-calculate-age-in-year/
+        age = today.year - dob_date.year - ((today.month, today.day) < (dob_date.month, dob_date.day))
+
+        if age < 18:
+            flash("Sorry, You must be of legal age to join our club")
+            return redirect(url_for('register'))
+
         # Create new username/password dictionary to add to DB
         register = {
             "username": request.form.get("username").lower(),
@@ -55,6 +67,7 @@ def register():
 
     return render_template("register.html")
 
+
 # Function to Sign-In
 @app.route("/sign_in", methods=["GET", "POST"])
 def sign_in():
@@ -68,7 +81,8 @@ def sign_in():
             if check_password_hash(user_exists["password"],
                                    request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                flash("Welcome {}!".format(request.form.get("username").title()))
+                flash("Welcome {}!".format(request.form.get(
+                    "username").title()))
                 return redirect(url_for('profile', username=session["user"]))
             else:
                 # If password is incorrect
@@ -80,6 +94,7 @@ def sign_in():
             return redirect(url_for('sign_in'))
 
     return render_template("sign-in.html")
+
 
 # Function to Sign Out
 @app.route("/sign_out")
