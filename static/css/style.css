@@ -63,62 +63,82 @@ body,
 
 /*-- Cards on Wines Page --*/
 
-/* For card size on tablets only */
-@media only screen and (max-width: 800px) and (min-width: 700px){
-    .card {
-        height: 330px!important;
+    /* For card size on tablets only */
+    @media only screen and (max-width: 800px) and (min-width: 700px){
+        .card {
+            height: 330px!important;
+        }
+        
+        .wine-info p{
+            padding-bottom: .65rem;
+        }
+        .card .h6{
+            margin-top: 5px;
+        }
     }
-    
-    .wine-info p{
-        padding-bottom: .65rem;
-    }
-    .card .h6{
-        margin-top: 5px;
-    }
-}
 
-/* for fixed card size on large screens */
-@media only screen and (min-width: 800px){
-    .card {
-        height: 350px !important;
+    /* for fixed card size on large screens */
+    @media only screen and (min-width: 800px){
+        .card {
+            height: 350px !important;
+        }
+
+        .card img {
+            max-height: 320px !important;
+        }
+
     }
 
     .card img {
-        max-height: 320px !important;
+        background-color: #923A49;
+        padding-top: 2rem;
     }
 
-}
-
-.card img {
-    background-color: #923A49;
-    padding-top: 2rem;
-}
-
-.wine-info p{
-    padding-bottom: .75rem;
-}
-
-.card-content{
-    padding: 10px !important;
-}
-
-/* for card container on tablets and larger */
-@media only screen and (min-width: 601px){
-    .container {
-        width: 90% !important;
+    .wine-info p{
+        padding-bottom: .75rem;
     }
-}
 
-@media only screen and (min-width: 1000px){
-    .container {
-        width: 80% !important;
+    .card-content{
+        padding: 10px !important;
     }
-}
 
-/* Modal */
-.modal-wine-info p{
-    color: #ff8f00;
-}
-.modal-wine-info p span{
+    /* for card container on tablets and larger */
+    @media only screen and (min-width: 601px){
+        .container {
+            width: 90% !important;
+        }
+    }
+
+    @media only screen and (min-width: 1000px){
+        .container {
+            width: 80% !important;
+        }
+    }
+
+    /* Modal */
+    .modal-wine-info p{
+        color: #ff8f00;
+    }
+    .modal-wine-info p span{
+        color: white;
+    }
+
+/*-- Flash Alert --  Source: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_alert */
+  .alert{
+      padding: 10px;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
     color: white;
-}
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }

@@ -68,8 +68,8 @@ def sign_in():
             if check_password_hash(user_exists["password"],
                                    request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                flash("Welcome {}!".format(request.form.get("username")))
-                return redirect(url_for('base', username=session["user"]))
+                flash("Welcome {}!".format(request.form.get("username").title()))
+                return redirect(url_for('profile', username=session["user"]))
             else:
                 # If password is incorrect
                 flash("Username or password is incorrect, Please try again")
@@ -90,7 +90,7 @@ def sign_out():
     return redirect(url_for('sign_in'))
 
 
-# function to view Profile page
+# Function to view Profile page
 @app.route("/profile")
 def profile():
     wines = mongo.db.wines.find()
