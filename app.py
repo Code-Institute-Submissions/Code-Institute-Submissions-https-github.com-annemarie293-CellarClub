@@ -181,7 +181,7 @@ def add_review(wine_id):
     if request.method == "POST":
         # Create new review dictionary to add to reviews DB
         review = {
-            "wine_name": request.form.get("wine_name"),
+            "wine_name": request.form.get("wine_name").lower(),
             "vintage": request.form.get("vintage"),
             "review": request.form.get("review"),
             "rating": int(request.form.get("rating")),
