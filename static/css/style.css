@@ -31,8 +31,9 @@ body,
 }
 
 .bg-wine {
-    background-color: #923A49;
+    background-color: #923A49 !important;
 }
+
 
 /*-----Headers on all pages page ------*/
 .row .page-header {

@@ -28,14 +28,14 @@
                 <a href="#" class="brand-logo logo-font center">CellarClub</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="left-align hide-on-med-and-down">
-                    <li><a href="{{ url_for('wines')}}">Wines</a></li>
+                    <li><a href="{{ url_for('view_wines')}}">Wines</a></li>
                     {% if session.user%}
                         <li><a href="{{ url_for('add_wine')}}">Add Wine</a></li>
                     {% endif %}
                 </ul>
                 <ul class="right hide-on-med-and-down">
                     {% if session.user%}
-                        <li><a href="{{ url_for('profile')}}">Profile</a></li>
+                        <li><a href="{{ url_for('profile', username=session['user'])}}">Profile</a></li>
                         <li><a href="{{ url_for('sign_out')}}">Sign Out</a></li>
                     {% else%}
                         <li><a href="{{ url_for('sign_in')}}">Sign in</a></li>
@@ -51,10 +51,10 @@
                 <h4 class="center-align logo-font">CellarClub</h4>
             </li>
             <li><a class="white-text" href="#">Home</a></li>
-            <li><a class="white-text" href="{{ url_for('wines')}}">Wines</a></li>
+            <li><a class="white-text" href="{{ url_for('view_wines')}}">Wines</a></li>
             {% if session.user%}
             <li><a class="white-text" href="{{ url_for('add_wine')}}">Add Wine</a></li>
-                <li><a href="{{ url_for('profile')}}">Profile</a></li>
+                <li><a href="{{ url_for('profile', username=session['user'])}}">Profile</a></li>
                 <li><a href="{{ url_for('sign_out')}}">Sign Out</a></li>
             {% else %}
                 <li><a href="{{ url_for('sign_in')}}">Sign in</a></li>

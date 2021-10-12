@@ -1,10 +1,10 @@
 import os
+from datetime import date, datetime
 from flask import (Flask, flash, render_template,
                    redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import date, datetime
 if os.path.exists("env.py"):
     import env
 
@@ -25,6 +25,10 @@ def base():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """Gets user submitted inputs from register.html
+        checks if there is existing user, and
+        if user is over 18. If conditions are met,
+        user details are added to 'users' DB """
     if request.method == "POST":
         # Check if user already exists in DB
         user_exists = mongo.db.users.find_one(
@@ -46,24 +50,31 @@ def register():
         dob = request.form.get("dob")
         dob_date = datetime.strptime(dob, '%Y-%m-%d').date()
         today = date.today()
-        # To Calcuate user age from dob input on form Source: https://www.geeksforgeeks.org/python-program-to-calculate-age-in-year/
-        age = today.year - dob_date.year - ((today.month, today.day) < (dob_date.month, dob_date.day))
+        # To Calcuate user age from dob input
+        # Source: https://www.geeksforgeeks.org/
+        # python-program-to-calculate-age-in-year/
+        age = today.year - dob_date.year - ((
+            today.month, today.day) < (dob_date.month, dob_date.day))
 
         if age < 18:
             flash("Sorry, You must be of legal age to join our club")
             return redirect(url_for('register'))
 
         # Create new username/password dictionary to add to DB
-        register = {
+        new_user = {
             "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password")),
+            "first-name": request.form.get("first-name").lower(),
+            "last-name": request.form.get("last-name").lower(),
+            "dob": request.form.get("dob"),
+            "country": request.form.get("country").lower(),
         }
-        mongo.db.users.insert_one(register)
+        mongo.db.users.insert_one(new_user)
 
         # Add the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration successful")
-        return redirect(url_for('base', username=session["user"]))
+        return redirect(url_for('profile', username=session["user"]))
 
     return render_template("register.html")
 
@@ -108,14 +119,25 @@ def sign_out():
 # Function to view Profile page
 @app.route("/profile")
 def profile():
-    wines = mongo.db.wines.find()
-    users = mongo.db.users.find()
-    return render_template("profile.html", wines=wines, users=users)
+    wines = list(mongo.db.wines.find())
+    # Grab the session user's username from the db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    first_name = mongo.db.users.find_one(
+        {"first-name": session["user"]})["first-name"]
+
+    if session["user"]:
+        return render_template("profile.html",
+                               username=username,
+                               wines=wines,
+                               first_name=first_name)
+    else:
+        return redirect(url_for('login'))
 
 
 # Function to view all wines
-@app.route("/wines")
-def wines():
+@app.route("/view_wines")
+def view_wines():
     wines = mongo.db.wines.find().sort("wine_name", 1)
     return render_template("wines.html", wines=wines)
 
@@ -125,13 +147,16 @@ def wines():
 def add_wine():
     if request.method == "POST":
         # Check if wine and vintage pair already exists in DB
-        wine_vintage_exists = mongo.db.wines.find_one(
+        wine_exists = mongo.db.wines.find_one(
                       {"wine_name": request.form.get("wine_name").lower()})
         
-        if wine_vintage_exists:
-            flash("Wine/Vintage already exists, please add a review")
-            return redirect(url_for("wines"))
-
+        if wine_exists:
+            vintage_exists = mongo.db.wines.find_one(
+                             {"vintage": request.form.get("vintage")})
+            if vintage_exists:
+                flash("Wine/Vintage already exists, please add a review")
+                return redirect(url_for("view_wines"))
+        
         # Create new wine dictionary to add to DB
         wine = {
             "wine_type": request.form.get("wine_type"),
@@ -144,7 +169,7 @@ def add_wine():
         }
         mongo.db.wines.insert_one(wine)
         flash("Your wine has been added to our collection!")
-        return redirect(url_for('wines'))
+        return redirect(url_for('view_wines'))
 
     types = mongo.db.wine_type.find().sort("wine_type", 1)
     return render_template("add-wine.html", types=types)
