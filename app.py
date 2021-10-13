@@ -19,7 +19,7 @@ mongo = PyMongo(app)
 
 @app.route("/")
 @app.route("/base")
-def base():
+def base():    
     return render_template("base.html")
 
 
@@ -139,7 +139,8 @@ def profile():
 @app.route("/view_wines")
 def view_wines():
     wines = mongo.db.wines.find().sort("wine_name", 1)
-    return render_template("wines.html", wines=wines)
+    reviews = list(mongo.db.reviews.find())
+    return render_template("wines.html", wines=wines, reviews=reviews)
 
 
 # Function to add a new wine to the DB

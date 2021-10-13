@@ -60,6 +60,14 @@
                             <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
                             {% endif %}
                         </div>
+                        <div class="row">
+                            {% for review in reviews %}
+                                {% if review.wine_name|lower == wine.wine_name|lower %}
+                                    <p class="yellow-text">{{ review.review }}</p>
+                                    <p class="yellow-text">{{ review.reviewed_by }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                     
                 </div>
@@ -67,7 +75,7 @@
                     {% if session.user %}
                         <a href="{{ url_for('add_review', wine_id=wine._id) }}" class="btn-small amber accent-2 center-align grey-text text-darken-4">Add Review</a>
                     {% endif %}
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
                 </div>
             </div>
 
