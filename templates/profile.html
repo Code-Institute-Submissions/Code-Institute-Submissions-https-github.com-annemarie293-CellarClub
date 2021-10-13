@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-    <h4 class="page-header col s12 m8 offset-m2 center-align amber accent-4">{{ first-name.title() }}'s Profile Page</h4>
+    <h4 class="page-header col s12 m8 offset-m2 center-align amber accent-4">{{ first_name.title() }}'s Profile Page</h4>
 </div>
 
 <!-- Personal Info-->
@@ -14,7 +14,7 @@
     <!-- Wines submitted by user-->
     <div class="col s12 m6">
         <ul class="collection with-header">
-            <li class="collection-header bg-wine amber-text"><h4>Wines added by {{ first-name.title() }}</h4></li>
+            <li class="collection-header bg-wine amber-text"><h4>Wines added by {{ first_name.title() }}</h4></li>
             {% for wine in wines %}
                 {% if session.user|lower == wine.submitted_by|lower %}
                     <li class="row collection-item bg-wine white-text">
