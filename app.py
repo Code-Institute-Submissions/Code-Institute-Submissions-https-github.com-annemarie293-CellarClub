@@ -177,9 +177,16 @@ def add_wine():
             "vintage": request.form.get("vintage").lower(),
             "country": request.form.get("country").lower(),
             "region": request.form.get("region").lower(),
-            "submitted_by": session["user"]
+            "submitted_by": session["user"],
+            "user_reviews": [{
+                "review": request.form.get("review"),
+                "rating": int(request.form.get("rating")),
+                "reviewed_by": session["user"]
+            }]
         }
         mongo.db.wines.insert_one(wine)
+
+        
         flash("Your wine has been added to our collection!")
         return redirect(url_for('view_wines'))
 
@@ -191,15 +198,14 @@ def add_wine():
 @app.route("/add_review/<wine_id>", methods=["GET", "POST"])
 def add_review(wine_id):
     if request.method == "POST":
-        # Create new review dictionary to add to reviews DB
+        # Create new review dictionary to add to
+        # user_review array in the wine doc in wines db
         review = {
-            "wine_name": request.form.get("wine_name").lower(),
-            "vintage": request.form.get("vintage"),
             "review": request.form.get("review"),
             "rating": int(request.form.get("rating")),
             "reviewed_by": session["user"]
         }
-        mongo.db.reviews.insert_one(review)
+        mongo.db.wines.update_one({"_id": ObjectId(wine_id)}, {"$push": {"user_reviews": review}})
         flash("Review successfully submitted")
         return redirect(url_for('view_wines'))
 
