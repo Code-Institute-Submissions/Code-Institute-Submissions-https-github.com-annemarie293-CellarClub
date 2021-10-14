@@ -34,11 +34,37 @@
                             <p class="white-text"><i class="fas fa-wine-bottle"></i>&nbsp {{ wine.vintage }}</p>
                         </div>
                         <div class="center-align">
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            <i class="fas fa-star grey-text"></i>
+                            {% if average == 1 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                    {% elif average == 2 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                    {% elif average == 3 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                    {% elif average == 4 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                    {% elif average == 5 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                    {% endif %}
                         </div>
                         <div class="card-action center-align">
                             <a href="#{{ wine._id }}" class="btn-small amber accent-2 modal-trigger center-align grey-text text-darken-4">View</a>

@@ -121,7 +121,8 @@ def sign_out():
 def profile():
     wines = list(mongo.db.wines.find())
     user = mongo.db.users.find_one({"username": session["user"]})["username"]
-    first_name = mongo.db.users.find_one({"first_name": session["user"]})["first_name"]
+    first_name = mongo.db.users.find_one({
+                "username": session["user"]})["first_name"]
 
     if session["user"]:
         return render_template("profile.html",
@@ -136,19 +137,21 @@ def profile():
 @app.route("/view_wines")
 def view_wines():
     wines = mongo.db.wines.find().sort("wine_name", 1)
+    reviews = list(mongo.db.reviews.find())
     
     # To calculate average rating from reviews
     average_dict = {}
     calculate_average = mongo.db.reviews.aggregate(
-        [{"$group": {"_id": "null",
-          "AverageValue": {"$avg": "$rating"}}}])
-    for y in calculate_average:
-        average_dict.update(y)
+                        [{"$group": {"_id": "null",
+                         "AverageValue": {"$avg": "$rating"}}}])
+    for x in calculate_average:
+        average_dict.update(x)
         print(average_dict)
         average = int(average_dict.get("AverageValue"))
         print(average)
            
-    return render_template("wines.html", wines=wines)
+    return render_template("wines.html", wines=wines,
+                           reviews=reviews, average=average)
 
 
 # Function to add a new wine to the DB
