@@ -60,14 +60,14 @@ def register():
             flash("Sorry, You must be of legal age to join our club")
             return redirect(url_for('register'))
 
-        # Create new username/password dictionary to add to DB
+        # Create new user dictionary to add to DB
         new_user = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
-            "first-name": request.form.get("first-name").lower(),
-            "last-name": request.form.get("last-name").lower(),
+            "first_name": request.form.get("first_name").lower(),
+            "last_name": request.form.get("last_name").lower(),
             "dob": request.form.get("dob"),
-            "country": request.form.get("country").lower(),
+            "country": request.form.get("country").lower()
         }
         mongo.db.users.insert_one(new_user)
 
@@ -120,16 +120,13 @@ def sign_out():
 @app.route("/profile")
 def profile():
     wines = list(mongo.db.wines.find())
-    # Grab the session user's username from the db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    first_name = mongo.db.users.find_one(
-        {"first-name": session["user"]})["first-name"]
+    user = mongo.db.users.find_one({"username": session["user"]})["username"]
+    first_name = mongo.db.users.find_one({"first_name": session["user"]})["first_name"]
 
     if session["user"]:
         return render_template("profile.html",
-                               username=username,
-                               wines=wines,
+                               user=user,
+                               wines=wines, 
                                first_name=first_name)
     else:
         return redirect(url_for('login'))
@@ -139,8 +136,19 @@ def profile():
 @app.route("/view_wines")
 def view_wines():
     wines = mongo.db.wines.find().sort("wine_name", 1)
-    reviews = list(mongo.db.reviews.find())
-    return render_template("wines.html", wines=wines, reviews=reviews)
+    
+    # To calculate average rating from reviews
+    average_dict = {}
+    calculate_average = mongo.db.reviews.aggregate(
+        [{"$group": {"_id": "null",
+          "AverageValue": {"$avg": "$rating"}}}])
+    for y in calculate_average:
+        average_dict.update(y)
+        print(average_dict)
+        average = int(average_dict.get("AverageValue"))
+        print(average)
+           
+    return render_template("wines.html", wines=wines)
 
 
 # Function to add a new wine to the DB
