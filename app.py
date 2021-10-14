@@ -19,8 +19,9 @@ mongo = PyMongo(app)
 
 @app.route("/")
 @app.route("/base")
-def base():    
-    return render_template("base.html")
+def base(wine_id):
+    wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
+    return render_template("base.html", wine=wine)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -134,24 +135,21 @@ def profile():
 
 
 # Function to view all wines
-@app.route("/view_wines")
+@app.route("/view_wines/")
 def view_wines():
-    wines = mongo.db.wines.find().sort("wine_name", 1)
-    reviews = list(mongo.db.reviews.find())
-    
+    wines = list(mongo.db.wines.find().sort("wine_name", 1))
+
     # To calculate average rating from reviews
-    average_dict = {}
-    calculate_average = mongo.db.reviews.aggregate(
-                        [{"$group": {"_id": "null",
-                         "AverageValue": {"$avg": "$rating"}}}])
+    average_dict = []
+    calculate_average = mongo.db.wines.aggregate(
+                        [{"$group": {"_id": "_id",
+                         "AverageValue": {"$avg": "$user_reviews.rating"}}}])
     for x in calculate_average:
-        average_dict.update(x)
+        average_dict.append(x)
         print(average_dict)
-        average = int(average_dict.get("AverageValue"))
-        print(average)
-           
-    return render_template("wines.html", wines=wines,
-                           reviews=reviews, average=average)
+        average = average_dict.get("AverageValue")
+        print(average)     
+    return render_template("wines.html", wines=wines)
 
 
 # Function to add a new wine to the DB
@@ -185,7 +183,6 @@ def add_wine():
             }]
         }
         mongo.db.wines.insert_one(wine)
-
         
         flash("Your wine has been added to our collection!")
         return redirect(url_for('view_wines'))
@@ -197,19 +194,21 @@ def add_wine():
 # Function to add a new review to the wine
 @app.route("/add_review/<wine_id>", methods=["GET", "POST"])
 def add_review(wine_id):
+    wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
+
     if request.method == "POST":
-        # Create new review dictionary to add to
+        # Create new review object to add to
         # user_review array in the wine doc in wines db
         review = {
             "review": request.form.get("review"),
             "rating": int(request.form.get("rating")),
             "reviewed_by": session["user"]
         }
-        mongo.db.wines.update_one({"_id": ObjectId(wine_id)}, {"$push": {"user_reviews": review}})
+        mongo.db.wines.update_one({"_id": ObjectId(wine_id)},
+                                  {"$push": {"user_reviews": review}})
         flash("Review successfully submitted")
         return redirect(url_for('view_wines'))
 
-    wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
     return render_template("add-review.html", wine=wine)
 
 
