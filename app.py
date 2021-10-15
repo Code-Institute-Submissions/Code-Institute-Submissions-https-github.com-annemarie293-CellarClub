@@ -19,8 +19,7 @@ mongo = PyMongo(app)
 
 @app.route("/")
 @app.route("/base")
-def base(wine_id):
-    wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
+def base():
     return render_template("base.html")
 
 
