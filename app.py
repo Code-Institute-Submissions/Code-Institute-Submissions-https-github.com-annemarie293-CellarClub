@@ -140,7 +140,6 @@ def view_wines():
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
 
     # To calculate average rating from reviews
-
     average_rating = list(mongo.db.wines.aggregate(
                         [{"$unwind": "$user_reviews"},
                          {"$group": {"_id": "$_id",
