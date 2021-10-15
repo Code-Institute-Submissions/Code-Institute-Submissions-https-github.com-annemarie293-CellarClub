@@ -34,37 +34,42 @@
                             <p class="white-text"><i class="fas fa-wine-bottle"></i>&nbsp {{ wine.vintage }}</p>
                         </div>
                         <div class="center-align">
-                            {% if average == 1 %}
+                            {% for rating in average_rating %}
+                                {% if rating["_id"] == wine._id %}
+                                    {% if rating["AverageValue"] == 1.0 %}
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star grey-text"></i>
                                         <i class="fas fa-star grey-text"></i>
                                         <i class="fas fa-star grey-text"></i>
                                         <i class="fas fa-star grey-text"></i>
-                                    {% elif average == 2 %}
+                                    {% elif rating["AverageValue"] == 2.0 %}
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star grey-text"></i>
                                         <i class="fas fa-star grey-text"></i>
                                         <i class="fas fa-star grey-text"></i>
-                                    {% elif average == 3 %}
+                                    {% elif rating["AverageValue"] == 3.0 %}
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star grey-text"></i>
                                         <i class="fas fa-star grey-text"></i>
-                                    {% elif average == 4 %}
+                                    {% elif rating["AverageValue"] == 4.0 %}
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star grey-text"></i>
-                                    {% elif average == 5 %}
+                                    {% elif rating["AverageValue"] == 5.0 %}
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                         <i class="fas fa-star amber-text"></i>
                                     {% endif %}
+                                {% endif %}
+                            {% endfor%}
+                            
                         </div>
                         <div class="card-action center-align">
                             <a href="#{{ wine._id }}" class="btn-small amber accent-2 modal-trigger center-align grey-text text-darken-4">View</a>
@@ -88,38 +93,40 @@
                         </div>
                         <div class="row">
                             {% for review in reviews %}
-                                <p class="yellow-text">{{ review.review }}</p>
-                                <p class="yellow-text">{{ review.reviewed_by }}</p>
-                                {% if review.rating == 1 %}
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                {% elif review.rating == 2 %}
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                {% elif review.rating == 3 %}
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                {% elif review.rating == 4 %}
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                {% elif review.rating == 5 %}
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
-                                    <i class="fas fa-star amber-text"></i>
+                                {% if (review.wine_name|lower == wine.wine_name|lower) and (review.vintage == wine.vintage) %}
+                                    <p class="yellow-text">{{ review.review }}</p>
+                                    <p class="yellow-text">{{ review.reviewed_by }}</p>
+                                    {% if review.rating == 1 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                    {% elif review.rating == 2 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                    {% elif review.rating == 3 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                    {% elif review.rating == 4 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star grey-text"></i>
+                                    {% elif review.rating == 5 %}
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                        <i class="fas fa-star amber-text"></i>
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         </div>

@@ -140,16 +140,15 @@ def view_wines():
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
 
     # To calculate average rating from reviews
-    average_dict = []
-    calculate_average = mongo.db.wines.aggregate(
-                        [{"$group": {"_id": "_id",
-                         "AverageValue": {"$avg": "$user_reviews.rating"}}}])
-    for x in calculate_average:
-        average_dict.append(x)
-        print(average_dict)
-        average = average_dict.get("AverageValue")
-        print(average)     
-    return render_template("wines.html", wines=wines)
+
+    average_rating = list(mongo.db.wines.aggregate(
+                        [{"$unwind": "$user_reviews"},
+                         {"$group": {"_id": "$_id",
+                          "AverageValue": {"$avg": "$user_reviews.rating"}}}]))
+    
+
+    return render_template("wines.html", wines=wines,
+                           average_rating=average_rating)
 
 
 # Function to add a new wine to the DB
