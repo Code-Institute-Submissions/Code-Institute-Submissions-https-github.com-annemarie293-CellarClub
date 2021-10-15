@@ -15,13 +15,17 @@
                 <div class="card horizontal">
                     <div class="card-image bg-wine">
                         {% if wine.wine_type == "red" %}
-                        <img src="static/images/red.png">
+                            <img src="{{ url_for('static', filename='images/red.png') }}"
+                            alt="image of bottle of red wine">>
                         {% elif wine.wine_type == "white" %}
-                        <img src="static/images/white.png">
+                            <img src="{{ url_for('static', filename='images/white.png') }}"
+                            alt="image of bottle of white wine">
                         {% elif wine.wine_type == "rose" %}
-                        <img src="static/images/rose.png">
+                            <img src="{{ url_for('static', filename='images/rose.png') }}"
+                            alt="image of bottle of rose wine">
                         {% elif wine.wine_type == "sparkling" %}
-                        <img src="static/images/champagne.png">
+                            <img src="{{ url_for('static', filename='images/champagne.png') }}"
+                            alt="image of bottle of sparkling wine">
                         {% endif %}
                     </div>
                     <div class="card-stacked black">
