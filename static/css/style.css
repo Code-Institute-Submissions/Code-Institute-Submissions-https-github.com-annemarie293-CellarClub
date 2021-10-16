@@ -17,6 +17,8 @@ body {
 .logo-font {
     font-family: 'Corben', cursive;
     font-weight: 700;
+    text-align: center;
+    font-size: x-large;
 }
 
 body,
@@ -127,6 +129,10 @@ body,
 /*-- Flash Alert --  Source: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_alert */
   .alert{
       padding: 10px;
+      background-color: #ffca28;
+      text-align: center;
+      font-family: 'EB Garamond', serif;
+      color: white;
   }
   
   .closebtn {
