@@ -7,78 +7,75 @@
         </div>
         
         <div class="container-fluid">
-            <div class="row">
+            <div class="row text-center mt-3">
         
                 {% for wine in wines %}
         
-                    <div class="col s-12 m-4">
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 card-image bg-wine">
-                                    {% if wine.wine_type == "red" %}
-                                        <img src="{{ url_for('static', filename='images/red.png') }}"
-                                        alt="image of bottle of red wine">>
-                                    {% elif wine.wine_type == "white" %}
-                                        <img src="{{ url_for('static', filename='images/white.png') }}"
-                                        alt="image of bottle of white wine">
-                                    {% elif wine.wine_type == "rose" %}
-                                        <img src="{{ url_for('static', filename='images/rose.png') }}"
-                                        alt="image of bottle of rose wine">
-                                    {% elif wine.wine_type == "sparkling" %}
-                                        <img src="{{ url_for('static', filename='images/champagne.png') }}"
-                                        alt="image of bottle of sparkling wine">
-                                    {% endif %}
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-content">
-                                        <div class="card-title">
-                                            <h5 class="amber-text">{{ wine.wine_name.title() }}</h5>
-                                        </div>
-                                        <div class="card-text wine-info">
-                                            <p class="white-text"><i class="fas fa-wine-glass"></i>&nbsp {{ wine.grape.capitalize() }}</p>
-                                            <p class="white-text"><i class="fas fa-flag"></i>&nbsp {{ wine.country.capitalize() }}</p>
-                                            <p class="white-text"><i class="fas fa-wine-bottle"></i>&nbsp {{ wine.vintage }}</p>
-                                        </div>
-                                        <div class="mx-auto">
-                                            {% for rating in average_rating %}
-                                                {% if rating["_id"] == wine._id %}
-                                                    {% if rating["AverageValue"] == 1.0 %}
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                    {% elif rating["AverageValue"] == 2.0 %}
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                    {% elif rating["AverageValue"] == 3.0 %}
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                    {% elif rating["AverageValue"] == 4.0 %}
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star grey-text"></i>
-                                                    {% elif rating["AverageValue"] == 5.0 %}
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                        <i class="fas fa-star amber-text"></i>
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endfor%}
-                                            
-                                        </div>
+                    <div class="card wine-card col-6 text-center m-3 p-0" style="max-width: 300px;">
+                        <div class="row g-0">
+                            <div class="col-4 card-image bg-wine ">
+                                {% if wine.wine_type == "red" %}
+                                    <img class="mx-auto" src="{{ url_for('static', filename='images/red.png') }}"
+                                    alt="image of bottle of red wine">
+                                {% elif wine.wine_type == "white" %}
+                                    <img src="{{ url_for('static', filename='images/white.png') }}"
+                                    alt="image of bottle of white wine">
+                                {% elif wine.wine_type == "rose" %}
+                                    <img src="{{ url_for('static', filename='images/rose.png') }}"
+                                    alt="image of bottle of rose wine">
+                                {% elif wine.wine_type == "sparkling" %}
+                                    <img src="{{ url_for('static', filename='images/champagne.png') }}"
+                                    alt="image of bottle of sparkling wine">
+                                {% endif %}
+                            </div>
+                            <div class="card-body col-8">
+                                <div class="p-3">
+                                    <div class="card-title mt-2 mb-4">
+                                        <h4 class="amber-text">{{ wine.wine_name.title() }}</h4>
                                     </div>
-                                    <div class="card-action center-align">
+                                    <div class="card-text wine-info mb-4">
+                                        <p class="white-text"><i class="fas fa-wine-glass"></i>&nbsp {{ wine.grape.capitalize() }}</p>
+                                        <p class="white-text"><i class="fas fa-flag"></i>&nbsp {{ wine.country.capitalize() }}</p>
+                                        <p class="white-text"><i class="fas fa-wine-bottle"></i>&nbsp {{ wine.vintage }}</p>
+                                    </div>
+                                    <div class="card-text mx-auto">
+                                        {% for rating in average_rating %}
+                                            {% if rating["_id"] == wine._id %}
+                                                {% if rating["AverageValue"] == 1.0 %}
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                {% elif rating["AverageValue"] == 2.0 %}
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                {% elif rating["AverageValue"] == 3.0 %}
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                {% elif rating["AverageValue"] == 4.0 %}
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star grey-text"></i>
+                                                {% elif rating["AverageValue"] == 5.0 %}
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                    <i class="fas fa-star amber-text"></i>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor%}
+                                    </div>
+                                    <div class="card-text">
                                         <a href="#{{ wine._id }}" class="btn-small amber accent-2 modal-trigger center-align grey-text text-darken-4">View</a>
                                     </div>
                                 </div>
