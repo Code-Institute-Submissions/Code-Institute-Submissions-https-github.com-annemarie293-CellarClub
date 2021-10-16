@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&display=swap');
 
 
-/*-----From Materialize for Sticky Footer------*/
+/*-----For Sticky Footer------*/
 body {
     display: flex;
     min-height: 100vh;
@@ -12,6 +12,20 @@ body {
   main {
     flex: 1 0 auto;
   }
+
+footer{
+    color:white;
+    text-align: center;
+}
+
+footer .social-link{
+    color: white;
+    font-size: medium;
+}
+
+footer .copyright{
+    font-size: 5px;
+}
 
 /*-----Fonts------*/
 .logo-font {
