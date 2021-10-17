@@ -7,73 +7,114 @@
 </div>
 
 <div class="row">
-    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register')}}">
-        <div class="card-panel center-align">
-            <!--Username input field-->
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="fas fa-user prefix black-text"></i>
-                    <input id="username" name="username" type="text" class="validate" minlength="5" maxlength="20"
-                        required pattern="^[a-zA-Z0-9]{5,20}$">
-                    <label for="username">Username</label>
+    <div class="card col-sm-12 col-md-8 offset-md-2 my-4 shadow">
+        <form class="g-3 needs-validation" novalidate method="POST" action="{{ url_for('register')}}">
+            <div class="row mt-2 p-2 mx-2">
+                <!--Username input field-->
+                <div class="col">
+                    <label for="username" class="visually-hidden">Username</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="username"><i class="fas fa-user"></i></span>
+                        <input id="username" name="username" type="text" class="form-control text-center" minlength="5"
+                            maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Username" aria-label="username"
+                            aria-describedby="username">
+                        <div class="invalid-feedback">
+                            Please choose a username
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-2 p-2 mx-2">
                 <!--Password input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-user-lock prefix black-text"></i>
-                    <input id="password" type="password" name="password" class="validate" minlength="5" maxlength="20"
-                        required pattern="^[a-zA-Z0-9]{5,20}$">
-                    <label for="password">Password</label>
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="password" class="visually-hidden">Password</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="password"><i class="fas fa-user-lock"></i></span>
+                        <input id="password" name="password" type="password" class="form-control text-center"
+                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Password"
+                            value="Password" aria-label="password" aria-describedby="password">
+                        <div class="invalid-feedback">
+                            Please choose a password
+                        </div>
+                    </div>
                 </div>
-                <!--Repeat password input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-user-check prefix black-text"></i>
-                    <input id="password-check" type="password" name="password-check" class="validate" minlength="5"
-                        maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$">
-                    <label for="password-check">Re-enter your password</label>
-                </div>
-            </div>
-            <div class="row">
-            <!--First Name input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-user-lock prefix black-text"></i>
-                    <input id="first_name" type="text" name="first_name" class="validate" minlength="2" maxlength="20"
-                        required>
-                    <label for="first_name">First Name</label>
-                </div>
-            <!--Last Name input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-user-lock prefix black-text"></i>
-                    <input id="last_name" type="text" name="last_name" class="validate" minlength="2" maxlength="20"
-                        required>
-                    <label for="last_name">Last Name</label>
+                <!--Password check input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="password-check" class="visually-hidden">Repeat password</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="password-check"><i class="fas fa-user-check"></i></span>
+                        <input id="password-check" name="password-check" type="text" class="form-control text-center"
+                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Repeat password"
+                            aria-label="password-check" aria-describedby="password-check">
+                        <div class="invalid-feedback">
+                            Please re-enter your password
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-            <!--Date of Birth input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-user-lock prefix black-text"></i>
-                    <input id="dob" type="text" class="datepicker" name="dob" class="validate"
-                        required>
-                    <label for="dob">Date of Birth</label>
+            <div class="row mb-2 p-2 mx-2">
+                <!--First Name input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="first_name" class="visually-hidden">First Name</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="first_name"><i class="fas fa-user"></i></span>
+                        <input id="first_name" name="first_name" type="text" class="form-control text-center"
+                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="First Name"
+                            aria-label="first_name" aria-describedby="first_name">
+                        <div class="invalid-feedback">
+                            Please add your first name
+                        </div>
+                    </div>
                 </div>
-            <!--Country input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-user-lock prefix black-text"></i>
-                    <input id="country" type="text" name="country" class="validate" minlength="2" maxlength="20"
-                        required>
-                    <label for="country">Country</label>
+                <!--Last Name input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="last_name" class="visually-hidden">Last Name</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="last_name"><i class="fas fa-user"></i></span>
+                        <input id="last_name" name="last_name" type="text" class="form-control text-center"
+                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Last Name"
+                            aria-label="last_name" aria-describedby="last_name">
+                        <div class="invalid-feedback">
+                            Please add your last name
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!--Submit Button-->
-            <div class="row">
-                <button type="submit" class="col s12 btn-large black white-text center-align corben-font">
-                    Register <i class="fas fa-sign-in-alt"></i>
-                </button>
+            <div class="row mb-2 p-2 mx-2">
+                <!--Date of Birth  input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="dob" class="visually-hidden">Date of Birth</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="dob"><i class="fa fa-calendar"></i></span>
+                        <input id="dob" name="dob" type="date" class="form-control text-center"
+                             min="1900-01-01" max="2050-12-31" placeholder="Date of Birth"
+                            aria-label="DateOfBirth" aria-describedby="dob">
+                        <div class="invalid-feedback">
+                            Please enter your date of birth
+                        </div>
+                    </div>
+                </div>
+                <!--Country input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="country" class="visually-hidden">Country</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="country"><i class="fas fa-flag"></i></span>
+                        <input id="country" name="country" type="text" class="form-control text-center" minlength="5"
+                            maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Country" aria-label="country"
+                            aria-describedby="country">
+                        <div class="invalid-feedback">
+                            Please add the country where you live
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </form>
+            <div class="row mb-2 p-2 mx-2">
+                <button type="submit" class="btn col-12 form-submit rounded text-center corben-font"><i
+                        class="fas fa-sign-in-alt"></i>Register</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 
 {% endblock %}

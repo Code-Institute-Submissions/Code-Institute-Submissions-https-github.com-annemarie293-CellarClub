@@ -101,14 +101,6 @@ body {
 }
 
 /*-- Cards on Wines Page --*/
-/*--
-    .wine-card .card-body{
-        background-color: #424242;
-    }
-
-    .wine-card .card-img{
-        background-color: #923A49;
-    }--*/
 
     /* For card size on mobile */
     @media only screen and (max-width: 700px){
@@ -139,26 +131,10 @@ body {
     }
 
     .wine-card:hover{
-        box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
     }
 
-    /*To make full card clickable*/
-    .fullclick .card {
-        position: relative !important ;
-    }
-    .fullclick a .main {
-        z-index: 1;
-        background-color: yellowgreen;
-    }
-    .fullclick .card a .main::after {
-        position: absolute !important;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        content: ' ';
-        background-color: yellowgreen;
-      }
+    
 
     /* Modal */
     .modal-wine-info p{
@@ -194,10 +170,12 @@ body {
     color: black;
   }
 
-/*-- Text area on Add review page: Reduce width on small screens --*/
-@media only screen and (max-width: 650px){
-    #review{
-        max-width: 65%;
-        margin: 0 auto;
-    }
+/*--- Form submit Button --*/
+.form-submit {
+    background-color: black;
+    color: white;
+}
+
+.form-submit:hover {
+    color: #ffc107;;
 }
