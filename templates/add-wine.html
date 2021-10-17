@@ -7,135 +7,177 @@
 </div>
 
 <div class="row">
-    <form class="col s12 m8 offset-m2 card-panel" method="POST" action="{{ url_for('add_wine')}}">
+    <div class="card col-sm-12 col-md-8 offset-md-2 my-4 shadow">
+        <form class="g-3 needs-validation" novalidate method="POST" action="{{ url_for('add_wine')}}">
             <!---------- Add New Wine section -------->
-            <!--Wine type selection-->
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="fas fa-bars prefix black-tex"></i>
-                    <select id="wine_type" name="wine_type" class="validate" required>
-                      <option value="" disabled selected>Select Wine Type</option>
-                      {% for type in types %}
-                        <option value="{{ type.wine_type }}">{{ type.wine_type.capitalize() }}</option>
-                      {% endfor %}
-                    </select>
-                    <label for="wine_type">Wine Type</label>
-                  </div>
+            <div class="row mt-2 p-2 mx-2">
+                <!--Wine type selection-->
+                <div class="col">
+                    <label for="wine_type" class="visually-hidden">Wine Type</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="wine_name"><i class="fas fa-bars"></i></span>
+                        <select id="wine_type" name="wine_type" class="form-select text-center" aria-label="wineType"
+                            aria-describedby="wine_type">
+                            <option value="" disabled selected>Select Wine Type</option>
+                            {% for type in types %}
+                            <option value="{{ type.wine_type }}">{{ type.wine_type.capitalize() }}</option>
+                            {% endfor %}
+                            <div class="invalid-feedback">
+                                Please choose a wine type
+                            </div>
+                        </select>
+                    </div>
+                </div>
             </div>
-            
-            <!--Wine Name input field-->
-                <div class="input-field col s12">
-                    <i class="fas fa-award prefix black-text"></i>
-                    <input id="wine_name"type="text" name="wine_name" class="validate" required>
-                    <label for="wine_name">Wine Name</label>
+            <div class="row mt-2 p-2 mx-2">
+                <!--Wine Name input field-->
+                <div class="col">
+                    <label for="wine_name" class="visually-hidden">Wine Name</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="wine_name"><i class="fas fa-award"></i></span>
+                        <input id="wine_name" name="wine_name" type="text" class="form-control text-center"
+                            value="Wine Name" aria-label="wineName" aria-describedby="wine_name">
+                        <div class="invalid-feedback">
+                            Please enter the wine name
+                        </div>
+                    </div>
                 </div>
-            <!--Grape input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-wine-glass prefix black-text"></i>
-                    <input id="grape"type="text" name="grape" class="validate" required>
-                    <label for="grape">Grape</label>
-                </div>
-            <!--Vintage input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-wine-bottle prefix black-text"></i>
-                    <input id="vintage"type="text" name="vintage" class="validate"
-                    minlength="4" maxlength="4" required pattern="^[0-9]{4,4}$" required>
-                    <label for="vintage">Vintage</label>
-                </div>
-            <!--Country input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-flag prefix black-text"></i>
-                    <input id="country"type="text" name="country" class="validate" required>
-                    <label for="country">Country</label>
-                </div>
-            <!--Region input field-->
-                <div class="input-field col s12 m6">
-                    <i class="fas fa-map-marker-alt prefix black-text"></i>
-                    <input id="region"type="text" name="region" class="region">
-                    <label for="region">Region (optional)</label>
-                </div>
-            <!---------- Add Review  section -------->
-            <!--Review text area input-->
-        <div class="row">
-            <div class="input-field col s12 center-align">
-                <i class="fas fa-pen prefix black-text"></i>
-                <textarea id="review" name="review" class="materialize-textarea validate"
-                minlength="5" maxlength="200"required></textarea>
-                <label for="review">Your Review</label>
             </div>
-        </div>
-    <!--Rating Input-->
-        <div class="col s12 center-align">
-            <p><i class="fa fa-star prefix black-text"></i> Rate this wine</p>
-            <p>
-                <label>
-                <input name="rating" type="radio" id="1" value="1"/>
-                <span>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                </span>
-                </label>
-            </p>
-            <p>
-                <label>
-                <input name="rating" type="radio" id="2" value="2" />
-                <span>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                </span>
-                </label>
-            </p>
-            <p>
-                <label>
-                <input name="rating" type="radio" id="3" value="3" />
-                <span>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                </span>
-                </label>
-            </p>
-            <p>
-                <label>
-                <input name="rating" type="radio" id="4" value="4"/>
-                <span>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                </span>
-                </label>
-            </p>
-            <p>
-                <label>
-                <input name="rating" type="radio" id="5" value="5"/>
-                <span>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                    <i class="fas fa-star amber-text"></i>
-                </span>
-                </label>
-            </p>
-        </div>
-            
-            <!--Submit Button -->
-            <div class="row">
-                <button type="submit" class="col s12 btn-large black white-text center-align corben-font">
-                    Submit Wine <i class="fas fa-plus-circle"></i>
-                </button>
+            <div class="row mb-2 p-2 mx-2">
+                <!--Grape input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="grape" class="visually-hidden">Grape</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="grape-input"><i class="fas fa-wine-glass"></i></span>
+                        <input id="grape" name="grape" type="text" class="form-control text-center" minlength="5"
+                            maxlength="30" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Grape" aria-label="Grape"
+                            aria-describedby="grape-input">
+                        <div class="invalid-feedback">
+                            Please enter a grape variety
+                        </div>
+                    </div>
+                </div>
+                <!--Vintage input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="grape" class="visually-hidden">Grape</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="vintage-input"><i class="fas fa-wine-bottle"></i></span>
+                        <input id="vintage" name="vintage" type="text" class="form-control text-center" minlength="4"
+                            maxlength="4" required pattern="^[0-9]{4,4}$" placeholder="Vintage" aria-label="vintage"
+                            aria-describedby="vintage-input">
+                        <div class="invalid-feedback">
+                            Please enter a vintage for this wine
+                        </div>
+                    </div>
+                </div>
             </div>
-    </form>
+            <div class="row mb-2 p-2 mx-2">
+                <!--Country input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="country" class="visually-hidden">Country</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="country-input"><i class="fas fa-flag"></i></span>
+                        <input id="country" name="country" type="text" class="form-control text-center" minlength="5"
+                            maxlength="30" required pattern="^[a-zA-Z]{5,20}$" placeholder="Country"
+                            aria-label="country" aria-describedby="country-input">
+                        <div class="invalid-feedback">
+                            Please enter a grape variety
+                        </div>
+                    </div>
+                </div>
+                <!--Region input field-->
+                <div class="col-sm-12 col-md-6 px-2">
+                    <label for="region" class="visually-hidden">Region</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="region-input"><i class="fas fa-map-marker"></i></span>
+                        <input id="region" name="region" type="text" class="form-control text-center" minlength="4"
+                            maxlength="4" pattern="^[0-9]{4,4}$" placeholder="Region" aria-label="region"
+                            aria-describedby="region-input">
+                    </div>
+                </div>
+            </div>
+            <!--Review Input-->
+            <div class="row mb-2 p-2 mx-2">
+                <div class="col">
+                    <div class="input-group">
+                        <span class="input-group-text" id="review"><i class="fas fa-pen prefix black-text"></i></span>
+                        <textarea id="review" name="review" class="form-control" minlength="5" maxlength="200" rows="4"
+                            required></textarea>
+                    </div>
+                    <label for="review" class="visually-hidden">Your Review</i></label>
+                </div>
+            </div>
+            <!--Rating Input-->
+            <div class="col text-center form-check">
+                <h5>Rate this wine</h5>
+                <p>
+                    <label>
+                        <input name="rating" type="radio" id="1" value="1" class="form-check-input"/>
+                        <span>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                        </span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="rating" type="radio" id="2" value="2" class="form-check-input"/>
+                        <span>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                        </span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="rating" type="radio" id="3" value="3" class="form-check-input"/>
+                        <span>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                        </span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="rating" type="radio" id="4" value="4" class="form-check-input"/>
+                        <span>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star grey-text"></i>
+                        </span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="rating" type="radio" id="5" value="5" class="form-check-input"/>
+                        <span>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                            <i class="fas fa-star amber-text"></i>
+                        </span>
+                    </label>
+                </p>
+            </div>
+            <div class="row mb-2 p-2 mx-2">
+                <button type="submit" class="btn col-12 form-submit rounded text-center corben-font">
+                    Submit Wine &nbsp;<i class="fas fa-plus-circle"></i></button>
+            </div>
+        </form>
+    </div>
 </div>
+
 
 {% endblock %}
