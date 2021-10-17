@@ -56,6 +56,11 @@ body {
 .amber-text {
     color: #ffc107 ;
 }
+
+.dark-amber-text {
+    color:#ffa000;
+}
+
 .grey-text {
     color: #9e9e9e;
 }
@@ -96,26 +101,25 @@ body {
 }
 
 /*-- Cards on Wines Page --*/
-
+/*--
     .wine-card .card-body{
         background-color: #424242;
     }
 
     .wine-card .card-img{
         background-color: #923A49;
-    }
+    }--*/
 
     /* For card size on mobile */
     @media only screen and (max-width: 700px){
         .card-image img {
             height: 250px!important;
         }
-    
     }
 
     /* For card size on tablets */
     @media only screen and (max-width: 800px) and (min-width: 700px){
-        .card {
+        .row .col .wine-card {
             height: 330px!important;
         }
         
@@ -126,12 +130,35 @@ body {
 
     /* for card size on large screens */
     @media only screen and (min-width: 800px){
-        
+        .row .col .wine-card {
+            height: 332px!important;
+        }
         .card-image img {
             height: 320px!important;
         }
-
     }
+
+    .wine-card:hover{
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+    }
+
+    /*To make full card clickable*/
+    .fullclick .card {
+        position: relative !important ;
+    }
+    .fullclick a .main {
+        z-index: 1;
+        background-color: yellowgreen;
+    }
+    .fullclick .card a .main::after {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: ' ';
+        background-color: yellowgreen;
+      }
 
     /* Modal */
     .modal-wine-info p{
@@ -140,6 +167,8 @@ body {
     .modal-wine-info p span{
         color: white;
     }
+
+    
 
 /*-- Flash Alert --  Source: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_alert */
   .alert{
