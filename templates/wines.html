@@ -11,6 +11,7 @@
 
         {% for wine in wines %}
 
+        <!--Card to display wine info -->
         <div class="col-md-4 mb-3 align-items-center fullclick">
 
             <div class="card shadow wine-card text-center mx-auto p-0" style="max-width: 300px;">
@@ -76,74 +77,86 @@
                                 {% endif %}
                                 {% endfor%}
                             </div>
-                            <a href="https://www.thejournal.ie/" class="stretched-link modal-trigger">Link</a> 
+                            <button type="button" class="btn btn-sm bg-wine white-text stretched-link"
+                                data-bs-toggle="modal" data-bs-target="#wine-id{{ wine._id }}">
+                                View
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal Structure -->
-            <div id="{{ wine._id }}" class="modal modal-fixed-footer">
-                <div class="modal-content black center-align">
-                    <h4 class="amber-text">{{ wine.wine_name.title() }}</h4>
-                    <div>
-                        <div class="row modal-wine-info">
-                            <p>Grape : &nbsp<span>{{ wine.grape.capitalize() }}</span></p>
-                            <p>Vintage : &nbsp<span>{{ wine.vintage.capitalize() }}</span></p>
-                            <p>Country : &nbsp<span>{{ wine.country.capitalize() }}</span></p>
-                            {% if wine.region %}
-                            <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
-                            {% endif %}
-                        </div>
-                        <div class="row">
-                            {% for user_review in wine.user_reviews %}
-                            <p class="yellow-text">{{ user_review.review }}</p>
-                            <p class="yellow-text">{{ user_review.reviewed_by }}</p>
 
-                            {% if user_review.rating == 1 %}
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            {% elif user_review.rating == 2 %}
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            {% elif user_review.rating == 3 %}
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            {% elif user_review.rating == 4 %}
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            {% elif user_review.rating == 5 %}
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
+            <!-- Modal to display wine info and reviews-->
+            <div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-labelledby="wineModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="wineModalLabel">{{ wine.wine_name.title() }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <p>Grape : &nbsp<span>{{ wine.grape.capitalize() }}</span></p>
+                                <p>Vintage : &nbsp<span>{{ wine.vintage.capitalize() }}</span></p>
+                                <p>Country : &nbsp<span>{{ wine.country.capitalize() }}</span></p>
+                                {% if wine.region %}
+                                <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {% for user_review in wine.user_reviews %}
+                                    <p class="amber-text">{{ user_review.review }}</p>
+                                    <p class="amber-text">{{ user_review.reviewed_by }}</p>
+
+                                    {% if user_review.rating == 1 %}
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    {% elif user_review.rating == 2 %}
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    {% elif user_review.rating == 3 %}
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    {% elif user_review.rating == 4 %}
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star grey-text"></i>
+                                    {% elif user_review.rating == 5 %}
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    <i class="fas fa-star dark-amber-text"></i>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {% if session.user %}
+                                <button type="button" class="btn btn-primary"><a
+                                    href="{{ url_for('add_review', wine_id=wine._id) }}">Add Review</a></button>
                             {% endif %}
-                            {% endfor %}
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
-
-                </div>
-                <div class="modal-footer">
-                    {% if session.user %}
-                    <a href="{{ url_for('add_review', wine_id=wine._id) }}"
-                        class="btn-small amber accent-2 center-align grey-text text-darken-4">Add Review</a>
-                    {% endif %}
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
                 </div>
             </div>
+
         </div>
 
         {% endfor %}
