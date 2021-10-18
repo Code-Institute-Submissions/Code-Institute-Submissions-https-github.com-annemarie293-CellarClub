@@ -214,14 +214,14 @@ def add_review(wine_id):
 
     # Check if user has already reviewed this wine
     review_exists = wine["user_reviews"]
-    print(review_exists)
+    reviewer = "unknown"
 
     for x in review_exists:
         if x["reviewed_by"] == session["user"]:
             reviewer = x["reviewed_by"]
         else:
             reviewer = "other"
-
+        
     if reviewer == session["user"]:
         flash("You have already reviewed this wine, please edit your review instead")
         return redirect(url_for('view_wines'))
