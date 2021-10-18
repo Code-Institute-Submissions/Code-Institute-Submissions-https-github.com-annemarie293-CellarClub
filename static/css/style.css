@@ -177,14 +177,23 @@ body {
     color: black;
   }
 
+/*-------- Form styling -------*/  
 /*--- Form submit Button --*/
 .form-submit {
     background-color: black;
     color: white;
 }
-
 .form-submit:hover {
     color: #ffc107;;
+}
+
+/*--- Form cancel Button --*/
+.form-cancel {
+    background-color: #ffc107;
+    color: black;
+}
+.form-cancel:hover {
+    color: red;;
 }
 
 /* --- Form hidden input style (https://stackoverflow.com/questions/38830620/make-an-input-look-like-normal-text-in-a-paragraph) ---*/
