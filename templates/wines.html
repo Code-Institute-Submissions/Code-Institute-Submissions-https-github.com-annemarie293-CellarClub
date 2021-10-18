@@ -44,31 +44,31 @@
                             <div class="card-text mx-auto">
                                 {% for rating in average_rating %}
                                 {% if rating["_id"] == wine._id %}
-                                {% if rating["AverageValue"] == 1.0 %}
+                                {% if rating["AverageValue"]|round|int == 1 %}
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
-                                {% elif rating["AverageValue"] == 2.0 %}
+                                {% elif rating["AverageValue"]|round|int == 2 %}
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
-                                {% elif rating["AverageValue"] == 3.0 %}
+                                {% elif rating["AverageValue"]|round|int == 3 %}
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
-                                {% elif rating["AverageValue"] == 4.0 %}
+                                {% elif rating["AverageValue"]|round|int == 4 %}
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
-                                {% elif rating["AverageValue"] == 5.0 %}
+                                {% elif rating["AverageValue"]|round|int == 5 %}
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
@@ -173,9 +173,9 @@
                         </div>
                         <div class="modal-footer">
                             {% if session.user %}
-                            <button type="submit" class="btn amber-bg white-text">Add to Favourites</a></button>
-                            <button type="button" class="btn amber-bg white-text"><a
-                                    href="{{ url_for('add_review', wine_id=wine._id) }}">Add Review</a></button>
+                            <button type="submit" class="btn action-button">Add to Favourites</a></button>
+                            <a class="btn action-button"
+                                    href="{{ url_for('add_review', wine_id=wine._id) }}">Add Review</a>
                             {% endif %}
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>

@@ -146,7 +146,10 @@ def view_wines():
                         [{"$unwind": "$user_reviews"},
                          {"$group": {"_id": "$_id",
                           "AverageValue": {"$avg": "$user_reviews.rating"}}}]))
-    
+                  
+    for x in average_rating:
+        print(x)
+
     # To add a wine to user favourites
     if request.method == "POST":
         
