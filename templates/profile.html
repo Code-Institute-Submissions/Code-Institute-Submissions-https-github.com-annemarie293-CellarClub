@@ -14,14 +14,15 @@
     <!-- Wines submitted by user-->
     <div class="col col-sm-12 col-md-4  m-3">
         <div class="card bg-wine white-text">
-            <div class="card-body">
-                <h5 class="card-title text-center amber-text">Wines added by {{ first_name.title() }}</h5>
+            <h4 class="card-title text-center amber-text mt-2">Wines added by {{ first_name.title() }}</h4>
+            <div class="card-body">                
                 <ul class="card-text px-1">
                     {% for wine in wines %}
                     {% if session.user|lower == wine.submitted_by|lower %}
 
                     <li class="row">
-                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-wine-bottle"></i>&nbsp {{ wine.wine_name.title() }}</span>
+                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-wine-bottle"></i>&nbsp
+                            {{ wine.wine_name.title() }}</span>
                         <span class="col">{{ wine.vintage }}</span>
                         <span class="col">{{ wine.country.capitalize() }}</span>
                     </li>
@@ -36,14 +37,16 @@
     <!-- Favourite  Wines-->
     <div class="col col-sm-12 col-md-4  m-3">
         <div class="card bg-wine white-text">
+            <h4 class="card-title text-center amber-text mt-2">{{ first_name.title() }}'s Favourite Wines</h4>
             <div class="card-body">
-                <h5 class="card-title text-center amber-text">{{ first_name.title() }}'s Favourite Wines</h5>
+                
                 <ul class="card-text px-1">
                     {% for userx in users %}
                     {% if session.user == userx.username %}
                     {% for favourite in userx.favourites %}
                     <li class="row">
-                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-heart"></i>&nbsp {{ favourite.wine_name.title() }}</span>
+                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-heart"></i>&nbsp
+                            {{ favourite.wine_name.title() }}</span>
                         <span class="col">{{ favourite.vintage }}</span>
                         <span class="col">{{ favourite.country.capitalize() }}</span>
                     </li>
@@ -55,6 +58,73 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- Reviews -->
+<div class="row">
+
+    <div class="col-sm-12 col-md-8 offset-md-2">
+        <div class="card mx-auto">
+            <h4 class="card-title text-center amber-text mt-2">{{ first_name.title() }}'s Reviews</h4>
+            <div class="card-body">
+                {% for wine in wines %}
+                {% for user_review in wine.user_reviews %}
+                {% if session.user ==  user_review.reviewed_by %}
+                    <div class="row">
+                        <h5 class="col-sm-6 col-md-4 amber-text">{{ wine.wine_name.title() }}</h5>
+                        <p class="col-sm-6 col-md-8 col-lg-4 card-text">{{ user_review.review }}</p>
+                    
+                        {% if user_review.rating == 1 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>  
+                            </div>
+                        {% elif user_review.rating == 2 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                            </div>
+                        {% elif user_review.rating == 3 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                            </div>
+                        {% elif user_review.rating == 4 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                            </div>
+                        {% elif user_review.rating == 5 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star dark-amber-text"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <hr>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}
