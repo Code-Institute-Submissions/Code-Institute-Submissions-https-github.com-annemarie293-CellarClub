@@ -7,7 +7,7 @@
 </div>
 
 <div class="container">
-    <div class="row mt-4 row-cols-auto justify-content-center align-items-center">
+    <div class="row mt-4 justify-content-center align-items-center">
 
         {% for wine in wines %}
 
@@ -91,7 +91,7 @@
             <!-- Modal to display wine info and reviews-->
             <div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-labelledby="wineModalLabel"
                 aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <form class="modal-content" method="POST" action="{{ url_for('view_wines', wines=wines)}}">
                         <div class="modal-header">
                             <h5 class="modal-title" id="wineModalLabel">
@@ -157,8 +157,16 @@
                                     <i class="fas fa-star dark-amber-text"></i>
                                     <i class="fas fa-star dark-amber-text"></i>
                                     {% endif %}
+
+                                    {% if session.user == user_review.reviewed_by  %}
+                                    <div class="col">
+                                        <button type="button" class="btn amber-bg white-text"><a
+                                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit Review</a></button>
+                                    </div>
+                                    {% endif %}
                                     {% endfor %}
                                 </div>
+
                             </div>
                         </div>
                         <div class="modal-footer">

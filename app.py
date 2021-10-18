@@ -210,14 +210,19 @@ def add_review(wine_id):
     wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
 
     # Check if user has already reviewed this wine
-    review_exists = mongo.db.wines.find({"user_reviews": {
-         "$elemMatch": {"_id": ObjectId(wine_id),
-                        "reviewed_by": session["user"]}}})
+    review_exists = wine["user_reviews"]
+    print(review_exists)
 
-    if review_exists:
-        flash("You have already reviewed this wine")
-        return redirect(url_for("view_wines"))
+    for x in review_exists:
+        if x["reviewed_by"] == session["user"]:
+            reviewer = x["reviewed_by"]
+        else:
+            reviewer = "other"
 
+    if reviewer == session["user"]:
+        flash("You have already reviewed this wine, please edit your review instead")
+        return redirect(url_for('view_wines'))
+    
     if request.method == "POST":
         # Create new review object to add to
         # user_review array in the wine doc in wines db
@@ -232,6 +237,37 @@ def add_review(wine_id):
         return redirect(url_for('view_wines'))
 
     return render_template("add-review.html", wine=wine)
+
+
+# Function to edit an existing review
+@app.route("/edit_review/<wine_id>", methods=["GET", "POST"])
+def edit_review(wine_id):
+    wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
+    # To find the existing review details to add to form 
+    existing_reviews = wine["user_reviews"]
+
+    for x in existing_reviews:
+        if x["reviewed_by"] == session["user"]:
+            old_review = x["review"]
+            old_rating = x["rating"]
+            
+    if request.method == "POST":
+        # Create new review object to replace the
+        # existing user review in the wine doc in wines db
+        review = {
+            "review": request.form.get("review"),
+            "rating": int(request.form.get("rating")),
+            "reviewed_by": session["user"]
+        }
+        mongo.db.wines.update_one({"_id": ObjectId(wine_id), "user_reviews.reviewed_by": session["user"]},   
+                                  {"$set": {"user_reviews.$": review}})
+        flash("Review successfully submitted")
+        return redirect(url_for('view_wines'))
+
+    return render_template("edit-review.html", wine=wine,
+                           existing_reviews=existing_reviews,
+                           old_review=old_review,
+                           old_rating=old_rating)
 
 
 if __name__ == "__main__":

@@ -106,6 +106,9 @@ body {
 
 /*-- Cards on Wines Page --*/
 
+.row .col .wine-card {
+    width: 90% !important;
+}
     /* For card size on mobile */
     @media only screen and (max-width: 700px){
         .card-image img {
@@ -135,7 +138,7 @@ body {
     }
 
     .wine-card:hover{
-        box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
     }
 
     
