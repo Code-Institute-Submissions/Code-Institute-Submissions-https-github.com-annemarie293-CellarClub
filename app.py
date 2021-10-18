@@ -270,6 +270,15 @@ def edit_review(wine_id):
                            old_rating=old_rating)
 
 
+# Function for Delete Review
+@app.route("/delete_review/<wine_id>")
+def delete_review(wine_id):
+    mongo.db.wines.update({"_id": ObjectId(wine_id)}, {"$pull": {'user_reviews': {"reviewed_by": session['user']}}})
+
+    flash("Wine review has successfully been removed")
+    return redirect(url_for('view_wines'))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

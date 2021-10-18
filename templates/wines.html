@@ -161,7 +161,9 @@
                                     {% if session.user == user_review.reviewed_by  %}
                                     <div class="col">
                                         <button type="button" class="btn amber-bg white-text"><a
-                                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit Review</a></button>
+                                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a></button>
+                                        <button type="button" class="btn amber-bg white-text"><a
+                                            href="{{ url_for('delete_review', wine_id=wine._id) }}">Delete</a></button>
                                     </div>
                                     {% endif %}
                                     {% endfor %}
