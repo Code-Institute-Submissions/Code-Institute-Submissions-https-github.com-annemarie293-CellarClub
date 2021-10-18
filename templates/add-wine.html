@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="row ">
-    <h3 class="page-header col-s-12 col-md-8 offset-md-2 p-2">Submit a new wine</h3>
+    <h3 class="page-header col-8 offset-2 p-2">Submit a new wine</h3>
 </div>
 
 <div class="row">
@@ -17,7 +17,7 @@
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="wine_name"><i class="fas fa-bars"></i></span>
                         <select id="wine_type" name="wine_type" class="form-select text-center" aria-label="wineType"
-                            aria-describedby="wine_type">
+                            aria-describedby="wine_type" required placeholder="Select Wine Type">
                             <option value="" disabled selected>Select Wine Type</option>
                             {% for type in types %}
                             <option value="{{ type.wine_type }}">{{ type.wine_type.capitalize() }}</option>
@@ -36,7 +36,7 @@
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="wine_name"><i class="fas fa-award"></i></span>
                         <input id="wine_name" name="wine_name" type="text" class="form-control text-center"
-                            value="Wine Name" aria-label="wineName" aria-describedby="wine_name">
+                            placeholder="Wine Name" aria-label="wineName" aria-describedby="wine_name" required>
                         <div class="invalid-feedback">
                             Please enter the wine name
                         </div>
@@ -81,7 +81,7 @@
                             maxlength="30" required pattern="^[a-zA-Z]{5,20}$" placeholder="Country"
                             aria-label="country" aria-describedby="country-input">
                         <div class="invalid-feedback">
-                            Please enter a grape variety
+                            Please enter the country where this wine is produced
                         </div>
                     </div>
                 </div>
@@ -93,16 +93,20 @@
                         <input id="region" name="region" type="text" class="form-control text-center" minlength="4"
                             maxlength="4" pattern="^[0-9]{4,4}$" placeholder="Region" aria-label="region"
                             aria-describedby="region-input">
+
                     </div>
                 </div>
             </div>
             <!--Review Input-->
             <div class="row mb-2 p-2 mx-2">
                 <div class="col">
-                    <div class="input-group">
+                    <div class="input-group has-validation">
                         <span class="input-group-text" id="review"><i class="fas fa-pen prefix black-text"></i></span>
                         <textarea id="review" name="review" class="form-control" minlength="5" maxlength="200" rows="4"
                             required></textarea>
+                        <div class="invalid-feedback">
+                            Please enter a review of this wine
+                        </div>
                     </div>
                     <label for="review" class="visually-hidden">Your Review</i></label>
                 </div>
@@ -112,7 +116,7 @@
                 <h5>Rate this wine</h5>
                 <p>
                     <label>
-                        <input name="rating" type="radio" id="1" value="1" class="form-check-input"/>
+                        <input name="rating" type="radio" id="1" value="1" class="form-check-input" required/>
                         <span>
                             <i class="fas fa-star amber-text"></i>
                             <i class="fas fa-star grey-text"></i>
@@ -124,7 +128,7 @@
                 </p>
                 <p>
                     <label>
-                        <input name="rating" type="radio" id="2" value="2" class="form-check-input"/>
+                        <input name="rating" type="radio" id="2" value="2" class="form-check-input" />
                         <span>
                             <i class="fas fa-star amber-text"></i>
                             <i class="fas fa-star amber-text"></i>
@@ -136,7 +140,7 @@
                 </p>
                 <p>
                     <label>
-                        <input name="rating" type="radio" id="3" value="3" class="form-check-input"/>
+                        <input name="rating" type="radio" id="3" value="3" class="form-check-input" />
                         <span>
                             <i class="fas fa-star amber-text"></i>
                             <i class="fas fa-star amber-text"></i>
@@ -148,7 +152,7 @@
                 </p>
                 <p>
                     <label>
-                        <input name="rating" type="radio" id="4" value="4" class="form-check-input"/>
+                        <input name="rating" type="radio" id="4" value="4" class="form-check-input" />
                         <span>
                             <i class="fas fa-star amber-text"></i>
                             <i class="fas fa-star amber-text"></i>
@@ -160,7 +164,7 @@
                 </p>
                 <p>
                     <label>
-                        <input name="rating" type="radio" id="5" value="5" class="form-check-input"/>
+                        <input name="rating" type="radio" id="5" value="5" class="form-check-input" />
                         <span>
                             <i class="fas fa-star amber-text"></i>
                             <i class="fas fa-star amber-text"></i>
@@ -170,6 +174,9 @@
                         </span>
                     </label>
                 </p>
+                <div class="invalid-feedback">
+                    Please add a rating
+                </div>
             </div>
             <div class="row mb-2 p-2 mx-2">
                 <button type="submit" class="btn col-12 form-submit rounded text-center corben-font">

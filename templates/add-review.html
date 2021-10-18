@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="row ">
-    <h3 class="page-header col-s-12 col-md-8 offset-md-2 p-2">Submit a review for {{ wine.wine_name.title() }}</h3>
+    <h3 class="page-header col-8 offset-2 p-2">Submit a review for {{ wine.wine_name.title() }}</h3>
 </div>
 
 <div class="row">
@@ -55,7 +55,7 @@
                 <h5>Rate this wine</h5>
                 <p>
                     <label>
-                        <input name="rating" type="radio" id="1" value="1" class="form-check-input" />
+                        <input name="rating" type="radio" id="1" value="1" class="form-check-input" required/>
                         <span>
                             <i class="fas fa-star amber-text"></i>
                             <i class="fas fa-star grey-text"></i>

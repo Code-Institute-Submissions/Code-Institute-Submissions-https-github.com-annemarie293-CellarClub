@@ -21,50 +21,54 @@
 
 <body>
 
+
     <header>
         <!-- Top navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-              <a class="navbar-brand h1 mb-0 logo-font" href="{{ url_for('base')}}">CellarClub</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 float-end">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('view_wines')}}">Wines</a></li>
-                    {% if session.user%}
+                <a class="navbar-brand h1 mb-0 logo-font" href="{{ url_for('base')}}">CellarClub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 float-end">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('view_wines')}}">Wines</a></li>
+                        {% if session.user%}
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('add_wine')}}">Add Wine</a></li>
-                    {% endif %}
-                    {% if session.user%}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('profile', username=session['user'])}}">Profile</a></li>
+                        {% endif %}
+                        {% if session.user%}
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{ url_for('profile', username=session['user'])}}">Profile</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('sign_out')}}">Sign Out</a></li>
-                    {% else%}
+                        {% else%}
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('sign_in')}}">Sign in</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('register')}}">Sign Up</a></li>
-                    {% endif %}
-                </ul>
-              </div>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-          </nav>
+        </nav>
     </header>
 
-    <section>
+    <section class="container-fluid gx-0">
         <!--to display flash messages-->
 
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                <h3 class="center-align"><strong>{{ message }}</strong></h3>
-          </div>
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <h3 class="center-align"><strong>{{ message }}</strong></h3>
+        </div>
         {% endfor %}
         {% endif%}
         {% endwith %}
 
     </section>
 
-    <main class="container-fluid">
+    <main class="container-fluid g-0">
         {% block content %}
         {% endblock %}
     </main>
@@ -81,6 +85,7 @@
                 <p class="mt-1">&copy; 2021 AM Murphy</p>
             </div>
     </footer>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

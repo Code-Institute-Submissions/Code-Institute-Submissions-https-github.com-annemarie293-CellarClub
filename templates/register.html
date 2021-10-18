@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="row ">
-    <h3 class="page-header col-s-12 col-md-8 offset-md-2 p-2">Sign up to join our club!</h3>
+    <h3 class="page-header col-8 offset-2 p-2">Sign up to join our club!</h3>
 </div>
 
 <div class="row">
@@ -14,10 +14,10 @@
                 <div class="col">
                     <label for="username" class="visually-hidden">Username</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="username"><i class="fas fa-user"></i></span>
+                        <span class="input-group-text" id="username-input"><i class="fas fa-user"></i></span>
                         <input id="username" name="username" type="text" class="form-control text-center" minlength="5"
-                            maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Username" aria-label="username"
-                            aria-describedby="username">
+                            maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Username" aria-label="username"
+                            aria-describedby="username-input">
                         <div class="invalid-feedback">
                             Please choose a username
                         </div>
@@ -26,26 +26,26 @@
             </div>
             <div class="row mb-2 p-2 mx-2">
                 <!--Password input field-->
-                <div class="col-sm-12 col-md-6 px-2">
+                <div class="col-sm-12 col-md-6 p-2">
                     <label for="password" class="visually-hidden">Password</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="password"><i class="fas fa-user-lock"></i></span>
+                        <span class="input-group-text" id="password-input"><i class="fas fa-user-lock"></i></span>
                         <input id="password" name="password" type="password" class="form-control text-center"
                             minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Password"
-                            value="Password" aria-label="password" aria-describedby="password">
+                            value="Password" aria-label="password" aria-describedby="password-input">
                         <div class="invalid-feedback">
                             Please choose a password
                         </div>
                     </div>
                 </div>
                 <!--Password check input field-->
-                <div class="col-sm-12 col-md-6 px-2">
+                <div class="col-sm-12 col-md-6 p-2">
                     <label for="password-check" class="visually-hidden">Repeat password</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="password-check"><i class="fas fa-user-check"></i></span>
-                        <input id="password-check" name="password-check" type="text" class="form-control text-center"
-                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Repeat password"
-                            aria-label="password-check" aria-describedby="password-check">
+                        <span class="input-group-text" id="password-check-input"><i class="fas fa-user-check"></i></span>
+                        <input id="password-check" name="password-check" type="password" class="form-control text-center"
+                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Repeat password"
+                            aria-label="password-check" aria-describedby="password-check-input">
                         <div class="invalid-feedback">
                             Please re-enter your password
                         </div>
@@ -54,12 +54,12 @@
             </div>
             <div class="row mb-2 p-2 mx-2">
                 <!--First Name input field-->
-                <div class="col-sm-12 col-md-6 px-2">
+                <div class="col-sm-12 col-md-6 p-2">
                     <label for="first_name" class="visually-hidden">First Name</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="first_name"><i class="fas fa-user"></i></span>
                         <input id="first_name" name="first_name" type="text" class="form-control text-center"
-                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="First Name"
+                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="First Name"
                             aria-label="first_name" aria-describedby="first_name">
                         <div class="invalid-feedback">
                             Please add your first name
@@ -67,12 +67,12 @@
                     </div>
                 </div>
                 <!--Last Name input field-->
-                <div class="col-sm-12 col-md-6 px-2">
+                <div class="col-sm-12 col-md-6 p-2">
                     <label for="last_name" class="visually-hidden">Last Name</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="last_name"><i class="fas fa-user"></i></span>
                         <input id="last_name" name="last_name" type="text" class="form-control text-center"
-                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Last Name"
+                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Last Name"
                             aria-label="last_name" aria-describedby="last_name">
                         <div class="invalid-feedback">
                             Please add your last name
@@ -82,12 +82,12 @@
             </div>
             <div class="row mb-2 p-2 mx-2">
                 <!--Date of Birth  input field-->
-                <div class="col-sm-12 col-md-6 px-2">
+                <div class="col-sm-12 col-md-6 p-2">
                     <label for="dob" class="visually-hidden">Date of Birth</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="dob"><i class="fa fa-calendar"></i></span>
                         <input id="dob" name="dob" type="date" class="form-control text-center"
-                             min="1900-01-01" max="2050-12-31" placeholder="Date of Birth"
+                             min="1900-01-01" max="2050-12-31" placeholder="Date of Birth dd/mm/yyy"
                             aria-label="DateOfBirth" aria-describedby="dob">
                         <div class="invalid-feedback">
                             Please enter your date of birth
@@ -95,13 +95,13 @@
                     </div>
                 </div>
                 <!--Country input field-->
-                <div class="col-sm-12 col-md-6 px-2">
+                <div class="col-sm-12 col-md-6 p-2">
                     <label for="country" class="visually-hidden">Country</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="country"><i class="fas fa-flag"></i></span>
+                        <span class="input-group-text" id="country-input"><i class="fas fa-flag"></i></span>
                         <input id="country" name="country" type="text" class="form-control text-center" minlength="5"
-                            maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Country" aria-label="country"
-                            aria-describedby="country">
+                            maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Country" aria-label="country"
+                            aria-describedby="country-input">
                         <div class="invalid-feedback">
                             Please add the country where you live
                         </div>
@@ -115,6 +115,5 @@
         </form>
     </div>
 </div>
-
 
 {% endblock %}

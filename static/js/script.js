@@ -1,17 +1,21 @@
 $(document).ready(function(){
-    //Jquery for Mobile navbar collapse (Materialize)
-    $('.sidenav').sidenav();
-    //Jquery for Modal on Wines page (Materialize)
-    $('.modal').modal();
-    //Jquery for select option on forms (Materialize)
-    $('select').formSelect();
-    //Jquery for datepicker option on forms (Materialize)
-    $('.datepicker').datepicker({
-      format: "yyyy-mm-dd",
-      yearRange: [1920,2021],
-      showClearBtn: true,
-      i18n: {
-        done: "Select"
+    
+    // Example starter JavaScript for disabling form submissions if there are invalid fields (Bootstrap)
+(() => {
+  'use strict';
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
       }
-    });
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
   });
