@@ -120,23 +120,26 @@ def sign_out():
 @app.route("/profile")
 def profile():
     wines = list(mongo.db.wines.find())
+    users = list(mongo.db.users.find())
     user = mongo.db.users.find_one({"username": session["user"]})["username"]
     first_name = mongo.db.users.find_one({
                 "username": session["user"]})["first_name"]
-
+    
     if session["user"]:
         return render_template("profile.html",
                                user=user,
-                               wines=wines, 
+                               users=users,
+                               wines=wines,
                                first_name=first_name)
     else:
         return redirect(url_for('login'))
 
 
 # Function to view all wines
-@app.route("/view_wines/")
+@app.route("/view_wines/", methods=["GET", "POST"])
 def view_wines():
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
+    user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
 
     # To calculate average rating from reviews
     average_rating = list(mongo.db.wines.aggregate(
@@ -144,6 +147,18 @@ def view_wines():
                          {"$group": {"_id": "$_id",
                           "AverageValue": {"$avg": "$user_reviews.rating"}}}]))
     
+    if request.method == "POST":
+        # Adds the wine to favourites in User DB
+        favourite = {
+            "wine_name": request.form.get("wine_name").lower(),
+            "grape": request.form.get("grape").lower(),
+            "vintage": request.form.get("vintage").lower(),
+            "country": request.form.get("country").lower(),
+        }
+        mongo.db.users.update_one({"_id": ObjectId(user_id)},
+                                  {"$push": {"favourites": favourite}})
+        flash("Wine is now added to your favourites list")
+        return redirect(url_for('view_wines'))
 
     return render_template("wines.html", wines=wines,
                            average_rating=average_rating)

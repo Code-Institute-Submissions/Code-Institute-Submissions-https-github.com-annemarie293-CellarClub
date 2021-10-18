@@ -57,6 +57,10 @@ body {
     color: #ffc107 ;
 }
 
+.amber-bg {
+    background-color: #ffc107 ;
+}
+
 .dark-amber-text {
     color:#ffa000;
 }
@@ -179,3 +183,13 @@ body {
 .form-submit:hover {
     color: #ffc107;;
 }
+
+/* --- Form hidden input style (https://stackoverflow.com/questions/38830620/make-an-input-look-like-normal-text-in-a-paragraph) ---*/
+.hidden-input {
+    border: none;
+    display: inline;
+    font-family: inherit;
+    font-size: inherit;
+    padding: none;
+    width: auto;
+  }

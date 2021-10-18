@@ -91,16 +91,30 @@
             <div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-labelledby="wineModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <form class="modal-content" method="POST" action="{{ url_for('view_wines', wines=wines)}}">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="wineModalLabel">{{ wine.wine_name.title() }}</h5>
+                            <h5 class="modal-title" id="wineModalLabel">
+                                <span>
+                                    <input type="text" id="wine_name" name="wine_name" class="hidden-input" readonly
+                                        required value="{{ wine.wine_name.title() }}">
+                                </span>
+                            </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <p>Grape : &nbsp<span>{{ wine.grape.capitalize() }}</span></p>
-                                <p>Vintage : &nbsp<span>{{ wine.vintage.capitalize() }}</span></p>
-                                <p>Country : &nbsp<span>{{ wine.country.capitalize() }}</span></p>
+                                <p>Grape :<span>
+                                        <input type="text" id="grape" name="grape" class="hidden-input" readonly
+                                            required value="{{ wine.grape.capitalize() }}">
+                                    </span></p>
+                                <p>Vintage :<span>
+                                        <input type="text" id="vintage" name="vintage" class="hidden-input" readonly
+                                            required value="{{ wine.vintage.capitalize() }}">
+                                    </span></p>
+                                <p>Country :<span>
+                                        <input type="text" id="country" name="country" class="hidden-input" readonly
+                                            required value="{{ wine.country.capitalize() }}">
+                                    </span></p>
                                 {% if wine.region %}
                                 <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
                                 {% endif %}
@@ -148,12 +162,13 @@
                         </div>
                         <div class="modal-footer">
                             {% if session.user %}
-                                <button type="button" class="btn btn-primary"><a
+                            <button type="submit" class="btn amber-bg white-text">Add to Favourites</a></button>
+                            <button type="button" class="btn amber-bg white-text"><a
                                     href="{{ url_for('add_review', wine_id=wine._id) }}">Add Review</a></button>
                             {% endif %}
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
