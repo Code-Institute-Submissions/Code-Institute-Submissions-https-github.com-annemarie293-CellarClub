@@ -209,16 +209,14 @@ def add_wine():
 def add_review(wine_id):
     wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
 
-    # Check if user has already reviewed this winw
-        wine_exists = mongo.db.wines.find_one(
-                      {"wine_name": request.form.get("wine_name").lower()})
-        
-        if wine_exists:
-            vintage_exists = mongo.db.wines.find_one(
-                             {"vintage": request.form.get("vintage")})
-            if vintage_exists:
-                flash("Wine/Vintage already exists, please add a review")
-                return redirect(url_for("view_wines"))
+    # Check if user has already reviewed this wine
+    review_exists = mongo.db.wines.find({"user_reviews": {
+         "$elemMatch": {"_id": ObjectId(wine_id),
+                        "reviewed_by": session["user"]}}})
+
+    if review_exists:
+        flash("You have already reviewed this wine")
+        return redirect(url_for("view_wines"))
 
     if request.method == "POST":
         # Create new review object to add to
