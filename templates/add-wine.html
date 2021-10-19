@@ -3,13 +3,13 @@
 {% block content %}
 
 <div class="row ">
-    <h3 class="page-header col-8 offset-2 p-2">Submit a new wine</h3>
+    <h3 class="page-header col-8 offset-2 p-2 shadow">Submit a new wine</h3>
 </div>
 
+<!---------- Add New Wine section -------->
 <div class="row">
     <div class="card col-sm-12 col-md-8 offset-md-2 my-4 shadow">
         <form class="g-3 needs-validation" novalidate method="POST" action="{{ url_for('add_wine')}}">
-            <!---------- Add New Wine section -------->
             <div class="row mt-2 p-2 mx-2">
                 <!--Wine type selection-->
                 <div class="col">
@@ -190,11 +190,12 @@
                     Please add a rating
                 </div>
             </div>
+            <!--Submit/Cancel button-->
             <div class="row mb-2 text-center justify-content-center">
-                <button type="submit" class="btn col-4 m-3 form-submit rounded text-center corben-font">
-                    Submit Wine &nbsp;<i class="fas fa-plus-circle"></i></button>
                 <a class="btn col-4 m-3 form-cancel rounded text-center corben-font" 
                 href="{{ url_for('view_wines')}}">Cancel &nbsp;<i class="fas fa-times-circle"></i></a>
+                <button type="submit" class="btn col-4 m-3 form-submit rounded text-center corben-font">
+                    Submit Wine &nbsp;<i class="fas fa-plus-circle"></i></button>
             </div>
         </form>
     </div>

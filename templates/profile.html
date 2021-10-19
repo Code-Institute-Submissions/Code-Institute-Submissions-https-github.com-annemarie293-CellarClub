@@ -2,18 +2,13 @@
 
 {% block content %}
 <div class="row">
-    <h3 class="page-header col-8 offset-2 p-2">{{ user.title() }}'s Profile Page</h3>
-</div>
-
-<!-- Personal Info-->
-<div>
-
+    <h3 class="page-header col-8 offset-2 p-2 shadow">{{ user.title() }}'s Profile Page</h3>
 </div>
 
 <div class="row mt-3 justify-content-center">
     <!-- Wines submitted by user-->
-    <div class="col col-sm-12 col-md-4  m-3">
-        <div class="card profile-card">
+    <div class="col col-sm-12 col-md-4 m-3">
+        <div class="card profile-card shadow">
             <h4 class="card-title text-center text-wine mt-2">Wines added by {{ first_name.title() }}</h4>
             <div class="card-body">
                 <ul class="card-text px-1">
@@ -35,8 +30,8 @@
     </div>
 
     <!-- Favourite  Wines-->
-    <div class="col col-sm-12 col-md-4  m-3">
-        <div class="card profile-card">
+    <div class="col col-sm-12 col-md-4 m-3">
+        <div class="card profile-card shadow">
             <h4 class="card-title text-center text-wine mt-2">{{ first_name.title() }}'s Favourite Wines</h4>
             <div class="card-body">
 
@@ -65,7 +60,7 @@
 <div class="row">
 
     <div class="col-sm-12 col-md-8 offset-md-2">
-        <div class="card mx-auto">
+        <div class="card mx-auto shadow">
             <h4 class="card-title text-center text-wine mt-2">{{ first_name.title() }}'s Reviews</h4>
             <div class="card-body">
                 {% for wine in wines %}

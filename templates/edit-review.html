@@ -2,15 +2,16 @@
 
 {% block content %}
 
+<!--------Page Header -------->
 <div class="row ">
-    <h3 class="page-header col-8 offset-2 p-2">Edit your review for {{ wine.wine_name.title() }}</h3>
+    <h3 class="page-header col-8 offset-2 p-2 shadow">Edit your review for {{ wine.wine_name.title() }}</h3>
 </div>
 
+<!---------- Edit Review section -------->
 <div class="row">
     <div class="card col-sm-12 col-md-8 offset-md-2 my-4 shadow">
         <form class="g-3 needs-validation" novalidate method="POST"
             action="{{ url_for('edit_review', wine_id=wine._id)}}">
-            <!---------- Edit Review section -------->
             <div class="row mb-2 p-2 mx-2">
                 <!--Wine Name input field-->
                 <div class="col-sm-12 col-md-6 px-2">
@@ -137,12 +138,12 @@
                     </label>
                 </p>
             </div>
-            <!--Submit button-->
+            <!--Submit/Cancel button-->
             <div class="row mb-2 text-center justify-content-center">
                 <button type="submit" class="btn col-4 m-3 form-submit rounded text-center corben-font">
-                    Submit Your Review &nbsp;<i class="fas fa-plus-circle"></i></button>
                 <a class="btn col-4 m-3 form-cancel rounded text-center corben-font"
                     href="{{ url_for('view_wines')}}">Cancel &nbsp;<i class="fas fa-times-circle"></i></a>
+                Submit Your Review &nbsp;<i class="fas fa-plus-circle"></i></button>
             </div>
         </form>
     </div>

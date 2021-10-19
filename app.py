@@ -19,9 +19,9 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/base")
-def base():
-    return render_template("base.html")
+@app.route("/home")
+def home():
+    return render_template("home.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -67,8 +67,7 @@ def register():
             "password": generate_password_hash(request.form.get("password")),
             "first_name": request.form.get("first_name").lower(),
             "last_name": request.form.get("last_name").lower(),
-            "dob": request.form.get("dob"),
-            "country": request.form.get("country").lower()
+            "dob": request.form.get("dob")
         }
         mongo.db.users.insert_one(new_user)
 
@@ -147,22 +146,19 @@ def view_wines():
                         [{"$unwind": "$user_reviews"},
                          {"$group": {"_id": "$_id",
                           "AverageValue": {"$avg": "$user_reviews.rating"}}}]))
-                  
-    for x in average_rating:
-        print(x)
 
+    
     # To add a wine to user favourites
     if request.method == "POST":
-        
+    
         favourite = {
-            '_id': bson.objectid.ObjectId(),
             "wine_name": request.form.get("wine_name").lower(),
             "grape": request.form.get("grape").lower(),
             "vintage": request.form.get("vintage").lower(),
             "country": request.form.get("country").lower(),
         }
         mongo.db.users.update_one({"_id": ObjectId(user_id)},
-                                  {"$push": {"favourites": favourite}})
+                                    {"$push": {"favourites": favourite}})
         flash("Wine is now added to your favourites list")
         return redirect(url_for('view_wines'))
 

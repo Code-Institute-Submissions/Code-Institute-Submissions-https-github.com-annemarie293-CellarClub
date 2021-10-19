@@ -6,50 +6,54 @@
     <h3 class="page-header col-8 offset-2 p-2">Sign in to your account</h3>
 </div>
 
-<div class="row">
-    <div class="card col-sm-12 col-md-8 offset-md-2 my-4 shadow">
-        <form class="g-3 needs-validation" novalidate method="POST" action="{{ url_for('sign_in')}}">
-            <div class="row mt-2 p-2 mx-2">
-                <!--Username input field-->
-                <div class="col">
-                    <label for="username" class="visually-hidden">Username</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text" id="username"><i class="fas fa-user"></i></span>
-                        <input id="username" name="username" type="text" class="form-control text-center" minlength="5"
-                            maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" value="Username" aria-label="username"
-                            aria-describedby="username">
-                        <div class="invalid-feedback">
-                            Please enter your username
+
+<div class="sign-in">
+    <div class="row">
+        <div class="card col-sm-12 col-md-8 offset-md-2 my-4 shadow">
+            <form class="needs-validation" novalidate method="POST" action="{{ url_for('sign_in')}}">
+                <div class="row mt-2 p-2 mx-2">
+                    <!--Username input field-->
+                    <div class="col">
+                        <label for="username" class="visually-hidden">Username</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="username"><i class="fas fa-user"></i></span>
+                            <input id="username" name="username" type="text" class="form-control text-center" minlength="5"
+                                maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Username" aria-label="username"
+                                aria-describedby="username">
+                            <div class="invalid-feedback">
+                                Please enter your username
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mb-2 p-2 mx-2">
-                <!--Password input field-->
-                <div class="col px-2">
-                    <label for="password" class="visually-hidden">Password</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text" id="password"><i class="fas fa-user-lock"></i></span>
-                        <input id="password" name="password" type="password" class="form-control text-center"
-                            minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Password"
-                            value="Password" aria-label="password" aria-describedby="password">
-                        <div class="invalid-feedback">
-                            Please enter your password
+                <div class="row mb-2 p-2 mx-2">
+                    <!--Password input field-->
+                    <div class="col px-2">
+                        <label for="password" class="visually-hidden">Password</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="password"><i class="fas fa-user-lock"></i></span>
+                            <input id="password" name="password" type="password" class="form-control text-center"
+                                minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Password"
+                                value="Password" aria-label="password" aria-describedby="password">
+                            <div class="invalid-feedback">
+                                Please enter your password
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-           
-            <div class="row mb-2 p-2 mx-2">
-                <button type="submit" class="btn col-12 form-submit rounded text-center corben-font">
-                    <i class="fas fa-sign-in-alt"></i>&nbsp Sign-In</button>
-            </div>
-            <div class="row">
-                <div class="col text-center">
-                    <h6>Dont have an account yet? &nbsp<span><a href="{{ url_for('register')}}" class="btn action-button shadow">Register</a></span></h6>
+               <!-- Submit button -->
+                <div class="row mb-2 p-2 mx-2">
+                    <button type="submit" class="btn col-12 form-submit rounded text-center corben-font">
+                        <i class="fas fa-sign-in-alt"></i>&nbsp Sign-In</button>
                 </div>
-            </div>
-        </form>
+                <!-- Link to Register page -->
+                <div class="row">
+                    <div class="col text-center">
+                        <h6>Dont have an account yet? &nbsp<span><a href="{{ url_for('register')}}" class="btn action-button shadow">Register</a></span></h6>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

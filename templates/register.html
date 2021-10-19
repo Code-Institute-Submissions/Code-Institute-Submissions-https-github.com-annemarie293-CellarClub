@@ -2,8 +2,9 @@
 
 {% block content %}
 
+<!-- Page Header -->
 <div class="row ">
-    <h3 class="page-header col-8 offset-2 p-2">Sign up to join our club!</h3>
+    <h3 class="page-header col-8 offset-2 p-2 shadow">Sign up to join our club!</h3>
 </div>
 
 <div class="row">
@@ -24,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-2 p-2 mx-2">
+            <div class="row mb-1 p-2 mx-2">
                 <!--Password input field-->
                 <div class="col-sm-12 col-md-6 p-2">
                     <label for="password" class="visually-hidden">Password</label>
@@ -48,6 +49,21 @@
                             aria-label="password-check" aria-describedby="password-check-input">
                         <div class="invalid-feedback">
                             Please re-enter your password
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2 p-2 mx-2">
+                <!--Date of Birth input field-->
+                <div class="col text-center">
+                    <label for="dob" class="">Date of Birth</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="dob"><i class="fa fa-calendar"></i></span>
+                        <input id="dob" name="dob" type="date" class="form-control text-center"
+                             min="1900-01-01" max="2050-12-31" placeholder="Date of Birth dd/mm/yyy"
+                            aria-label="DateOfBirth" aria-describedby="dob">
+                        <div class="invalid-feedback">
+                            Please enter your date of birth
                         </div>
                     </div>
                 </div>
@@ -80,39 +96,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-2 p-2 mx-2">
-                <!--Date of Birth  input field-->
-                <div class="col-sm-12 col-md-6 p-2">
-                    <label for="dob" class="visually-hidden">Date of Birth</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text" id="dob"><i class="fa fa-calendar"></i></span>
-                        <input id="dob" name="dob" type="date" class="form-control text-center"
-                             min="1900-01-01" max="2050-12-31" placeholder="Date of Birth dd/mm/yyy"
-                            aria-label="DateOfBirth" aria-describedby="dob">
-                        <div class="invalid-feedback">
-                            Please enter your date of birth
-                        </div>
-                    </div>
-                </div>
-                <!--Country input field-->
-                <div class="col-sm-12 col-md-6 p-2">
-                    <label for="country" class="visually-hidden">Country</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text" id="country-input"><i class="fas fa-flag"></i></span>
-                        <input id="country" name="country" type="text" class="form-control text-center" minlength="2"
-                            maxlength="30" required placeholder="Country" aria-label="country"
-                            aria-describedby="country-input">
-                        <div class="invalid-feedback">
-                            Please add the country where you live
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Submit button -->
             <div class="row mb-2 p-2 mx-2">
                 <button type="submit" class="btn col-12 form-submit rounded text-center corben-font"><i
                         class="fas fa-sign-in-alt"></i>Register</button>
             </div>
 
+            <!-- Link to Sign-in Page -->
             <div class="row">
                 <div class="col text-center">
                     <h6>Already have an account? &nbsp<span><a href="{{ url_for('sign_in')}}" class="btn action-button shadow">Sign In</a></span></h6>

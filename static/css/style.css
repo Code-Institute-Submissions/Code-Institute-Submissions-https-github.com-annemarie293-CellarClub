@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&display=swap');
 
 
-/*-----For Sticky Footer------*/
+/*----- Footer------*/
 body {
     display: flex;
     min-height: 100vh;
@@ -27,7 +27,7 @@ footer .copyright{
     font-size: 5px;
 }
 
-/*-----Fonts------*/
+/*------------Fonts---------------*/
 .logo-font {
     font-family: 'Corben', cursive;
     font-weight: 700;
@@ -78,7 +78,7 @@ body {
     color: white;
 }
 
-/*-----Headers on all pages page ------*/
+/*-----Headers on all pages ------*/
 .row .page-header {
     margin-top: 1.5rem;
     padding-bottom: .5rem;
@@ -92,15 +92,37 @@ body {
     color: black;
     background-color: #ffc107;
     border: none;
-    border-radius:16px;
+    border-radius:15px;
     display: inline-block;
     margin: 0 auto;
-    border-radius: 16px;
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    
 }
 
+/*---------- Home Page Image------------*/
 
-/*-- Cards on Wines Page --*/
+.hero-image {
+    background-image: url("../images/wine-hero.jpg");
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    max-width: 100%;
+}
+
+.hero-image-text {
+    position: absolute;
+    top: 25%;
+    left:.5%;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+}
+
+.hero-image-text:hover{
+    color: white;
+}
+
+/*------ Cards on Wines Page -----------*/
 
 .row .col .wine-card {
     width: 90% !important;
@@ -133,12 +155,16 @@ body {
         }
     }
 
+    .wine-card{
+        border: 2px solid white !important;
+    }
     .wine-card:hover{
         box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+        border: 2px solid #9b2b3e !important;
     }
 
 
-    /* Modal */
+    /*--------- Modal to display wine details ----------*/
     .modal-wine-info p{
         color: #ff8f00;
     }
@@ -148,13 +174,13 @@ body {
 
     
 
-/*-- Flash Alert --  Source: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_alert */
+/*---- Flash Alert --  Source: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_alert */
   .alert{
       padding: 10px;
       background-color:#ffd54f;
       text-align: center;
       font-family: 'EB Garamond', serif;
-      color: #9b2b3e ;
+      color: black;
       
   }
   
@@ -173,7 +199,14 @@ body {
     color: black;
   }
 
-/*-------- Button styling -------*/  
+/*------------ Button styling ------------*/  
+
+/*-------remove blue outline from all bootstrap buttons---------*/
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 /*--- Form submit Button --*/
 .form-submit {
     background-color: black;
@@ -203,7 +236,6 @@ body {
     box-shadow: 0 1rem 3rem rgba(0,0,0,.15) !important;
 }
 
-
 /*-- Button to open Modal--*/
 .wine-modal-button{
     background-color: white;
@@ -216,4 +248,9 @@ body {
     color: #9b2b3e;
     border: 2px solid #9b2b3e !important;
     border-radius: 10px;
+}
+
+/*------ height for sign-in section to push down footer---------*/
+.sign-in{
+    height: 75vh;
 }

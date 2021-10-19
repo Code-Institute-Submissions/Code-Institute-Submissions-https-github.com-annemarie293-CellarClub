@@ -1,0 +1,25 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    <!--<img class="img-fluid gx-0" src="{{ url_for('static', filename='images/wine-hero.jpg') }}" alt="image of shelved wall stacked with wine bottles">
+    <div>
+        <h2 class="white-text">Step down into the cellar...</h2>
+    </div>-->
+
+
+</div>
+
+<div class="hero-image container-fluid g-0">
+    <div class="row justify-content-center">
+        <div class="hero-image-text col-8 offset-2 text-center p-3 amber-text shadow-lg">
+            <h2 class="logo-font">Step down into the cellar...</h2>
+            <h4 class="corben-font">Join up today and start exploring our community wine reviews</h4>
+            <a class="stretched-link" href="{{ url_for('register')}}"></a>
+        </div>
+    </div>
+</div>
+{% endblock %}
