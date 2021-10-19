@@ -15,7 +15,7 @@
     <div class="col col-sm-12 col-md-4  m-3">
         <div class="card bg-wine white-text">
             <h4 class="card-title text-center amber-text mt-2">Wines added by {{ first_name.title() }}</h4>
-            <div class="card-body">                
+            <div class="card-body">
                 <ul class="card-text px-1">
                     {% for wine in wines %}
                     {% if session.user|lower == wine.submitted_by|lower %}
@@ -39,7 +39,7 @@
         <div class="card bg-wine white-text">
             <h4 class="card-title text-center amber-text mt-2">{{ first_name.title() }}'s Favourite Wines</h4>
             <div class="card-body">
-                
+
                 <ul class="card-text px-1">
                     {% for userx in users %}
                     {% if session.user == userx.username %}
@@ -71,65 +71,65 @@
                 {% for wine in wines %}
                 {% for user_review in wine.user_reviews %}
                 {% if session.user ==  user_review.reviewed_by %}
-                    <div class="row">
-                        <h5 class="col-sm-6 col-md-4 amber-text">{{ wine.wine_name.title() }}</h5>
-                        <p class="col-sm-6 col-md-8 col-lg-4 card-text">{{ user_review.review }}</p>
-                    
-                        {% if user_review.rating == 1 %}
-                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                                <i class="fas fa-star grey-text"></i>  
-                            </div>
-                        {% elif user_review.rating == 2 %}
-                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                            </div>
-                        {% elif user_review.rating == 3 %}
-                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                            </div>
-                        {% elif user_review.rating == 4 %}
-                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star grey-text"></i>
-                            </div>
-                        {% elif user_review.rating == 5 %}
-                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                            </div>
-                        {% endif %}
+                <div class="row">
+                    <h5 class="col-sm-6 col-md-4 amber-text">{{ wine.wine_name.title() }}</h5>
+                    <p class="col-sm-6 col-md-8 col-lg-4 card-text">{{ user_review.review }}</p>
+
+                    {% if user_review.rating == 1 %}
+                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
                     </div>
-                    <div class="row">
-                        <div class="col align-items-center">
-                            <a class="btn btn-small action-button mx-2 shadow float-end"
-                                href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
-                            <a class="btn action-button float-end shadow mx-2"
-                                href="{{ url_for('delete_review', wine_id=wine._id) }}">Delete</a>
-                            <button type="button" class="btn action-button float-end  shadow mx-2"
-                                data-bs-toggle="modal" data-bs-target="#wine-id{{ wine._id }}">
-                                View wine
-                            </button>
-                        </div>
+                    {% elif user_review.rating == 2 %}
+                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
                     </div>
-                    <hr>
+                    {% elif user_review.rating == 3 %}
+                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                    </div>
+                    {% elif user_review.rating == 4 %}
+                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                    </div>
+                    {% elif user_review.rating == 5 %}
+                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <div class="col align-items-center">
+                        <a class="btn btn-small action-button mx-2 shadow float-end"
+                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
+                        <a class="btn action-button float-end shadow mx-2"
+                            href="{{ url_for('delete_review', wine_id=wine._id) }}">Delete</a>
+                        <button type="button" class="btn action-button float-end  shadow mx-2" data-bs-toggle="modal"
+                            data-bs-target="#wine-id{{ wine._id }}">
+                            View wine
+                        </button>
+                    </div>
+                </div>
+                <hr>
                 {% endif %}
                 {% endfor %}
                 {% endfor %}
@@ -141,98 +141,95 @@
 
 <!-- Modal to display wine info and reviews-->
 {% for wine in wines %}
-<div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-labelledby="wineModalLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <form class="modal-content" method="POST" action="{{ url_for('view_wines', wines=wines)}}">
-        <div class="modal-header">
-            <h5 class="modal-title" id="wineModalLabel">
-                <span>
-                    <input type="text" id="wine_name" name="wine_name" class="hidden-input" readonly
-                        required value="{{ wine.wine_name.title() }}">
-                </span>
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <p>Grape :<span>
-                        <input type="text" id="grape" name="grape" class="hidden-input" readonly
-                            required value="{{ wine.grape.capitalize() }}">
-                    </span></p>
-                <p>Vintage :<span>
-                        <input type="text" id="vintage" name="vintage" class="hidden-input" readonly
-                            required value="{{ wine.vintage.capitalize() }}">
-                    </span></p>
-                <p>Country :<span>
-                        <input type="text" id="country" name="country" class="hidden-input" readonly
-                            required value="{{ wine.country.capitalize() }}">
-                    </span></p>
-                {% if wine.region %}
-                <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
-                {% endif %}
+<div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-labelledby="wineModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" method="POST" action="{{ url_for('view_wines', wines=wines)}}">
+            <div class="modal-header">
+                <h5 class="modal-title" id="wineModalLabel">
+                    <span>
+                        <input type="text" id="wine_name" name="wine_name" class="hidden-input" readonly required
+                            value="{{ wine.wine_name.title() }}">
+                    </span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="row">
-                <div class="col">
-                    {% for user_review in wine.user_reviews %}
-                    <p class="amber-text">{{ user_review.review }}</p>
-                    <p class="amber-text">{{ user_review.reviewed_by }}</p>
-
-                    {% if user_review.rating == 1 %}
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    {% elif user_review.rating == 2 %}
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    {% elif user_review.rating == 3 %}
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    {% elif user_review.rating == 4 %}
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star grey-text"></i>
-                    {% elif user_review.rating == 5 %}
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
-                    <i class="fas fa-star dark-amber-text"></i>
+            <div class="modal-body">
+                <div class="row">
+                    <p>Grape :<span>
+                            <input type="text" id="grape" name="grape" class="hidden-input" readonly required
+                                value="{{ wine.grape.capitalize() }}">
+                        </span></p>
+                    <p>Vintage :<span>
+                            <input type="text" id="vintage" name="vintage" class="hidden-input" readonly required
+                                value="{{ wine.vintage.capitalize() }}">
+                        </span></p>
+                    <p>Country :<span>
+                            <input type="text" id="country" name="country" class="hidden-input" readonly required
+                                value="{{ wine.country.capitalize() }}">
+                        </span></p>
+                    {% if wine.region %}
+                    <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
                     {% endif %}
-
-                    {% if session.user == user_review.reviewed_by  %}
-                    <div class="col">
-                        <a class="btn action-button"
-                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
-                        <a class="btn action-button"
-                            href="{{ url_for('delete_review', wine_id=wine._id) }}">Delete</a>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
                 </div>
+                <div class="row">
+                    <div class="col">
+                        {% for user_review in wine.user_reviews %}
+                        <p class="amber-text">{{ user_review.review }}</p>
+                        <p class="amber-text">{{ user_review.reviewed_by }}</p>
 
+                        {% if user_review.rating == 1 %}
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        {% elif user_review.rating == 2 %}
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        {% elif user_review.rating == 3 %}
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        {% elif user_review.rating == 4 %}
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star grey-text"></i>
+                        {% elif user_review.rating == 5 %}
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        <i class="fas fa-star dark-amber-text"></i>
+                        {% endif %}
+
+                        {% if session.user == user_review.reviewed_by  %}
+                        <div class="col">
+                            <a class="btn action-button" href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
+                            <a class="btn action-button"
+                                href="{{ url_for('delete_review', wine_id=wine._id) }}">Delete</a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            {% if session.user %}
-            <button type="submit" class="btn action-button">Add to Favourites</a></button>
-            <a class="btn action-button"
-                    href="{{ url_for('add_review', wine_id=wine._id) }}">Add Review</a>
-            {% endif %}
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-    </form>
-</div>
+            <div class="modal-footer">
+                {% if session.user %}
+                <button type="submit" class="btn action-button">Add to Favourites</a></button>
+                <a class="btn action-button" href="{{ url_for('add_review', wine_id=wine._id) }}">Add Review</a>
+                {% endif %}
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endfor %}
 

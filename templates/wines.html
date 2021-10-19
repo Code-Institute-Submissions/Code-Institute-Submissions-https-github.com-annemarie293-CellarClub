@@ -162,8 +162,9 @@
                                     <div class="col">
                                         <a class="btn btn-sm action-button"
                                             href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
-                                        <a class="btn btn-sm action-button"
-                                            href="{{ url_for('delete_review', wine_id=wine._id) }}">Delete</a>
+                                        <a id="deleteWine" class="btn btn-sm action-button"
+                                            href="{{ url_for('delete_review', wine_id=wine._id) }}"
+                                            onclick="return confirm('Are you sure you want to delete?');">Delete</a>
                                     </div>
                                     {% endif %}
                                     {% endfor %}
@@ -177,8 +178,9 @@
                             <a class="btn action-button" href="{{ url_for('add_review', wine_id=wine._id) }}">Add
                                 Review</a>
                             {% if session.user|lower == "admin"|lower %}
-                            <a id="wine-delete-button" class="btn action-button"
-                                href="{{ url_for('delete_wine', wine_id=wine._id) }}">Delete</a>
+                            <a class="btn action-button"
+                                href="{{ url_for('delete_wine', wine_id=wine._id) }}"
+                                onclick="return confirm('Are you sure you want to delete?');">Delete</a>
                             {% endif %}
                             {% endif %}
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
