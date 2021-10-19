@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="row">
-    <h3 class="page-header col-8 offset-2 p-2">Sign in to your account</h3>
+    <h3 class="page-header col-8 offset-2 p-2 shadow">Sign in to your account</h3>
 </div>
 
 
@@ -16,7 +16,7 @@
                     <div class="col">
                         <label for="username" class="visually-hidden">Username</label>
                         <div class="input-group has-validation">
-                            <span class="input-group-text" id="username"><i class="fas fa-user"></i></span>
+                            <span class="input-group-text" id="username-input"><i class="fas fa-user"></i></span>
                             <input id="username" name="username" type="text" class="form-control text-center" minlength="5"
                                 maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Username" aria-label="username"
                                 aria-describedby="username">
@@ -31,10 +31,10 @@
                     <div class="col px-2">
                         <label for="password" class="visually-hidden">Password</label>
                         <div class="input-group has-validation">
-                            <span class="input-group-text" id="password"><i class="fas fa-user-lock"></i></span>
+                            <span class="input-group-text" id="password-input"><i class="fas fa-user-lock"></i></span>
                             <input id="password" name="password" type="password" class="form-control text-center"
                                 minlength="5" maxlength="20" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Password"
-                                value="Password" aria-label="password" aria-describedby="password">
+                                value="Password" aria-label="password" aria-describedby="password-input">
                             <div class="invalid-feedback">
                                 Please enter your password
                             </div>
@@ -44,12 +44,12 @@
                <!-- Submit button -->
                 <div class="row mb-2 p-2 mx-2">
                     <button type="submit" class="btn col-12 form-submit rounded text-center corben-font">
-                        <i class="fas fa-sign-in-alt"></i>&nbsp Sign-In</button>
+                        <i class="fas fa-sign-in-alt"></i>&nbsp; Sign-In</button>
                 </div>
                 <!-- Link to Register page -->
                 <div class="row">
                     <div class="col text-center">
-                        <h6>Dont have an account yet? &nbsp<span><a href="{{ url_for('register')}}" class="btn action-button shadow">Register</a></span></h6>
+                        <h6>Dont have an account yet? &nbsp;<span><a href="{{ url_for('register')}}" class="btn action-button shadow">Register</a></span></h6>
                     </div>
                 </div>
             </form>

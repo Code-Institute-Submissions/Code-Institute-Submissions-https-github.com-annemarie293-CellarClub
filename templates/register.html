@@ -58,10 +58,10 @@
                 <div class="col text-center">
                     <label for="dob" class="">Date of Birth</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="dob"><i class="fa fa-calendar"></i></span>
+                        <span class="input-group-text" id="dob-input"><i class="fa fa-calendar"></i></span>
                         <input id="dob" name="dob" type="date" class="form-control text-center"
-                             min="1900-01-01" max="2050-12-31" placeholder="Date of Birth dd/mm/yyy"
-                            aria-label="DateOfBirth" aria-describedby="dob">
+                             min="1900-01-01" max="2050-12-31"
+                            aria-label="DateOfBirth" aria-describedby="dob-input">
                         <div class="invalid-feedback">
                             Please enter your date of birth
                         </div>
@@ -73,10 +73,10 @@
                 <div class="col-sm-12 col-md-6 p-2">
                     <label for="first_name" class="visually-hidden">First Name</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="first_name"><i class="fas fa-user"></i></span>
+                        <span class="input-group-text" id="first_name-input"><i class="fas fa-user"></i></span>
                         <input id="first_name" name="first_name" type="text" class="form-control text-center"
                             minlength="2" maxlength="30" required placeholder="First Name"
-                            aria-label="first_name" aria-describedby="first_name">
+                            aria-label="first_name" aria-describedby="first_name-input">
                         <div class="invalid-feedback">
                             Please add your first name
                         </div>
@@ -86,10 +86,10 @@
                 <div class="col-sm-12 col-md-6 p-2">
                     <label for="last_name" class="visually-hidden">Last Name</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="last_name"><i class="fas fa-user"></i></span>
+                        <span class="input-group-text" id="last_name-input"><i class="fas fa-user"></i></span>
                         <input id="last_name" name="last_name" type="text" class="form-control text-center"
                             minlength="2" maxlength="30" required placeholder="Last Name"
-                            aria-label="last_name" aria-describedby="last_name">
+                            aria-label="last_name" aria-describedby="last_name-input">
                         <div class="invalid-feedback">
                             Please add your last name
                         </div>
@@ -105,7 +105,7 @@
             <!-- Link to Sign-in Page -->
             <div class="row">
                 <div class="col text-center">
-                    <h6>Already have an account? &nbsp<span><a href="{{ url_for('sign_in')}}" class="btn action-button shadow">Sign In</a></span></h6>
+                    <h6>Already have an account? &nbsp;<span><a href="{{ url_for('sign_in')}}" class="btn action-button shadow">Sign In</a></span></h6>
                 </div>
             </div>
         </form>

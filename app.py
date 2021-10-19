@@ -124,7 +124,7 @@ def profile():
     user = mongo.db.users.find_one({"username": session["user"]})["username"]
     first_name = mongo.db.users.find_one({
                 "username": session["user"]})["first_name"]
-    
+
     if session["user"]:
         return render_template("profile.html",
                                user=user,
@@ -147,10 +147,8 @@ def view_wines():
                          {"$group": {"_id": "$_id",
                           "AverageValue": {"$avg": "$user_reviews.rating"}}}]))
 
-    
     # To add a wine to user favourites
     if request.method == "POST":
-    
         favourite = {
             "wine_name": request.form.get("wine_name").lower(),
             "grape": request.form.get("grape").lower(),
@@ -158,7 +156,7 @@ def view_wines():
             "country": request.form.get("country").lower(),
         }
         mongo.db.users.update_one({"_id": ObjectId(user_id)},
-                                    {"$push": {"favourites": favourite}})
+                                  {"$push": {"favourites": favourite}})
         flash("Wine is now added to your favourites list")
         return redirect(url_for('view_wines'))
 
@@ -173,14 +171,12 @@ def add_wine():
         # Check if wine and vintage pair already exists in DB
         wine_exists = mongo.db.wines.find_one(
                       {"wine_name": request.form.get("wine_name").lower()})
-        
         if wine_exists:
             vintage_exists = mongo.db.wines.find_one(
                              {"vintage": request.form.get("vintage")})
             if vintage_exists:
                 flash("Wine/Vintage already exists, please add a review")
                 return redirect(url_for("view_wines"))
-        
         # Create new wine dictionary to add to DB
         wine = {
             "wine_type": request.form.get("wine_type"),
@@ -199,7 +195,6 @@ def add_wine():
             }]
         }
         mongo.db.wines.insert_one(wine)
-        
         flash("Your wine has been added to our collection!")
         return redirect(url_for('view_wines'))
 
@@ -221,9 +216,9 @@ def add_review(wine_id):
             reviewer = x["reviewed_by"]
         else:
             reviewer = "other"
-        
     if reviewer == session["user"]:
-        flash("You have already reviewed this wine, please edit your review instead")
+        flash("You have already reviewed this wine, "
+              "please edit your review instead")
         return redirect(url_for('view_wines'))
     
     if request.method == "POST":
@@ -247,7 +242,7 @@ def add_review(wine_id):
 @app.route("/edit_review/<wine_id>", methods=["GET", "POST"])
 def edit_review(wine_id):
     wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
-    # To find the existing review details to add to form 
+    # To find the existing review details to add to form
     existing_reviews = wine["user_reviews"]
 
     for x in existing_reviews:
@@ -263,7 +258,9 @@ def edit_review(wine_id):
             "rating": int(request.form.get("rating")),
             "reviewed_by": session["user"]
         }
-        mongo.db.wines.update_one({"_id": ObjectId(wine_id), "user_reviews.reviewed_by": session["user"]},   
+        mongo.db.wines.update_one({"_id": ObjectId(wine_id),
+                                   "user_reviews.reviewed_by":
+                                   session["user"]},
                                   {"$set": {"user_reviews.$": review}})
         flash("Review successfully submitted")
         return redirect(url_for('view_wines'))
@@ -277,7 +274,8 @@ def edit_review(wine_id):
 # Function for Delete Review
 @app.route("/delete_review/<wine_id>")
 def delete_review(wine_id):
-    mongo.db.wines.update({"_id": ObjectId(wine_id)}, {"$pull": {'user_reviews': {"reviewed_by": session['user']}}})
+    mongo.db.wines.update({"_id": ObjectId(wine_id)}, {"$pull":
+                          {'user_reviews': {"reviewed_by": session['user']}}})
 
     flash("Wine review has successfully been removed")
     return redirect(url_for('view_wines'))
