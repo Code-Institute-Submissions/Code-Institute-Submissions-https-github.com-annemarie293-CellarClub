@@ -177,7 +177,7 @@ body {
     color: black;
   }
 
-/*-------- Form styling -------*/  
+/*-------- Button styling -------*/  
 /*--- Form submit Button --*/
 .form-submit {
     background-color: black;
@@ -199,14 +199,13 @@ body {
 /*--- General Action Button --*/
 .action-button{
     background-color: #ffc107;
-    color: black;
+    color: #923A49;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 .action-button:hover{
     color: white;
     box-shadow: 0 1rem 3rem rgba(0,0,0,.15) !important;
 }
-
 
 
 /* --- Form hidden input style (https://stackoverflow.com/questions/38830620/make-an-input-look-like-normal-text-in-a-paragraph) ---*/

@@ -282,6 +282,14 @@ def delete_review(wine_id):
     return redirect(url_for('view_wines'))
 
 
+# Function for Delete Wine - Admin user only
+@app.route("/delete_wine/<wine_id>")
+def delete_wine(wine_id):
+    mongo.db.wines.remove({"_id": ObjectId(wine_id)})
+    flash("This wine has now been deleted from our collection")
+    return redirect(url_for('view_wines'))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

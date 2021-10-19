@@ -158,12 +158,12 @@
                                     <i class="fas fa-star dark-amber-text"></i>
                                     {% endif %}
 
-                                    {% if session.user == user_review.reviewed_by  %}
+                                    {% if session.user == user_review.reviewed_by or session.user|lower == "admin"|lower  %}
                                     <div class="col">
-                                        <button type="button" class="btn amber-bg white-text"><a
-                                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a></button>
-                                        <button type="button" class="btn amber-bg white-text"><a
-                                            href="{{ url_for('delete_review', wine_id=wine._id) }}">Delete</a></button>
+                                        <a class="btn btn-sm action-button"
+                                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
+                                        <a class="btn btn-sm action-button"
+                                            href="{{ url_for('delete_review', wine_id=wine._id) }}">Delete</a>
                                     </div>
                                     {% endif %}
                                     {% endfor %}
@@ -174,8 +174,12 @@
                         <div class="modal-footer">
                             {% if session.user %}
                             <button type="submit" class="btn action-button">Add to Favourites</a></button>
-                            <a class="btn action-button"
-                                    href="{{ url_for('add_review', wine_id=wine._id) }}">Add Review</a>
+                            <a class="btn action-button" href="{{ url_for('add_review', wine_id=wine._id) }}">Add
+                                Review</a>
+                            {% if session.user|lower == "admin"|lower %}
+                            <a id="wine-delete-button" class="btn action-button"
+                                href="{{ url_for('delete_wine', wine_id=wine._id) }}">Delete</a>
+                            {% endif %}
                             {% endif %}
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
