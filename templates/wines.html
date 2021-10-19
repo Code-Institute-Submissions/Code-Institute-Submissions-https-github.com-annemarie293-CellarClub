@@ -34,7 +34,7 @@
                     <div class="card-body col-8 p-md-1 p-lg-2">
                         <div class="p-md-1 p-lg-3">
                             <div class="card-title mt-2 mb-md-2 mb-lg-4">
-                                <h4 class="dark-amber-text">{{ wine.wine_name.title() }}</h4>
+                                <h4 class="amber-text">{{ wine.wine_name.title() }}</h4>
                             </div>
                             <div class="card-text wine-info mb-4">
                                 <p><i class="fas fa-wine-glass"></i>&nbsp {{ wine.grape.capitalize() }}</p>
@@ -46,35 +46,35 @@
                                 {% for rating in average_rating %}
                                 {% if rating["_id"] == wine._id %}
                                 {% if rating["AverageValue"]|round|int == 1 %}
-                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 {% elif rating["AverageValue"]|round|int == 2 %}
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 {% elif rating["AverageValue"]|round|int == 3 %}
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 {% elif rating["AverageValue"]|round|int == 4 %}
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
                                 {% elif rating["AverageValue"]|round|int == 5 %}
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
-                                <i class="fas fa-star dark-amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
                                 {% endif %}
                                 {% endif %}
                                 {% endfor%}
