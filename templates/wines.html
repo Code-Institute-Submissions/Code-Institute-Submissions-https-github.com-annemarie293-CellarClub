@@ -7,7 +7,7 @@
 </div>
 
 <div class="container">
-    <div class="row mt-4 justify-content-center align-items-center">
+    <div class="row mt-4 justify-content-center">
 
         {% for wine in wines %}
 
@@ -17,7 +17,7 @@
             <div class="card shadow wine-card text-center mx-auto p-0" style="max-width: 300px;">
                 <div class="row g-0">
                     <div class="col-4 card-image">
-                        {% if wine.wine_type == "red" %}
+                       {% if wine.wine_type == "red" %}
                         <img class="mx-auto" src="{{ url_for('static', filename='images/red.png') }}"
                             alt="image of bottle of red wine">
                         {% elif wine.wine_type == "white" %}
@@ -41,6 +41,7 @@
                                 <p><i class="fas fa-flag"></i>&nbsp {{ wine.country.capitalize() }}</p>
                                 <p><i class="fas fa-wine-bottle"></i>&nbsp {{ wine.vintage }}</p>
                             </div>
+
                             <div class="card-text mx-auto">
                                 {% for rating in average_rating %}
                                 {% if rating["_id"] == wine._id %}
@@ -82,6 +83,7 @@
                                 data-bs-toggle="modal" data-bs-target="#wine-id{{ wine._id }}">
                                 View
                             </button>
+
                         </div>
                     </div>
                 </div>
@@ -94,79 +96,120 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <form class="modal-content" method="POST" action="{{ url_for('view_wines', wines=wines)}}">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="wineModalLabel">
+                            <!--Modal title with wine name-->
+                            <h5 class="modal-title text-center logo-font" id="wineModalLabel">
                                 <span>
-                                    <input type="text" id="wine_name" name="wine_name" class="hidden-input" readonly
-                                        required value="{{ wine.wine_name.title() }}">
+                                    <input type="text" id="wine_name" name="wine_name" class="visually-hidden" readonly
+                                        required value="{{ wine.wine_name }}">
+                                    <label for="wine_name">{{ wine.wine_name.title() }}</label>
                                 </span>
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <!--Modal Body -->
                         <div class="modal-body">
                             <div class="row">
-                                <p>Grape :<span>
-                                        <input type="text" id="grape" name="grape" class="hidden-input" readonly
-                                            required value="{{ wine.grape.capitalize() }}">
-                                    </span></p>
-                                <p>Vintage :<span>
-                                        <input type="text" id="vintage" name="vintage" class="hidden-input" readonly
-                                            required value="{{ wine.vintage.capitalize() }}">
-                                    </span></p>
-                                <p>Country :<span>
-                                        <input type="text" id="country" name="country" class="hidden-input" readonly
-                                            required value="{{ wine.country.capitalize() }}">
-                                    </span></p>
-                                {% if wine.region %}
-                                <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
-                                {% endif %}
+                                <!--Modal Body - Wine info -->
+                                <div class="col-sm-12 col-md-6">
+                                    <p>Grape :<span>
+                                            <input type="text" id="grape" name="grape" class="visually-hidden" readonly
+                                                required value="{{ wine.grape }}">
+                                            <label for="grape">{{ wine.grape.title() }}</label>
+                                        </span></p>
+                                    <p>Vintage :<span>
+                                            <input type="text" id="vintage" name="vintage" class="visually-hidden"
+                                                readonly required value="{{ wine.vintage }}">
+                                            <label for="vintage">{{ wine.vintage.capitalize() }}</label>
+                                        </span></p>
+                                    <p>Country :<span>
+                                            <input type="text" id="country" name="country" class="visually-hidden"
+                                                readonly required value="{{ wine.country }}">
+                                            <label for="country">{{ wine.country.capitalize() }}</label>
+                                        </span></p>
+                                    {% if wine.region %}
+                                    <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
+                                    {% endif %}
+                                </div>
+                                <!--Modal Body - Wine Image -->
+                                <div class="col-sm-6 col-md-6 text-center">
+                                    {% if wine.wine_img %}
+                                    <img src="{{ wine.wine_img }}"
+                                        class="img-fluid rounded mx-auto" alt="image of the selected wine">
+                                    {% else %}
+                                    <img src="{{ url_for('static', filename='images/wines.jfif') }}"
+                                        class="img-fluid rounded mx-auto" alt="image of a group of wine bottles">
+                                    {% endif %}
+                                </div>
                             </div>
+                            <!--Modal Body - Wine Reviews -->
                             <div class="row">
                                 <div class="col">
+                                    <h4 class="text-wine">Reviews:</h4>
                                     {% for user_review in wine.user_reviews %}
-                                    <p class="amber-text">{{ user_review.review }}</p>
-                                    <p class="amber-text">{{ user_review.reviewed_by }}</p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="dark-amber-text">Submitted by: <span
+                                                    class="dark-grey-text">{{ user_review.reviewed_by.title() }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            {% if session.user == user_review.reviewed_by  %}
 
-                                    {% if user_review.rating == 1 %}
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    {% elif user_review.rating == 2 %}
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    {% elif user_review.rating == 3 %}
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    {% elif user_review.rating == 4 %}
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star grey-text"></i>
-                                    {% elif user_review.rating == 5 %}
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    <i class="fas fa-star dark-amber-text"></i>
-                                    {% endif %}
+                                            <a class="btn btn-sm ms-1 action-button float-end"
+                                                href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
+                                            <a id="deleteWine" class="btn btn-sm action-button float-end"
+                                                href="{{ url_for('delete_review', wine_id=wine._id) }}"
+                                                onclick="return confirm('Are you sure you want to delete?');">Delete</a>
 
-                                    {% if session.user == user_review.reviewed_by or session.user|lower == "admin"|lower  %}
-                                    <div class="col">
-                                        <a class="btn btn-sm action-button"
-                                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
-                                        <a id="deleteWine" class="btn btn-sm action-button"
-                                            href="{{ url_for('delete_review', wine_id=wine._id) }}"
-                                            onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+                                            {% endif %}
+                                        </div>
+
+                                        <p class="col-12 dark-grey-text text-center">{{ user_review.review }}</p>
+
+                                        {% if user_review.rating == 1 %}
+                                        <div class="text-center">
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                        </div>
+                                        {% elif user_review.rating == 2 %}
+                                        <div class="text-center">
+
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                        </div>
+                                        {% elif user_review.rating == 3 %}
+                                        <div class="text-center">
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                        </div>
+                                        {% elif user_review.rating == 4 %}
+                                        <div class="text-center">
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star grey-text"></i>
+                                        </div>
+                                        {% elif user_review.rating == 5 %}
+                                        <div class="text-center">
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                            <i class="fas fa-star dark-amber-text"></i>
+                                        </div>
+                                        {% endif %}
                                     </div>
-                                    {% endif %}
+                                    <hr>
                                     {% endfor %}
                                 </div>
 
@@ -178,8 +221,7 @@
                             <a class="btn action-button" href="{{ url_for('add_review', wine_id=wine._id) }}">Add
                                 Review</a>
                             {% if session.user|lower == "admin"|lower %}
-                            <a class="btn action-button"
-                                href="{{ url_for('delete_wine', wine_id=wine._id) }}"
+                            <a class="btn action-button" href="{{ url_for('delete_wine', wine_id=wine._id) }}"
                                 onclick="return confirm('Are you sure you want to delete?');">Delete</a>
                             {% endif %}
                             {% endif %}

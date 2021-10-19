@@ -1,4 +1,5 @@
 import os
+import bson
 from datetime import date, datetime
 from flask import (Flask, flash, render_template,
                    redirect, request, session, url_for)
@@ -154,6 +155,7 @@ def view_wines():
     if request.method == "POST":
         
         favourite = {
+            '_id': bson.objectid.ObjectId(),
             "wine_name": request.form.get("wine_name").lower(),
             "grape": request.form.get("grape").lower(),
             "vintage": request.form.get("vintage").lower(),
@@ -191,8 +193,10 @@ def add_wine():
             "vintage": request.form.get("vintage").lower(),
             "country": request.form.get("country").lower(),
             "region": request.form.get("region").lower(),
+            "wine_img": request.form.get("wine_img"),
             "submitted_by": session["user"],
             "user_reviews": [{
+                '_id': bson.objectid.ObjectId(),
                 "review": request.form.get("review"),
                 "rating": int(request.form.get("rating")),
                 "reviewed_by": session["user"]
@@ -230,6 +234,7 @@ def add_review(wine_id):
         # Create new review object to add to
         # user_review array in the wine doc in wines db
         review = {
+            '_id': bson.objectid.ObjectId(),
             "review": request.form.get("review"),
             "rating": int(request.form.get("rating")),
             "reviewed_by": session["user"]

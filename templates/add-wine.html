@@ -43,14 +43,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-2 p-2 mx-2">
+            <div class="row mb-1 p-2 mx-2">
                 <!--Grape input field-->
                 <div class="col-sm-12 col-md-6 px-2">
                     <label for="grape" class="visually-hidden">Grape</label>
-                    <div class="input-group has-validation">
+                    <div class="input-group has-validation mb-2">
                         <span class="input-group-text" id="grape-input"><i class="fas fa-wine-glass"></i></span>
-                        <input id="grape" name="grape" type="text" class="form-control text-center" minlength="5"
-                            maxlength="30" required pattern="^[a-zA-Z0-9]{5,20}$" placeholder="Grape" aria-label="Grape"
+                        <input id="grape" name="grape" type="text" class="form-control text-center" minlength="4"
+                            maxlength="30" placeholder="Grape" aria-label="Grape"
                             aria-describedby="grape-input">
                         <div class="invalid-feedback">
                             Please enter a grape variety
@@ -71,11 +71,11 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-2 p-2 mx-2">
+            <div class="row mb-1 p-2 mx-2">
                 <!--Country input field-->
                 <div class="col-sm-12 col-md-6 px-2">
                     <label for="country" class="visually-hidden">Country</label>
-                    <div class="input-group has-validation">
+                    <div class="input-group has-validation mb-2">
                         <span class="input-group-text" id="country-input"><i class="fas fa-flag"></i></span>
                         <input id="country" name="country" type="text" class="form-control text-center" minlength="2"
                             maxlength="30" required  placeholder="Country"
@@ -97,13 +97,25 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-2 p-2 mx-2">
+                <!--Image URL input field-->
+                <div class="col text-center">
+                    <label for="wine_img">Optional: Add an image of this wine (image URL only)</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="wine_img"><i class="fas fa-image"></i></span>
+                        <input id="wine_img" name="wine_img" type="text" class="form-control text-center" 
+                            aria-label="wineImg" aria-describedby="wine_img" required>
+                    </div>
+                </div>
+            </div>
             <!--Review Input-->
             <div class="row mb-2 p-2 mx-2">
                 <div class="col">
+                    <label for="review" class="visually-hidden">Review</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="review"><i class="fas fa-pen prefix black-text"></i></span>
-                        <textarea id="review" name="review" class="form-control" minlength="5" maxlength="200" rows="4"
-                            required></textarea>
+                        <textarea id="review" name="review" class="form-control" minlength="5" maxlength="500" rows="4"
+                            placeholder="Your Review" required></textarea>
                         <div class="invalid-feedback">
                             Please enter a review of this wine
                         </div>
