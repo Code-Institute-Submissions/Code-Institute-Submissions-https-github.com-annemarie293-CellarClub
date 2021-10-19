@@ -46,11 +46,11 @@ body {
 
 /*-----Colours------*/
 .text-wine {
-    color: #923A49;
+    color: #9b2b3e;
 }
 
 .bg-wine {
-    background-color: #923A49 !important;
+    background-color: #9b2b3e !important;
 }
 
 .amber-text {
@@ -62,7 +62,7 @@ body {
 }
 
 .dark-amber-text {
-    color:#ffa000;
+    color:#ef6c00 ;
 }
 
 .grey-text {
@@ -84,13 +84,12 @@ body {
     padding-bottom: .5rem;
 }
 
-
 .page-header {
     font-family: 'Corben', serif;
     text-transform: capitalize;
     text-align: center;
     font-weight: bold;
-    color: #616161;
+    color: black;
     background-color: #ffc107;
     border: none;
     border-radius:16px;
@@ -100,12 +99,6 @@ body {
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
 }
 
-@media only screen and (max-width: 730px) {
-    .page-header {
-        height: 5.5rem;
-        line-height: 2.5rem;
-    }
-}
 
 /*-- Cards on Wines Page --*/
 
@@ -144,7 +137,6 @@ body {
         box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
     }
 
-    
 
     /* Modal */
     .modal-wine-info p{
@@ -159,10 +151,11 @@ body {
 /*-- Flash Alert --  Source: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_alert */
   .alert{
       padding: 10px;
-      background-color: #ffca28;
+      background-color:#ffd54f;
       text-align: center;
       font-family: 'EB Garamond', serif;
-      color: white;
+      color: #9b2b3e ;
+      
   }
   
   .closebtn {
@@ -202,7 +195,7 @@ body {
 /*--- General Action Button --*/
 .action-button{
     background-color: #ffc107;
-    color: #923A49;
+    color: #9b2b3e;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 .action-button:hover{
@@ -211,16 +204,16 @@ body {
 }
 
 
-/* --- Form hidden input style (https://stackoverflow.com/questions/38830620/make-an-input-look-like-normal-text-in-a-paragraph) ---*/
-.hidden-input {
-    border: none;
-    display: inline;
-    font-family: inherit;
-    font-size: inherit;
-    padding: none;
-    width: auto;
-  }
+/*-- Button to open Modal--*/
+.wine-modal-button{
+    background-color: white;
+    color: white;
+    border: 2px solid white !important;
+}
 
-.hidden-input:focus{
-    border: none;
-  }
+.wine-modal-button:hover{
+    background-color: white;
+    color: #9b2b3e;
+    border: 2px solid #9b2b3e !important;
+    border-radius: 10px;
+}

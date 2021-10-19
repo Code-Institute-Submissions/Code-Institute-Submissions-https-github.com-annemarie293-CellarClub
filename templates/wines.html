@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="row ">
+<div class="row text-center">
     <h3 class="page-header rounded shadow col-8 offset-2 p-2">Wines</h3>
 </div>
 
@@ -79,7 +79,7 @@
                                 {% endif %}
                                 {% endfor%}
                             </div>
-                            <button type="button" class="btn btn-sm bg-wine white-text stretched-link"
+                            <button type="button" class="wine-modal-button stretched-link mt-1"
                                 data-bs-toggle="modal" data-bs-target="#wine-id{{ wine._id }}">
                                 View
                             </button>
@@ -111,23 +111,24 @@
                             <div class="row">
                                 <!--Modal Body - Wine info -->
                                 <div class="col-sm-12 col-md-6">
-                                    <p>Grape :<span>
+                                    <h4 class="text-wine">Details:</h4>
+                                    <p class="dark-amber-text">Grape :<span>
                                             <input type="text" id="grape" name="grape" class="visually-hidden" readonly
                                                 required value="{{ wine.grape }}">
-                                            <label for="grape">{{ wine.grape.title() }}</label>
+                                            <label for="grape" class="dark-grey-text">{{ wine.grape.title() }}</label>
                                         </span></p>
-                                    <p>Vintage :<span>
+                                    <p class="dark-amber-text">Vintage :<span>
                                             <input type="text" id="vintage" name="vintage" class="visually-hidden"
                                                 readonly required value="{{ wine.vintage }}">
-                                            <label for="vintage">{{ wine.vintage.capitalize() }}</label>
+                                            <label for="vintage" class="dark-grey-text">{{ wine.vintage.capitalize() }}</label>
                                         </span></p>
-                                    <p>Country :<span>
+                                    <p class="dark-amber-text">Country :<span>
                                             <input type="text" id="country" name="country" class="visually-hidden"
                                                 readonly required value="{{ wine.country }}">
-                                            <label for="country">{{ wine.country.capitalize() }}</label>
+                                            <label for="country" class="dark-grey-text">{{ wine.country.capitalize() }}</label>
                                         </span></p>
                                     {% if wine.region %}
-                                    <p>Region : &nbsp<span>{{ wine.region.capitalize() }}</span></p>
+                                    <p class="dark-amber-text">Region : &nbsp<span class="dark-grey-text">{{ wine.region.capitalize() }}</span></p>
                                     {% endif %}
                                 </div>
                                 <!--Modal Body - Wine Image -->
