@@ -17,11 +17,11 @@
                             {% for wine in wines %}
                             {% if session.user|lower == wine.submitted_by|lower %}
 
-                            <div class="row">
-                                <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-wine-bottle text-wine"></i>&nbsp;
+                            <div class="row px-0">
+                                <span class="col-sm-12 col-lg-6 h5"><i class="fas fa-star text-wine"></i>&nbsp;
                                     {{ wine.wine_name.title() }}</span>
-                                <span class="col">{{ wine.vintage }}</span>
-                                <span class="col">{{ wine.country.title() }}</span>
+                                <span class="col"><i class="fas fa-wine-bottle grey-text"></i>&nbsp;{{ wine.vintage }}</span>
+                                <span class="col"><i class="fas fa-flag grey-text"></i>&nbsp;{{ wine.country.title() }}</span>
                                 </div>
                             <hr>
                             {% endif %}
@@ -42,10 +42,10 @@
                             {% if session.user == userx.username %}
                             {% for favourite in userx.favourites %}
                             <div class="row">
-                                <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-heart text-wine"></i>&nbsp;
+                                <span class="col-sm-12 col-lg-6 h5"><i class="fas fa-heart text-wine"></i>&nbsp;
                                     {{ favourite.wine_name.title() }}</span>
-                                <span class="col">{{ favourite.vintage }}</span>
-                                <span class="col">{{ favourite.country.title() }}</span>  
+                                <span class="col"><i class="fas fa-wine-bottle grey-text"></i>&nbsp;{{ favourite.vintage }}</span>
+                                <span class="col"><i class="fas fa-flag grey-text"></i>&nbsp;{{ favourite.country.title() }}</span>  
                                 <span class="col" >
                                     <form method="POST" action="{{ url_for('delete_favourite')}}">                          
                                         <input type="hidden" name="wine_id" value="{{ favourite.wine_id }}">
@@ -53,7 +53,7 @@
                                             <button class="remove-favourite" type="submit"
                                             onclick="return confirm('Are you sure you want to remove?');"
                                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove from favourites">
-                                                <i class="fas fa-times-circle"></i>
+                                                <i class="fas fa-times-circle h3 text-end"></i>
                                             </button>
                                         </span>
                                     </form>

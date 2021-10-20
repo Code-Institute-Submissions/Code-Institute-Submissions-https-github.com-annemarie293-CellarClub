@@ -85,6 +85,7 @@
                                     <p><i class="fas fa-wine-glass"></i>&nbsp; {{ wine.grape.capitalize() }}</p>
                                     <p><i class="fas fa-flag"></i>&nbsp; {{ wine.country.capitalize() }}</p>
                                     <p><i class="fas fa-wine-bottle"></i>&nbsp; {{ wine.vintage }}</p>
+            
                                 </div>
                                 <!-- Star rating section -->
                                 <div class="card-text mx-auto">
@@ -140,7 +141,7 @@
             <!-- Modal to display wine info and reviews-->
             <div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <form class="modal-content" method="POST" action="{{ url_for('add_favourite', wines=wines)}}">
+                    <form class="modal-content" method="POST" action="{{ url_for('add_favourite')}}">
                         <div class="modal-header">
                             <!--Modal title with wine name-->
                             <h5 class="modal-title text-center logo-font">
@@ -161,7 +162,7 @@
                                     </p>
                                     <input type="hidden" name="grape" value="{{ wine.grape }}">
                                     <p class="dark-amber-text">Vintage :
-                                        <span class="dark-grey-text">{{ wine.vintage.capitalize() }}</span>
+                                        <span class="dark-grey-text">{{ wine.vintage }}</span>
                                     </p>
                                     <input type="hidden" name="vintage" value="{{ wine.vintage }}">
                                     <p class="dark-amber-text">Country :
@@ -172,6 +173,10 @@
                                     <p class="dark-amber-text">Region: &nbsp;<span
                                             class="dark-grey-text">{{ wine.region.capitalize() }}</span></p>
                                     {% endif %}
+                                    <p><i class="fas fa-tag"></i>
+                                        <a target=”_blank” href="https://www.wine-searcher.com/find/{{ wine.wine_name }}/{{ wine.vintage }}/"
+                                        class="wine-link">
+                                        Buy this wine <i class="fas fa-arrow-right"></i></a></p>
                                 </div>
                                 <!--Modal Body - Wine Image -->
                                 <div class="col-sm-6 col-md-6 text-center">

@@ -163,6 +163,10 @@ body {
         border: 2px solid #9b2b3e !important;
     }
 
+    .wine-link{
+        text-decoration: none;
+        color: black;
+    }
 
     /*--------- Modal to display wine details ----------*/
     .modal-wine-info p{
@@ -286,7 +290,6 @@ body {
 .search-form button{
     display: inline;
 }
-
 
 /*------ height for sign-in section to push down footer---------*/
 .sign-in{
