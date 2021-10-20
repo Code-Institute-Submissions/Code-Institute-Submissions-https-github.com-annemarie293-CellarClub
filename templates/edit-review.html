@@ -17,9 +17,9 @@
                 <div class="col-sm-12 col-md-6 px-2">
                     <label for="wine_name" class="visually-hidden">Wine Name</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="wine_name"><i class="fas fa-award"></i></span>
+                        <span class="input-group-text" id="wine_name-input"><i class="fas fa-award"></i></span>
                         <input id="wine_name" name="wine_name" type="text" class="form-control text-center"
-                            value="{{ wine.wine_name.title() }}" readonly required aria-label="wineName"
+                            value="{{ wine.wine_name.title() }}" readonly required aria-label="wineName-input"
                             aria-describedby="wine_name">
                         <div class="invalid-feedback">
                             Please enter the wine name
@@ -44,7 +44,7 @@
             <div class="row mb-2 p-2 mx-2">
                 <div class="col">
                     <div class="input-group">
-                        <span class="input-group-text" id="review"><i class="fas fa-pen prefix black-text"></i></span>
+                        <span class="input-group-text" id="review-input"><i class="fas fa-pen prefix black-text"></i></span>
                         <textarea id="review" name="review" class="form-control" minlength="5" maxlength="200" rows="4"
                             required>{{ old_review }}</textarea>
                         <div class="invalid-feedback">

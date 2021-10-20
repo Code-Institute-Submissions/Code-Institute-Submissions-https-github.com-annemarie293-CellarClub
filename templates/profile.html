@@ -11,20 +11,20 @@
         <div class="card profile-card shadow">
             <h4 class="card-title text-center text-wine mt-2">Wines added by {{ first_name.title() }}</h4>
             <div class="card-body">
-                <ul class="card-text px-1">
+                <div class="card-text px-1">
                     {% for wine in wines %}
                     {% if session.user|lower == wine.submitted_by|lower %}
 
-                    <li class="row">
-                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-wine-bottle text-wine"></i>&nbsp
+                    <div class="row">
+                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-wine-bottle text-wine"></i>&nbsp;
                             {{ wine.wine_name.title() }}</span>
                         <span class="col">{{ wine.vintage }}</span>
-                        <span class="col">{{ wine.country.capitalize() }}</span>
-                    </li>
+                        <span class="col">{{ wine.country.title() }}</span>
+                        </div>
                     <hr>
                     {% endif %}
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -35,21 +35,21 @@
             <h4 class="card-title text-center text-wine mt-2">{{ first_name.title() }}'s Favourite Wines</h4>
             <div class="card-body">
 
-                <ul class="card-text px-1">
+                <div class="card-text px-1">
                     {% for userx in users %}
                     {% if session.user == userx.username %}
                     {% for favourite in userx.favourites %}
-                    <li class="row">
-                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-heart text-wine"></i>&nbsp
+                    <div class="row">
+                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-heart text-wine"></i>&nbsp;
                             {{ favourite.wine_name.title() }}</span>
                         <span class="col">{{ favourite.vintage }}</span>
                         <span class="col">{{ favourite.country.capitalize() }}</span>
-                    </li>
+                        </div>
                     <hr>
                     {% endfor %}
                     {% endif %}
                     {% endfor %}
-                </ul>
+                    </div>
             </div>
         </div>
     </div>
@@ -139,17 +139,14 @@
 
 {% for wine in wines %}
 
-<div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-labelledby="wineModalLabel" aria-hidden="true">
+<div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <form class="modal-content" method="POST" action="{{ url_for('view_wines', wines=wines)}}">
             <div class="modal-header">
                 <!--Modal title with wine name-->
-                <h5 class="modal-title text-center logo-font" id="wineModalLabel">
-                    <span>
-                        <input type="text" id="wine_name" name="wine_name" class="visually-hidden" readonly required
-                            value="{{ wine.wine_name }}">
-                        <label for="wine_name">{{ wine.wine_name.title() }}</label>
-                    </span>
+                <h5 class="modal-title text-center logo-font">
+                    <span>{{ wine.wine_name.title() }}</span>
+                    <input type="hidden" name="wine_name" value="{{ wine.wine_name }}">
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -159,23 +156,20 @@
                     <!--Modal Body - Wine info -->
                     <div class="col-sm-12 col-md-6">
                         <h4 class="text-wine">Details:</h4>
-                        <p class="dark-amber-text">Grape :<span>
-                                <input type="text" id="grape" name="grape" class="visually-hidden" readonly required
-                                    value="{{ wine.grape }}">
-                                <label for="grape" class="dark-grey-text">{{ wine.grape.title() }}</label>
-                            </span></p>
-                        <p class="dark-amber-text">Vintage :<span>
-                                <input type="text" id="vintage" name="vintage" class="visually-hidden" readonly required
-                                    value="{{ wine.vintage }}">
-                                <label for="vintage" class="dark-grey-text">{{ wine.vintage.capitalize() }}</label>
-                            </span></p>
-                        <p class="dark-amber-text">Country :<span>
-                                <input type="text" id="country" name="country" class="visually-hidden" readonly required
-                                    value="{{ wine.country }}">
-                                <label for="country" class="dark-grey-text">{{ wine.country.capitalize() }}</label>
-                            </span></p>
+                        <p class="dark-amber-text">Grape :
+                            <span class="dark-grey-text">{{ wine.grape.title() }}</span>
+                        </p>
+                        <input type="hidden" name="grape" value="{{ wine.grape }}">
+                        <p class="dark-amber-text">Vintage :
+                            <span class="dark-grey-text">{{ wine.vintage.capitalize() }}</span>
+                        </p>
+                        <input type="hidden" name="vintage" value="{{ wine.vintage }}">
+                        <p class="dark-amber-text">Country :
+                            <span class="dark-grey-text">{{ wine.country.capitalize() }}</span>
+                        </p>
+                        <input type="hidden" name="country" value="{{ wine.country }}">
                         {% if wine.region %}
-                        <p class="dark-amber-text">Region : &nbsp<span
+                        <p class="dark-amber-text">Region: &nbsp;<span
                                 class="dark-grey-text">{{ wine.region.capitalize() }}</span></p>
                         {% endif %}
                     </div>
@@ -206,7 +200,7 @@
 
                                 <a class="btn btn-sm ms-1 action-button float-end"
                                     href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
-                                <a id="deleteWine" class="btn btn-sm action-button float-end"
+                                <a class="btn btn-sm action-button float-end"
                                     href="{{ url_for('delete_review', wine_id=wine._id) }}"
                                     onclick="return confirm('Are you sure you want to delete?');">Delete</a>
 
@@ -225,7 +219,6 @@
                             </div>
                             {% elif user_review.rating == 2 %}
                             <div class="text-center">
-
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star dark-amber-text"></i>
                                 <i class="fas fa-star grey-text"></i>
@@ -266,7 +259,7 @@
             </div>
             <div class="modal-footer">
                 {% if session.user %}
-                <button type="submit" class="btn action-button">Add to Favourites</a></button>
+                <button type="submit" class="btn action-button">Add to Favourites</button>
                 <a class="btn action-button" href="{{ url_for('add_review', wine_id=wine._id) }}">Add
                     Review</a>
                 {% if session.user|lower == "admin"|lower %}

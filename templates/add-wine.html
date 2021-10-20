@@ -6,7 +6,7 @@
     <h3 class="page-header col-8 offset-2 p-2 shadow">Submit a new wine</h3>
 </div>
 
-<!----- Add New Wine section ----->
+<!--Add New Wine Section-->
 <div class="row">
     <div class="card col-sm-12 col-md-8 offset-md-2 my-4 shadow">
         <form class="g-3 needs-validation" novalidate method="POST" action="{{ url_for('add_wine')}}">
@@ -15,17 +15,17 @@
                 <div class="col">
                     <label for="wine_type" class="visually-hidden">Wine Type</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="wine_name"><i class="fas fa-bars"></i></span>
+                        <span class="input-group-text" id="wine_type-input"><i class="fas fa-bars"></i></span>
                         <select id="wine_type" name="wine_type" class="form-select text-center" aria-label="wineType"
-                            aria-describedby="wine_type" required>
+                            aria-describedby="wine_type-input" required>
                             <option value="" disabled selected>Select Wine Type</option>
                             {% for type in types %}
                             <option value="{{ type.wine_type }}">{{ type.wine_type.capitalize() }}</option>
                             {% endfor %}
-                            <div class="invalid-feedback">
-                                Please choose a wine type
-                            </div>
                         </select>
+                        <div class="invalid-feedback">
+                            Please choose a wine type
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,8 +50,7 @@
                     <div class="input-group has-validation mb-2">
                         <span class="input-group-text" id="grape-input"><i class="fas fa-wine-glass"></i></span>
                         <input id="grape" name="grape" type="text" class="form-control text-center" minlength="4"
-                            maxlength="30" placeholder="Grape" aria-label="Grape"
-                            aria-describedby="grape-input">
+                            maxlength="30" placeholder="Grape" aria-label="Grape" aria-describedby="grape-input">
                         <div class="invalid-feedback">
                             Please enter a grape variety
                         </div>
@@ -78,8 +77,8 @@
                     <div class="input-group has-validation mb-2">
                         <span class="input-group-text" id="country-input"><i class="fas fa-flag"></i></span>
                         <input id="country" name="country" type="text" class="form-control text-center" minlength="2"
-                            maxlength="30" required  placeholder="Country"
-                            aria-label="country" aria-describedby="country-input">
+                            maxlength="30" required placeholder="Country" aria-label="country"
+                            aria-describedby="country-input">
                         <div class="invalid-feedback">
                             Please enter the country where this wine is produced
                         </div>
@@ -91,8 +90,7 @@
                     <div class="input-group">
                         <span class="input-group-text" id="region-input"><i class="fas fa-map-marker"></i></span>
                         <input id="region" name="region" type="text" class="form-control text-center" minlength="2"
-                            maxlength="30" placeholder="Region" aria-label="region"
-                            aria-describedby="region-input">
+                            maxlength="30" placeholder="Region" aria-label="region" aria-describedby="region-input">
 
                     </div>
                 </div>
@@ -103,7 +101,7 @@
                     <label for="wine_img">Optional: Add an image of this wine (image URL only)</label>
                     <div class="input-group">
                         <span class="input-group-text" id="wine_img-input"><i class="fas fa-image"></i></span>
-                        <input id="wine_img" name="wine_img" type="text" class="form-control text-center" 
+                        <input id="wine_img" name="wine_img" type="text" class="form-control text-center"
                             aria-label="wineImg" aria-describedby="wine_img-input" required>
                     </div>
                 </div>
@@ -128,7 +126,7 @@
                 <h5>Rate this wine</h5>
                 <p>
                     <label>
-                        <input name="rating" type="radio" id="1" value="1" class="form-check-input" required/>
+                        <input name="rating" type="radio" id="1" value="1" class="form-check-input" required />
                         <span>
                             <i class="fas fa-star amber-text"></i>
                             <i class="fas fa-star grey-text"></i>
@@ -192,8 +190,8 @@
             </div>
             <!--Submit/Cancel button-->
             <div class="row mb-2 text-center justify-content-center">
-                <a class="btn col-4 m-3 form-cancel rounded text-center corben-font" 
-                href="{{ url_for('view_wines')}}">Cancel &nbsp;<i class="fas fa-times-circle"></i></a>
+                <a class="btn col-4 m-3 form-cancel rounded text-center corben-font"
+                    href="{{ url_for('view_wines')}}">Cancel &nbsp;<i class="fas fa-times-circle"></i></a>
                 <button type="submit" class="btn col-4 m-3 form-submit rounded text-center corben-font">
                     Submit Wine &nbsp;<i class="fas fa-plus-circle"></i></button>
             </div>
