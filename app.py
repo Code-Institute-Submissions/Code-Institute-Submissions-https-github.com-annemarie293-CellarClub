@@ -29,7 +29,8 @@ def register():
     """Gets user submitted inputs from register.html
         checks if there is existing user, and
         if user is over 18. If conditions are met,
-        user details are added to 'users' DB """
+        user details are added to 'users' DB.
+        Logs in the user and opens session """
     if request.method == "POST":
         # Check if user already exists in DB
         user_exists = mongo.db.users.find_one(
@@ -82,6 +83,9 @@ def register():
 # Function to Sign-In
 @app.route("/sign_in", methods=["GET", "POST"])
 def sign_in():
+    """Gets user submitted inputs from sign-in.html
+        checks user and password matched the users DB
+        and logs user in to site and into the sesion"""
     if request.method == "POST":
         # Check if user already exists in DB
         user_exists = mongo.db.users.find_one(
@@ -110,6 +114,7 @@ def sign_in():
 # Function to Sign Out
 @app.route("/sign_out")
 def sign_out():
+    """Logs the user out of the session """
     # Clear the session user cookie
     flash("You have been Logged out")
     session.pop("user")
@@ -119,6 +124,8 @@ def sign_out():
 # Function to view Profile page
 @app.route("/profile")
 def profile():
+    """Returns the user profile page
+        if user is logged in """
     wines = list(mongo.db.wines.find())
     users = list(mongo.db.users.find())
     user = mongo.db.users.find_one({"username": session["user"]})["username"]
@@ -138,6 +145,8 @@ def profile():
 # Function to view all wines
 @app.route("/view_wines/", methods=["GET", "POST"])
 def view_wines():
+    """Returns page with listing of all
+        wines from wines db, search and filter functions """
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
     types = list(mongo.db.wine_type.find())
     # To calculate average rating from reviews
@@ -154,6 +163,9 @@ def view_wines():
 # Function to add a new wine to the DB
 @app.route("/add_wine", methods=["GET", "POST"])
 def add_wine():
+    """Returns form to submit new wine to DB
+        Checks if there is existing wine name and vintage,
+        if not, wine is added to the DB """
     if request.method == "POST":
         # Check if wine and vintage pair already exists in DB
         wine_exists = mongo.db.wines.find_one(
@@ -192,6 +204,10 @@ def add_wine():
 # Function to add a new review to the wine
 @app.route("/add_review/<wine_id>", methods=["GET", "POST"])
 def add_review(wine_id):
+    """Returns form to add review to the selected wine
+        checks if user has already added review for this
+        wine. Review is added as dict to the 'reviews'
+        array in the wine doc in wines db"""
     wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
 
     # Check if user has already reviewed this wine
@@ -207,7 +223,7 @@ def add_review(wine_id):
         flash("You have already reviewed this wine, "
               "please edit your review instead")
         return redirect(url_for('view_wines'))
-    
+
     if request.method == "POST":
         # Create new review object to add to
         # user_review array in the wine doc in wines db
@@ -228,6 +244,8 @@ def add_review(wine_id):
 # Function to edit an existing review
 @app.route("/edit_review/<wine_id>", methods=["GET", "POST"])
 def edit_review(wine_id):
+    """Allows user to update their review
+        in the wines db"""
     wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
     # To find the existing review details to add to form
     existing_reviews = wine["user_reviews"]
@@ -236,7 +254,7 @@ def edit_review(wine_id):
         if review["reviewed_by"] == session["user"]:
             old_review = review["review"]
             old_rating = review["rating"]
-            
+
     if request.method == "POST":
         # Create new review object to replace the
         # existing user review in the wine doc in wines db
@@ -261,6 +279,8 @@ def edit_review(wine_id):
 # Function for Delete Review
 @app.route("/delete_review/<wine_id>")
 def delete_review(wine_id):
+    """Allows user to delete their review
+        from the db """
     mongo.db.wines.update({"_id": ObjectId(wine_id)}, {"$pull":
                           {'user_reviews': {"reviewed_by": session['user']}}})
 
@@ -271,10 +291,14 @@ def delete_review(wine_id):
 # Function to add wine to favourites
 @app.route("/add_favourite", methods=["GET", "POST"])
 def add_favourite():
+    """Allows user to add wine details to a new dict
+        in the 'favourites' array in 'users' db
+        Checks if the wine is already added to this
+        array"""
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
     user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
     user = mongo.db.users.find_one({"username": session["user"]})
-    
+
     # To find if check if user already has created favourites,
     # and if wine exists in favourites
     if "favourites" in user:
@@ -304,6 +328,8 @@ def add_favourite():
 # Function to remove wine from favourites
 @app.route("/delete_favourite", methods=["GET", "POST"])
 def delete_favourite():
+    """Allows user to remove wine details from
+        the 'favourites' array in 'users' db"""
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
     user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
     favourite = request.form.get("wine_id")
@@ -318,19 +344,23 @@ def delete_favourite():
 # Function for Delete Wine - Admin user only
 @app.route("/delete_wine/<wine_id>")
 def delete_wine(wine_id):
+    """Allows Admin user to remove wine from
+        the wines db. Checks if the wine is
+        added to any user favourites and also
+        removes"""
     wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
     wineid = str(wine["_id"])
     print(type(wineid))
     users = mongo.db.users.find()
-    
+
     # To check if wine is in any user favourites, and remove if so
     for user in users:
         if "favourites" in user:
             favourites = user["favourites"]
-            for favourite in favourites: 
+            for favourite in favourites:
                 if wineid == favourite["wine_id"]:
                     mongo.db.users.update_many({}, {
-                        "$pull": {'favourites': {"wine_id": wineid}}}) 
+                        "$pull": {'favourites': {"wine_id": wineid}}})
 
     # To remove the wine from the wines db
     mongo.db.wines.delete_one({"_id": ObjectId(wine_id)})
@@ -342,9 +372,11 @@ def delete_wine(wine_id):
 # Function for Search
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """Allows user to search/filter the wines on
+        wines.html"""
     query = request.form.get("query")
     wines = list(mongo.db.wines.find({"$text": {"$search": query}}))
-    types = list(mongo.db.wine_type.find())     
+    types = list(mongo.db.wine_type.find())
     return render_template("wines.html", wines=wines,
                            types=types)
 
