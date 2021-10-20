@@ -140,26 +140,12 @@ def profile():
 def view_wines():
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
     types = list(mongo.db.wine_type.find()) 
-    user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
 
     # To calculate average rating from reviews
     average_rating = list(mongo.db.wines.aggregate(
                         [{"$unwind": "$user_reviews"},
                          {"$group": {"_id": "$_id",
                           "AverageValue": {"$avg": "$user_reviews.rating"}}}]))
-
-    # To add a wine to user favourites
-    if request.method == "POST":
-        favourite = {
-            "wine_name": request.form.get("wine_name").lower(),
-            "grape": request.form.get("grape").lower(),
-            "vintage": request.form.get("vintage").lower(),
-            "country": request.form.get("country").lower(),
-        }
-        mongo.db.users.update_one({"_id": ObjectId(user_id)},
-                                  {"$push": {"favourites": favourite}})
-        flash("Wine is now added to your favourites list")
-        return redirect(url_for('view_wines'))
 
     return render_template("wines.html", wines=wines,
                            average_rating=average_rating,
@@ -247,10 +233,10 @@ def edit_review(wine_id):
     # To find the existing review details to add to form
     existing_reviews = wine["user_reviews"]
 
-    for x in existing_reviews:
-        if x["reviewed_by"] == session["user"]:
-            old_review = x["review"]
-            old_rating = x["rating"]
+    for review in existing_reviews:
+        if review["reviewed_by"] == session["user"]:
+            old_review = review["review"]
+            old_rating = review["rating"]
             
     if request.method == "POST":
         # Create new review object to replace the
@@ -281,6 +267,51 @@ def delete_review(wine_id):
 
     flash("Wine review has successfully been removed")
     return redirect(url_for('view_wines'))
+
+
+# Function to add wine to favourites
+@app.route("/add_favourite", methods=["GET", "POST"])
+def add_favourite():
+    wines = list(mongo.db.wines.find().sort("wine_name", 1))
+    user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+
+    # To find if wine already exists in favourites
+    existing_favourites = user["favourites"]
+
+    for favourite in existing_favourites:
+        if favourite["wine_id"] == request.form.get("wine_id"):
+            flash("This wine was was already added to your favourites list")
+            return redirect(url_for('view_wines'))
+
+    # To add a wine to user favourites
+    favourite = {
+        "wine_id": request.form.get("wine_id"),
+        "wine_name": request.form.get("wine_name").lower(),
+        "grape": request.form.get("grape").lower(),
+        "vintage": request.form.get("vintage").lower(),
+        "country": request.form.get("country").lower(),
+    }
+    mongo.db.users.update_one({"_id": ObjectId(user_id)},
+                              {"$push": {"favourites": favourite}})
+
+    flash("Wine is now added to your favourites list")
+    return redirect(url_for('view_wines', wines=wines))
+
+
+# Function to remove wine from favourites
+@app.route("/delete_favourite", methods=["GET", "POST"])
+def delete_favourite():
+    wines = list(mongo.db.wines.find().sort("wine_name", 1))
+    user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
+    favourite = request.form.get("wine_id")
+    print("PRINTING FAVOURITE")
+    print(favourite)
+    mongo.db.users.update({"_id": ObjectId(user_id)}, {"$pull":
+                          {'favourites': {"wine_id": favourite}}})
+
+    flash("Wine has now been removed from your favourites")
+    return redirect(url_for('profile', wines=wines))
 
 
 # Function for Delete Wine - Admin user only

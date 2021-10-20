@@ -250,6 +250,17 @@ body {
     border-radius: 10px;
 }
 
+/*-- Button to remove favourites --*/
+.remove-favourite{
+    background-color: white;
+    color: #9b2b3e;
+    border: none !important;
+    width: 5px;
+}
+.remove-favourite:hover{
+    color: #ffc107;
+}
+
 /*-- Search/Filter button--*/
 .search-button {
     background-color: white;

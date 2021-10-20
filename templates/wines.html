@@ -140,12 +140,13 @@
             <!-- Modal to display wine info and reviews-->
             <div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <form class="modal-content" method="POST" action="{{ url_for('view_wines', wines=wines)}}">
+                    <form class="modal-content" method="POST" action="{{ url_for('add_favourite', wines=wines)}}">
                         <div class="modal-header">
                             <!--Modal title with wine name-->
                             <h5 class="modal-title text-center logo-font">
                                 <span>{{ wine.wine_name.title() }}</span>
                                 <input type="hidden" name="wine_name" value="{{ wine.wine_name }}">
+                                <input type="hidden" name="wine_id" value="{{ wine._id }}">
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>

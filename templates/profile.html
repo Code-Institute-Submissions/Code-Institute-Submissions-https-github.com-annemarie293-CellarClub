@@ -6,134 +6,149 @@
 </div>
 
 <div class="row mt-3 justify-content-center">
-    <!-- Wines submitted by user-->
-    <div class="col col-sm-12 col-md-4 m-3">
-        <div class="card profile-card shadow">
-            <h4 class="card-title text-center text-wine mt-2">Wines added by {{ first_name.title() }}</h4>
-            <div class="card-body">
-                <div class="card-text px-1">
-                    {% for wine in wines %}
-                    {% if session.user|lower == wine.submitted_by|lower %}
+    <div class="col-md-10 offset-md-1 ms-0">
+        <div class="row justify-content-center">
+            <!-- Wines submitted by user-->
+            <div class="col-md-6 my-3">
+                <div class="card profile-card shadow">
+                    <h4 class="card-title text-center text-wine mt-2">Wines added by {{ first_name.title() }}</h4>
+                    <div class="card-body">
+                        <div class="card-text px-1">
+                            {% for wine in wines %}
+                            {% if session.user|lower == wine.submitted_by|lower %}
 
-                    <div class="row">
-                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-wine-bottle text-wine"></i>&nbsp;
-                            {{ wine.wine_name.title() }}</span>
-                        <span class="col">{{ wine.vintage }}</span>
-                        <span class="col">{{ wine.country.title() }}</span>
+                            <div class="row">
+                                <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-wine-bottle text-wine"></i>&nbsp;
+                                    {{ wine.wine_name.title() }}</span>
+                                <span class="col">{{ wine.vintage }}</span>
+                                <span class="col">{{ wine.country.title() }}</span>
+                                </div>
+                            <hr>
+                            {% endif %}
+                            {% endfor %}
                         </div>
-                    <hr>
-                    {% endif %}
-                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favourite  Wines-->
+            <div class="col-md-6 my-3">
+                <div class="card profile-card shadow">
+                    <h4 class="card-title text-center text-wine mt-2">{{ first_name.title() }}'s Favourite Wines</h4>
+                    <div class="card-body">
+
+                        <div class="card-text px-1">
+                            {% for userx in users %}
+                            {% if session.user == userx.username %}
+                            {% for favourite in userx.favourites %}
+                            <div class="row">
+                                <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-heart text-wine"></i>&nbsp;
+                                    {{ favourite.wine_name.title() }}</span>
+                                <span class="col">{{ favourite.vintage }}</span>
+                                <span class="col">{{ favourite.country.title() }}</span>  
+                                <span class="col" >
+                                    <form method="POST" action="{{ url_for('delete_favourite')}}">                          
+                                        <input type="hidden" name="wine_id" value="{{ favourite.wine_id }}">
+                                        <span class="col text-center px-0">
+                                            <button class="remove-favourite" type="submit"
+                                            onclick="return confirm('Are you sure you want to remove?');"
+                                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove from favourites">
+                                                <i class="fas fa-times-circle"></i>
+                                            </button>
+                                        </span>
+                                    </form>
+                                </span>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- Reviews -->
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card mx-auto shadow">
+                    <h4 class="card-title text-center text-wine mt-2">{{ first_name.title() }}'s Reviews</h4>
+                    <div class="card-body">
+                        {% for wine in wines %}
+                        {% for user_review in wine.user_reviews %}
+                        {% if session.user ==  user_review.reviewed_by %}
+                        <div class="row">
+                            <h5 class="col-sm-6 col-md-4 dark-amber-text">{{ wine.wine_name.title() }} : {{ wine.vintage }}</h5>
+                            <p class="col-sm-6 col-md-8 col-lg-4 card-text">{{ user_review.review }}</p>
 
-    <!-- Favourite  Wines-->
-    <div class="col col-sm-12 col-md-4 m-3">
-        <div class="card profile-card shadow">
-            <h4 class="card-title text-center text-wine mt-2">{{ first_name.title() }}'s Favourite Wines</h4>
-            <div class="card-body">
-
-                <div class="card-text px-1">
-                    {% for userx in users %}
-                    {% if session.user == userx.username %}
-                    {% for favourite in userx.favourites %}
-                    <div class="row">
-                        <span class="col-sm-12 col-lg-6 h6"><i class="fas fa-heart text-wine"></i>&nbsp;
-                            {{ favourite.wine_name.title() }}</span>
-                        <span class="col">{{ favourite.vintage }}</span>
-                        <span class="col">{{ favourite.country.capitalize() }}</span>
+                            {% if user_review.rating == 1 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                            </div>
+                            {% elif user_review.rating == 2 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                            </div>
+                            {% elif user_review.rating == 3 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                            </div>
+                            {% elif user_review.rating == 4 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star grey-text"></i>
+                            </div>
+                            {% elif user_review.rating == 5 %}
+                            <div class="col-sm-12 col-lg-4 mb-2 text-center">
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                                <i class="fas fa-star amber-text"></i>
+                            </div>
+                            {% endif %}
                         </div>
-                    <hr>
-                    {% endfor %}
-                    {% endif %}
-                    {% endfor %}
+                        <div class="row">
+                            <div class="col align-items-center">
+                                <a class="btn btn-small action-button mx-2 shadow float-end"
+                                    href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
+                                <a class="btn action-button float-end shadow mx-2"
+                                    href="{{ url_for('delete_review', wine_id=wine._id) }}"
+                                    onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+                                <button type="button" class="btn action-button float-end  shadow mx-2" data-bs-toggle="modal"
+                                    data-bs-target="#wine-id{{ wine._id }}">
+                                    View wine
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
                     </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<!-- Reviews -->
-<div class="row">
 
-    <div class="col-sm-12 col-md-8 offset-md-2">
-        <div class="card mx-auto shadow">
-            <h4 class="card-title text-center text-wine mt-2">{{ first_name.title() }}'s Reviews</h4>
-            <div class="card-body">
-                {% for wine in wines %}
-                {% for user_review in wine.user_reviews %}
-                {% if session.user ==  user_review.reviewed_by %}
-                <div class="row">
-                    <h5 class="col-sm-6 col-md-4 dark-amber-text">{{ wine.wine_name.title() }} : {{ wine.vintage }}</h5>
-                    <p class="col-sm-6 col-md-8 col-lg-4 card-text">{{ user_review.review }}</p>
-
-                    {% if user_review.rating == 1 %}
-                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                    </div>
-                    {% elif user_review.rating == 2 %}
-                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                    </div>
-                    {% elif user_review.rating == 3 %}
-                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                    </div>
-                    {% elif user_review.rating == 4 %}
-                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star grey-text"></i>
-                    </div>
-                    {% elif user_review.rating == 5 %}
-                    <div class="col-sm-12 col-lg-4 mb-2 text-center">
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                        <i class="fas fa-star amber-text"></i>
-                    </div>
-                    {% endif %}
-                </div>
-                <div class="row">
-                    <div class="col align-items-center">
-                        <a class="btn btn-small action-button mx-2 shadow float-end"
-                            href="{{ url_for('edit_review', wine_id=wine._id) }}">Edit</a>
-                        <a class="btn action-button float-end shadow mx-2"
-                            href="{{ url_for('delete_review', wine_id=wine._id) }}"
-                            onclick="return confirm('Are you sure you want to delete?');">Delete</a>
-                        <button type="button" class="btn action-button float-end  shadow mx-2" data-bs-toggle="modal"
-                            data-bs-target="#wine-id{{ wine._id }}">
-                            View wine
-                        </button>
-                    </div>
-                </div>
-                <hr>
-                {% endif %}
-                {% endfor %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-
-</div>
 
 <!-- Modal to display wine info and all reviews-->
 
