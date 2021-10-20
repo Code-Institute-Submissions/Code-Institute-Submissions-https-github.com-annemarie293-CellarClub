@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&display=swap');
 
 
+/*----- Background Image------*/
+body {
+    background-image: url("{{ url_for('static', filename='images/cellarclub-bg.png') }}");
+}
+
 /*----- Footer------*/
 body {
     display: flex;
