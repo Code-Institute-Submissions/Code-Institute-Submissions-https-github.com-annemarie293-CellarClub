@@ -21,7 +21,12 @@
                                 <span class="col-sm-12 col-lg-6 h5"><i class="fas fa-star text-wine"></i>&nbsp;
                                     {{ wine.wine_name.title() }}</span>
                                 <span class="col"><i class="fas fa-wine-bottle grey-text"></i>&nbsp;{{ wine.vintage }}</span>
-                                <span class="col"><i class="fas fa-flag grey-text"></i>&nbsp;{{ wine.country.title() }}</span>
+                                <span class="col">
+                                    <button type="button" class="btn btn-sm action-button float-end" data-bs-toggle="modal"
+                                    data-bs-target="#wine-id{{ wine._id }}">
+                                    View
+                                </button>
+                                </span>
                                 </div>
                             <hr>
                             {% endif %}
@@ -45,7 +50,12 @@
                                 <span class="col-sm-12 col-lg-6 h5"><i class="fas fa-heart text-wine"></i>&nbsp;
                                     {{ favourite.wine_name.title() }}</span>
                                 <span class="col"><i class="fas fa-wine-bottle grey-text"></i>&nbsp;{{ favourite.vintage }}</span>
-                                <span class="col"><i class="fas fa-flag grey-text"></i>&nbsp;{{ favourite.country.title() }}</span>  
+                                <span class="col">
+                                    <button type="button" class="btn btn-sm action-button float-end" data-bs-toggle="modal"
+                                    data-bs-target="#wine-id{{ favourite.wine_id }}">
+                                    View
+                                </button>
+                                </span>  
                                 <span class="col" >
                                     <form method="POST" action="{{ url_for('delete_favourite')}}">                          
                                         <input type="hidden" name="wine_id" value="{{ favourite.wine_id }}">
@@ -156,7 +166,7 @@
 
 <div class="modal fade" id="wine-id{{ wine._id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <form class="modal-content" method="POST" action="{{ url_for('view_wines', wines=wines)}}">
+        <form class="modal-content" method="POST" action="{{ url_for('add_favourite')}}">
             <div class="modal-header">
                 <!--Modal title with wine name-->
                 <h5 class="modal-title text-center logo-font">
@@ -187,6 +197,10 @@
                         <p class="dark-amber-text">Region: &nbsp;<span
                                 class="dark-grey-text">{{ wine.region.capitalize() }}</span></p>
                         {% endif %}
+                        <p><i class="fas fa-tag amber-text"></i>
+                            <a target=”_blank” href="https://www.wine-searcher.com/find/{{ wine.wine_name }}/{{ wine.vintage }}/"
+                            class="wine-link dark-grey-text">
+                            Buy this wine <i class="fas fa-arrow-right"></i></a></p>
                     </div>
                     <!--Modal Body - Wine Image -->
                     <div class="col-sm-6 col-md-6 text-center">
