@@ -4,7 +4,7 @@
 
 /*----- Background Image------*/
 body {
-    background-image: url("{{ url_for('static', filename='images/cellarclub-bg.png') }}");
+    background-image: url("..images/cellarclub-bg.png");
 }
 
 /*----- Footer------*/
