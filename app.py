@@ -274,17 +274,19 @@ def delete_review(wine_id):
 def add_favourite():
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
     user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
-    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    user = mongo.db.users.find_one({"username": session["user"]})
+    
+    # To find if check if user already has created favourites,
+    # and if wine exists in favourites
+    if "favourites" in user:
+        existing_favourites = user["favourites"]
+        if existing_favourites:
+            for favourite in existing_favourites:
+                if favourite["wine_id"] == request.form.get("wine_id"):
+                    flash("This wine was was already added to your favourites list")
+                    return redirect(url_for('view_wines'))
 
-    # To find if wine already exists in favourites
-    existing_favourites = user["favourites"]
-
-    for favourite in existing_favourites:
-        if favourite["wine_id"] == request.form.get("wine_id"):
-            flash("This wine was was already added to your favourites list")
-            return redirect(url_for('view_wines'))
-
-    # To add a wine to user favourites
+    # To add the wine to user favourites
     favourite = {
         "wine_id": request.form.get("wine_id"),
         "wine_name": request.form.get("wine_name").lower(),
@@ -305,8 +307,7 @@ def delete_favourite():
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
     user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
     favourite = request.form.get("wine_id")
-    print("PRINTING FAVOURITE")
-    print(favourite)
+
     mongo.db.users.update({"_id": ObjectId(user_id)}, {"$pull":
                           {'favourites': {"wine_id": favourite}}})
 
@@ -317,7 +318,16 @@ def delete_favourite():
 # Function for Delete Wine - Admin user only
 @app.route("/delete_wine/<wine_id>")
 def delete_wine(wine_id):
+    wine = mongo.db.wines.update_one({"_id": ObjectId(wine_id)})
+    users = mongo.db.users.find()
+    for user in users:
+        if wine["_id"] == user["wine_id"]:
+            mongo.db.users.update({}, {"$pull":
+                                       {'favourites': {"wine_id": 
+                                        user["wine_id"]}}}) 
+
     mongo.db.wines.remove({"_id": ObjectId(wine_id)})
+
     flash("This wine has now been deleted from our collection")
     return redirect(url_for('view_wines'))
 
