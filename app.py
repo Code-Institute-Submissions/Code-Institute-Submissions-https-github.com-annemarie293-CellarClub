@@ -139,6 +139,7 @@ def profile():
 @app.route("/view_wines/", methods=["GET", "POST"])
 def view_wines():
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
+    types = list(mongo.db.wine_type.find()) 
     user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
 
     # To calculate average rating from reviews
@@ -161,7 +162,8 @@ def view_wines():
         return redirect(url_for('view_wines'))
 
     return render_template("wines.html", wines=wines,
-                           average_rating=average_rating)
+                           average_rating=average_rating,
+                           types=types)
 
 
 # Function to add a new wine to the DB
@@ -287,6 +289,16 @@ def delete_wine(wine_id):
     mongo.db.wines.remove({"_id": ObjectId(wine_id)})
     flash("This wine has now been deleted from our collection")
     return redirect(url_for('view_wines'))
+
+
+# Function for Search
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    wines = list(mongo.db.wines.find({"$text": {"$search": query}}))
+    types = list(mongo.db.wine_type.find())     
+    return render_template("wines.html", wines=wines,
+                           types=types)
 
 
 if __name__ == "__main__":
