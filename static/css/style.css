@@ -36,12 +36,15 @@ footer .copyright{
 }
 
 body {
-    font-family: 'EB Garamond', serif;
+    font-family: 'Corben', serif;
 }
 
 .corben-font {
     font-family: 'Corben', serif;
     font-weight: 400;
+}
+.garamond-font{
+    font-family: 'EB Garamond', serif;
 }
 
 /*-----Colours------*/

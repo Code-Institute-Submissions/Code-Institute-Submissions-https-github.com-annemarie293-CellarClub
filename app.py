@@ -1,6 +1,6 @@
 import os
-import bson
 from datetime import date, datetime
+import bson
 from flask import (Flask, flash, render_template,
                    redirect, request, session, url_for)
 from flask_pymongo import PyMongo
@@ -139,8 +139,7 @@ def profile():
 @app.route("/view_wines/", methods=["GET", "POST"])
 def view_wines():
     wines = list(mongo.db.wines.find().sort("wine_name", 1))
-    types = list(mongo.db.wine_type.find()) 
-
+    types = list(mongo.db.wine_type.find())
     # To calculate average rating from reviews
     average_rating = list(mongo.db.wines.aggregate(
                         [{"$unwind": "$user_reviews"},
@@ -199,9 +198,9 @@ def add_review(wine_id):
     review_exists = wine["user_reviews"]
     reviewer = "unknown"
 
-    for x in review_exists:
-        if x["reviewed_by"] == session["user"]:
-            reviewer = x["reviewed_by"]
+    for review in review_exists:
+        if review["reviewed_by"] == session["user"]:
+            reviewer = review["reviewed_by"]
         else:
             reviewer = "other"
     if reviewer == session["user"]:
@@ -283,7 +282,8 @@ def add_favourite():
         if existing_favourites:
             for favourite in existing_favourites:
                 if favourite["wine_id"] == request.form.get("wine_id"):
-                    flash("This wine was was already added to your favourites list")
+                    flash("This wine was was already"
+                          "added to your favourites list")
                     return redirect(url_for('view_wines'))
 
     # To add the wine to user favourites
@@ -318,15 +318,22 @@ def delete_favourite():
 # Function for Delete Wine - Admin user only
 @app.route("/delete_wine/<wine_id>")
 def delete_wine(wine_id):
-    wine = mongo.db.wines.update_one({"_id": ObjectId(wine_id)})
+    wine = mongo.db.wines.find_one({"_id": ObjectId(wine_id)})
+    wineid = str(wine["_id"])
+    print(type(wineid))
     users = mongo.db.users.find()
+    
+    # To check if wine is in any user favourites, and remove if so
     for user in users:
-        if wine["_id"] == user["wine_id"]:
-            mongo.db.users.update({}, {"$pull":
-                                       {'favourites': {"wine_id": 
-                                        user["wine_id"]}}}) 
+        if "favourites" in user:
+            favourites = user["favourites"]
+            for favourite in favourites: 
+                if wineid == favourite["wine_id"]:
+                    mongo.db.users.update_many({}, {
+                        "$pull": {'favourites': {"wine_id": wineid}}}) 
 
-    mongo.db.wines.remove({"_id": ObjectId(wine_id)})
+    # To remove the wine from the wines db
+    mongo.db.wines.delete_one({"_id": ObjectId(wine_id)})
 
     flash("This wine has now been deleted from our collection")
     return redirect(url_for('view_wines'))
