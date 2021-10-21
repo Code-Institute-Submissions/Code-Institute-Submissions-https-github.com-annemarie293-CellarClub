@@ -16,7 +16,7 @@
                 <form action="{{ url_for('search') }}" method="POST" class="search-form">
                     <div >
                         <label for="filter"><i class="fas fa-bars text-wine"></i></label>
-                        <select id="filter" name="query" class="form-select text-center" required>
+                        <select type="text" id="filter" name="query" class="form-select text-center" required>
                             <option value="" disabled selected>Filter by Wine Type</option>
                             {% for type in types %}
                             <option value="{{ type.wine_type }}">{{ type.wine_type.capitalize() }}</option>
@@ -174,7 +174,7 @@
                                             class="dark-grey-text">{{ wine.region.capitalize() }}</span></p>
                                     {% endif %}
                                     <p><i class="fas fa-tag amber-text"></i>
-                                        <a target=”_blank” href="https://www.wine-searcher.com/find/{{ wine.wine_name }}/{{ wine.vintage }}/"
+                                        <a target=”_blank” href="https://www.wine-searcher.com/find/{{ wine.wine_name|replace(' ','+') }}/{{ wine.vintage }}/"
                                         class="wine-link dark-grey-text">
                                         Buy this wine <i class="fas fa-arrow-right"></i></a></p>
                                 </div>

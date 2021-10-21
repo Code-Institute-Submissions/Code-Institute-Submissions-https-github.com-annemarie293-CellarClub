@@ -199,7 +199,7 @@
                                 class="dark-grey-text">{{ wine.region.capitalize() }}</span></p>
                         {% endif %}
                         <p><i class="fas fa-tag amber-text"></i>
-                            <a target=”_blank” href="https://www.wine-searcher.com/find/{{ wine.wine_name }}/{{ wine.vintage }}/"
+                            <a target=”_blank” href="https://www.wine-searcher.com/find/{{ wine.wine_name|replace(' ','+') }}/{{ wine.vintage }}/"
                             class="wine-link dark-grey-text">
                             Buy this wine <i class="fas fa-arrow-right"></i></a></p>
                     </div>
