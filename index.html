@@ -5,497 +5,85 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    <meta name="description" content="A community website where users can submit wines and share reviews on their favourites">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         type="text/css">
-
-    <title>Cellar Club</title>
-
+    <link rel="stylesheet" href="static/css/style.css" type="text/css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <title>CellarClub</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap');
-
-        .cellar {
-            font-family: 'Corben', cursive;
-            font-weight: 700;
-            padding-left: 1rem;
-        }
-
-        .text-wine {
-            color: #923A49;
-        }
-
-        .bg-wine {
-            background-color: #923A49;
-        }
-
-        .wine-card .card .card-action {
-            background-color: #923A49;
-        }
-
         body {
-            background-image: url("static/images/wine-wallpaper.png");
-            background-position: center;
-            /* Center the image */
-            background-repeat: no-repeat;
-            /* Do not repeat the image */
-            background-size: cover;
-            /* Resize the background image to cover the entire container */
-        }
-
-
-        #bg-reveal {
-            background-color: #923A49;
-        }
-
-        .card-title {
-            font-family: 'Corben', cursive;
-            font-weight: 400;
-        }
-
-        .card img {
-            background-color: #923A49;
-            padding-top: 2rem;
-            
-        }
-
-        .wine-info{
-            padding-top: 2rem;
+            background-image: url("static/images/cellarclub-bg.png");
         }
     </style>
 </head>
 
 <body>
-
     <header>
-        <!-- Top navbar-->
-        <nav>
-            <div class="nav-wrapper nav-extended text-shadow black">
-                <a href="#" class="brand-logo padding-left cellar">CellarClub</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="#" class="white-text">Home</a></li>
-                    <li><a href="#" class="white-text">Wines</a></li>
-                    <li><a href="#" class="white-text">LogIn</a></li>
-                </ul>
+        <!-- Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand h1 mb-0 logo-font" href="{{ url_for('home')}}">CellarClub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 float-end">
+                        
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('view_wines')}}">Wines</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('add_wine')}}">Add Wine</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="{{ url_for('profile', username=session['user'])}}">Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('sign_out')}}">Sign Out</a></li>
+                        
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('sign_in')}}">Sign in</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('register')}}">Sign Up</a></li>
+                        
+                    </ul>
+                </div>
             </div>
         </nav>
-
-        <!-- Mobile Sidenav-->
-        <ul class="sidenav" id="mobile-demo">
-            <li>
-                <h4 class="center-align light-blue-text text-darken-4">Task Manager</h4>
-            </li>
-            <li><a href="{{ url_for('get_tasks')}}">Home</a></li>
-            {% if session.user %}
-            <li><a href="{{ url_for('profile', username=session['user'])}}">Profile</a></li>
-            <li><a href="{{ url_for('add_task')}}">New Task</a></li>
-            {% if session.user|lower == "admin"|lower %}
-            <li><a href="{{ url_for('get_categories')}}">Manage Categories</a></li>
-            {% endif %}
-            <li><a href="{{ url_for('logout')}}">Log Out</a></li>
-            {% else %}
-            <li><a href="{{ url_for('login')}}">Log In</a></li>
-            <li><a href="{{ url_for('register')}}">Register</a></li>
-            {% endif %}
-        </ul>
     </header>
 
-    <section>
-        <!--to display flash messages-->
 
 
-    </section>
-
-    <main class="container">
-
-        <div class="row">
-
-            <div class="wine-card col s12 m4">
-                <div class="card grey lighten-3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="templates/wines.jfif">
-                    </div>
-                    <div class="card-content bg-wine">
-                        <span class="card-title activator white-text"><strong>Chateau de la Baume</strong><i
-                                class="fas fa-ellipsis-v right"></i></span>
-
-                    </div>
-                    <div id="bg-reveal" class="card-reveal">
-                        <span class="card-title white-text bg-wine"><strong>Chateau de la Baume</strong><i
-                                class="fas fa-window-close right"></i></span>
-                        <div class="row">
-                            <p class="col s4 center-align white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                            <p class="col s4 center-align white-text"><i class="fas fa-flag"></i> France</p>
-                            <p class="col s4 center-align white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        </div>
-                        <div class="center-align">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="card-action center-align">
-                            <a
-                                class="waves-effect waves-light btn-small amber accent-2 grey-text text-darken-4">View</a>
-                            <a
-                                class="waves-effect waves-light btn-small amber accent-3 grey-text text-darken-4">Review</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="wine-card col s12 m4">
-                <div class="card sticky-action white">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="templates/wines.jfif">
-                    </div>
-                    <div class="card-content white">
-                        <span class="card-title activator text-wine"><strong>Chateau de la Baume</strong><i
-                                class="fas fa-ellipsis-v right"></i></span>
-                    </div>
-                    <div class="card-action bg-wine center-align">
-                        <a class="waves-effect waves-light btn-small amber accent-2 grey-text text-darken-4">View</a>
-                        <a class="waves-effect waves-light btn-small amber accent-3 grey-text text-darken-4">Review</a>
-                    </div>
-                    <div id="bg-reveal" class="card-reveal text-wine white">
-                        <span class="card-title"><strong>Chateau de la Baume</strong><i
-                                class="fas fa-window-close right"></i></span>
-                        <div class="row">
-                            <p class="col s4 center-align text-wine"><i class="fas fa-wine-glass"></i> Malbec</p>
-                            <p class="col s4 center-align text-wine"><i class="fas fa-flag"></i> France</p>
-                            <p class="col s4 center-align text-wine"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="templates/wines.jfif">
-                        <span class="card-title">Card Title</span>
-                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i
-                                class="material-icons">add</i></a>
-                    </div>
-                    <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient
-                            because I require little markup to use effectively.</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="card col s12 m4">
-                <div class="row">
-
-                    <div class="col s4 card-image">
-                        <img src="templates/wines.jfif">
-                    </div>
-
-                    <div class="card-stacked bg-wine col s8">
-                        <div class="row">
-                            <h5 class="card-title center-align white-text">Chateau de la Baume</h5>
-                        </div>
-                        <div class="card-content row">
-                            <p class="col s4 center-align white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                            <p class="col s4 center-align white-text"><i class="fas fa-flag"></i> France</p>
-                            <p class="col s4 center-align white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        </div>
-                        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal Trigger -->
-
-            <!-- Modal Structure -->
-            <div id="modal1" class="modal modal-fixed-footer">
-                <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card bg-wine">
-                    <div class="row card-content">
-                        <div class="col s8 card-image">
-                            <img src="templates/wines.jfif">
-                        </div>
-                        <div class="col s4 white-text">
-                            <h6 class="white-text left-align"><i class="fas fa-wine-glass"></i> Malbec</h6>
-                            <h6 class="align white-text left-align"><i class="fas fa-flag"></i> France</h6>
-                            <h6 class="align white-text left-align"><i class="fas fa-wine-bottle"></i> 2019</h6>
-                        </div>
-                    </div>
-                    <div class="row card-content white-text center-align">
-                        <span class="card-title">Chateau de la Baume</span>
-                        <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                        <a class="waves-effect waves-light btn-small amber accent-2 grey-text text-darken-4">View</a>
-                        <a class="waves-effect waves-light btn-small amber accent-3 grey-text text-darken-4">Review</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card horizontal bg-wine">
-                    <div class="card-image">
-                        <img src="templates/wines.jfif">
-                    </div>
-                    <div class="card-stacked">
-                        <h2 class="card-title">Chateau de la Baume</h2>
-                        <div class="card-content">
-                            <p class="center-align white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                            <p class="center-align white-text"><i class="fas fa-flag"></i> France</p>
-                            <p class="center-align white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        </div>
-                        <div class="card-action center-align">
-                            <a clas="btn btn-small amber accent-1" href="#">View</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card bg-wine">
-                    <div class="card-image">
-                        <img src="templates/wines.jfif">
-                    </div>
-                    <div class="row card-content">
-                        <span class="card-title white-text center-align"><strong>Chateau de la Baume</strong></span>
-                        <p class="col s4 center-align white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                        <p class="col s4 center-align white-text"><i class="fas fa-flag"></i> France</p>
-                        <p class="col s4 center-align white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        <div class="center-align valign-wrapper">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-
-                    </div>
-                    <div class="card-action center-align">
-                        <a class="waves-effect waves-light btn-small amber accent-2 grey-text text-darken-4">View</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card horizontal">
-                    <div class="card-image bg-wine">
-                        <img class="responsive-img" src="static/images/red2.png">
-                    </div>
-                    <div class="card-stacked bg-wine">
-                        <div class="card-content">
-                            <span class="card-title activator white-text">Chateau de la Baume</span>
-                            <p class="white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                            <p class="white-text"><i class="fas fa-flag"></i> France</p>
-                            <p class="white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        </div>
-                        <div class="center-align">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="btn-small amber accent-2 grey-text text-darken-4">View</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card horizontal">
-                    <div class="card-image bg-wine">
-                        <img class="responsive-img" src="static/images/red2.png">
-                    </div>
-                    <div class="card-stacked bg-wine">
-                        <div class="card-content">
-                            <span class="card-title activator white-text">Chateau de la Baume</span>
-                            <p class="white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                            <p class="white-text"><i class="fas fa-flag"></i> France</p>
-                            <p class="white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        </div>
-                        <div class="center-align">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="btn-small amber accent-2 grey-text text-darken-4">View</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card horizontal">
-                    <div class="card-image bg-wine">
-                        <img class="responsive-img" src="static/images/red2.png">
-                    </div>
-                    <div class="card-stacked bg-wine">
-                        <div class="card-content">
-                            <span class="card-title activator white-text">Chateau de la Baume</span>
-                            <p class="white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                            <p class="white-text"><i class="fas fa-flag"></i> France</p>
-                            <p class="white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        </div>
-                        <div class="center-align">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="btn-small amber accent-2 grey-text text-darken-4">View</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card horizontal">
-                    <div class="card-image bg-wine">
-                        <img class="responsive-img" src="static/images/red2.png">
-                    </div>
-                    <div class="card-stacked bg-wine">
-                        <div class="card-content">
-                            <span class="card-title activator white-text">Chateau de la Baume</span>
-                            <p class="white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                            <p class="white-text"><i class="fas fa-flag"></i> France</p>
-                            <p class="white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                        </div>
-                        <div class="center-align">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="card-action">
-                            <a href="#" class="btn-small amber accent-2 grey-text text-darken-4">View</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="card horizontal">
-                    <div class="card-image bg-wine">
-                        <img class="responsive-img" src="static/images/red2.png">
-                    </div>
-                    <div class="card-stacked black">
-                        <div class="card-content">
-                            <span class="card-title activator white-text"><strong>Chateau de la Baume</strong></span>
-                            <div class="wine-info">
-                                <p class="white-text"><i class="fas fa-wine-glass"></i> Malbec</p>
-                                <p class="white-text"><i class="fas fa-flag"></i> France</p>
-                                <p class="white-text"><i class="fas fa-wine-bottle"></i> 2019</p>
-                            </div>
-                        </div>
-                        <div class="center-align">
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star amber-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                            <i class="fas fa-star grey-text"></i>
-                        </div>
-                        <div class="card-action">
-                            <a href="#modal1" class="btn-small amber accent-2 center-align grey-text text-darken-4">View</a>
-                        </div>
-                    </div>
+    <!-- section to fill with templates -->
+    <main class="container-fluid p-0">
+        <div class="hero-image container-fluid g-0">
+            <div class="row justify-content-center">
+                <div class="hero-image-text col-8 offset-2 text-center p-3 amber-text shadow-lg">
+                    <h2 class="logo-font">Step down into the cellar...</h2>
+                    <h4 class="corben-font">Join up today and start exploring our community wine reviews</h4>
+                    <a class="stretched-link" href="{{ url_for('register')}}"></a>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- footer section -->
+    <footer class="bg-wine">
+        <div class="row">
+            <div class="footer-info col m-1">
+                <h5 class="logo-font mt-2">CellarClub</h5>
+                <p>2 Main Street Rathmines, &nbsp; cellarclub@gmail.com</p>
+                <a class="fs-4 social-link m-2" href="www.instagram.com"><i class="fab fa-instagram "></i></a>
+                <a class="fs-4 social-link m-2" href="www.facebook.com"><i class="fab fa-facebook "></i></a>
+                <a class="fs-4 social-link m-2" href="www.twitter.com"><i class="fab fa-twitter "></i></a>
+                <a class="fs-4 social-link m-2" href="www.pinterest.com"><i class="fab fa-pinterest"></i></a>
+                <p class="mt-1">&copy; 2021 AM Murphy</p>
+            </div>
+        </div>
+    </footer>
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-        //JQuery for mobile sidenav, collapsible, and tooltips, datepicker(from Materialize)
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js')}}"></script>
-    <script>
-        $(document).ready(function () {
-            $('.modal').modal();
-            $('.sidenav').sidenav({
-                edge: "right"
-            });
-            $('.collapsible').collapsible();
-            $('.tooltipped').tooltip();
-            $('.datepicker').datepicker({
-                format: "dd mmm, yyyy",
-                yearRange: 3,
-                showClearBtn: true,
-                i18n: {
-                    done: "Select"
-                }
-            });
-            $('select').formSelect();
-
-            validateMaterializeSelect();
-
-            function validateMaterializeSelect() {
-                let classValid = {
-                    "border-bottom": "1px solid #4caf50",
-                    "box-shadow": "0 1px 0 0 #4caf50"
-                };
-                let classInvalid = {
-                    "border-bottom": "1px solid #f44336",
-                    "box-shadow": "0 1px 0 0 #f44336"
-                };
-                if ($("select.validate").prop("required")) {
-                    $("select.validate").css({
-                        "display": "block",
-                        "height": "0",
-                        "padding": "0",
-                        "width": "0",
-                        "position": "absolute"
-                    });
-                }
-                $(".select-wrapper input.select-dropdown").on("focusin", function () {
-                    $(this).parent(".select-wrapper").on("change", function () {
-                        if ($(this).children("ul").children("li.selected:not(.disabled)").on(
-                                "click",
-                                function () {})) {
-                            $(this).children("input").css(classValid);
-                        }
-                    });
-                }).on("click", function () {
-                    if ($(this).parent(".select-wrapper").children("ul").children(
-                            "li.selected:not(.disabled)").css("background-color") ===
-                        "rgba(0, 0, 0, 0.03)") {
-                        $(this).parent(".select-wrapper").children("input").css(classValid);
-                    } else {
-                        $(".select-wrapper input.select-dropdown").on("focusout", function () {
-                            if ($(this).parent(".select-wrapper").children("select").prop(
-                                    "required")) {
-                                if ($(this).css("border-bottom") !=
-                                    "1px solid rgb(76, 175, 80)") {
-                                    $(this).parent(".select-wrapper").children("input").css(
-                                        classInvalid);
-                                }
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    </script>
-
 
 </body>
 

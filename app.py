@@ -18,12 +18,15 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+# Function for home page
 @app.route("/")
 @app.route("/home")
 def home():
+    """Returns home page """
     return render_template("home.html")
 
 
+# Function to Register an account
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Gets user submitted inputs from register.html

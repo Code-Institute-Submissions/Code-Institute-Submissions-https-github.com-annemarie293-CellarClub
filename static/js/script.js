@@ -1,6 +1,6 @@
 $(document).ready(function(){
     
-    // Example starter JavaScript for disabling form submissions if there are invalid fields (Bootstrap)
+    // JavaScript for disabling form submissions if there are invalid fields (Bootstrap)
 (() => {
   'use strict';
 
@@ -18,8 +18,6 @@ $(document).ready(function(){
     }, false);
   });
 })();
-  
-
 });
 
 
