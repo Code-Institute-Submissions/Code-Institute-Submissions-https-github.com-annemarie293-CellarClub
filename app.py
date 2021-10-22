@@ -300,34 +300,34 @@ def add_favourite():
         in the 'favourites' array in 'users' db
         Checks if the wine is already added to this
         array"""
-    wines = list(mongo.db.wines.find().sort("wine_name", 1))
-    user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
-    user = mongo.db.users.find_one({"username": session["user"]})
+    if request.method == "POST":
+        wines = list(mongo.db.wines.find().sort("wine_name", 1))
+        user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
+        user = mongo.db.users.find_one({"username": session["user"]})
 
-    # To find if check if user already has created favourites,
-    # and if wine exists in favourites
-    if "favourites" in user:
-        existing_favourites = user["favourites"]
-        if existing_favourites:
-            for favourite in existing_favourites:
-                if favourite["wine_id"] == request.form.get("wine_id"):
-                    flash("This wine was was already"
-                          "added to your favourites list")
-                    return redirect(url_for('view_wines'))
+        # To find if check if user already has created favourites,
+        # and if wine exists in favourites
+        if "favourites" in user:
+            existing_favourites = user["favourites"]
+            if existing_favourites:
+                for favourite in existing_favourites:
+                    if favourite["wine_id"] == request.form.get("wine_id"):
+                        flash("This wine was was already"
+                              "added to your favourites list")
+                        return redirect(url_for('view_wines'))
+        # To add the wine to user favourites
+            favourite = {
+                "wine_id": request.form.get("wine_id"),
+                "wine_name": request.form.get("wine_name").lower(),
+                "grape": request.form.get("grape").lower(),
+                "vintage": request.form.get("vintage").lower(),
+                "country": request.form.get("country").lower(),
+            }
+            mongo.db.users.update_one({"_id": ObjectId(user_id)},
+                                      {"$push": {"favourites": favourite}})
 
-    # To add the wine to user favourites
-    favourite = {
-        "wine_id": request.form.get("wine_id"),
-        "wine_name": request.form.get("wine_name").lower(),
-        "grape": request.form.get("grape").lower(),
-        "vintage": request.form.get("vintage").lower(),
-        "country": request.form.get("country").lower(),
-    }
-    mongo.db.users.update_one({"_id": ObjectId(user_id)},
-                              {"$push": {"favourites": favourite}})
-
-    flash("Wine is now added to your favourites list")
-    return redirect(url_for('view_wines', wines=wines))
+            flash("Wine is now added to your favourites list")
+            return redirect(url_for('view_wines', wines=wines))
 
 
 # Function to remove wine from favourites
@@ -335,15 +335,16 @@ def add_favourite():
 def delete_favourite():
     """Allows user to remove wine details from
         the 'favourites' array in 'users' db"""
-    wines = list(mongo.db.wines.find().sort("wine_name", 1))
-    user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
-    favourite = request.form.get("wine_id")
+    if request.method == "POST":
+        wines = list(mongo.db.wines.find().sort("wine_name", 1))
+        user_id = mongo.db.users.find_one({"username": session["user"]})["_id"]
+        favourite = request.form.get("wine_id")
 
-    mongo.db.users.update({"_id": ObjectId(user_id)}, {"$pull":
-                          {'favourites': {"wine_id": favourite}}})
+        mongo.db.users.update({"_id": ObjectId(user_id)}, {"$pull":
+                              {'favourites': {"wine_id": favourite}}})
 
-    flash("Wine has now been removed from your favourites")
-    return redirect(url_for('profile', wines=wines))
+        flash("Wine has now been removed from your favourites")
+        return redirect(url_for('profile', wines=wines))
 
 
 # Function for Delete Wine - Admin user only
