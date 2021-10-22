@@ -224,7 +224,7 @@ ______
 
    ___
 ## **TESTING**
-    Full testing documentation found in separate file (TESTING.md)[TESTING.md])
+Full testing documentation found in separate file (TESTING.md)[TESTING.md]
  
 
 ## **DEPLOYMENT**
