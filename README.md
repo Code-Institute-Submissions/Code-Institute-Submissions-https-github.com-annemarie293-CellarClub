@@ -5,8 +5,8 @@ View the deployed site [here](http://cellar-club.herokuapp.com/ "CellarClub")
 ## PROJECT INTRODUCTION
 Cellar Club is a website desisgned for members of a wine appreciation group. Members can create an account on the site to view the collection of wines, add reviews and ratings to wines in the collection, and also add new wines to the collection. Members can also add the wines to a 'favourites' list for future reference.
 
-![image of home page site mock-ups on various screen sizes](/workspace/CellarClub/static/images/mock-ups/mock-screens.png "Mock Up")
-![image of wines pagesite mock-ups on various screen sizes](/workspace/CellarClub/static/images/mock-ups/mock-screens-wines.png "Mock Up")
+![image of home page site mock-ups on various screen sizes](/static/images/mock-ups/mock-screens.png "Mock Up")
+![image of wines pagesite mock-ups on various screen sizes](/static/images/mock-ups/mock-screens-wines.png "Mock Up")
 ___
 
 ## **USER EXPERIENCE (UX)**
