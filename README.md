@@ -46,7 +46,7 @@ Admin Users
 
 - **Images**
 
-  - All images taken from open source sites, or from free download allowance on subscription sites. The large hero image on the home page was chosen to echo the 'cellar' theme and lead users into the site. The custom background graphic was created as slight background in line with the sites theme, proviving some contrast for the card elements but not distracting or competing. The generic wine bottle images used for the wine cards were chosen to ensure a uniform size and look, while the user can submit an image of the actual wine to be displayed in the pop up modal.
+  - All images taken from open source sites, or from free download allowance on subscription sites. The large hero image on the home page was chosen to echo the 'cellar' theme and lead users into the site. The custom background graphic was created as slight background in line with the sites theme, providing some contrast for the card elements but not distracting or competing. The generic wine bottle images used for the wine cards were chosen to ensure a uniform size and look, while the user can submit an image of the actual wine to be displayed in the pop up modal.
 
 ### Wireframes
 
@@ -224,8 +224,9 @@ ______
 
    ___
 ## **TESTING**
-    Full testing documentation found in separate file (TESTING.md(-TESTING.md])
-    ___
+    Full testing documentation found in separate file (TESTING.md)[TESTING.md])
+ 
+
 ## **DEPLOYMENT**
 
 #### Deployed using Heroku
