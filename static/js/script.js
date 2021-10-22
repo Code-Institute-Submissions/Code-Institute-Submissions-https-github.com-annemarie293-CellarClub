@@ -1,3 +1,5 @@
+/*globals $:false */
+
 $(document).ready(function(){
     
     // JavaScript for disabling form submissions if there are invalid fields (Bootstrap)

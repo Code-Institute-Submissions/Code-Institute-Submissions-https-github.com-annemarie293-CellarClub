@@ -77,7 +77,9 @@ def register():
 
         # Add the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        flash("Registration successful")
+        flash("Thanks for joining our club!"
+              "Browse our wines and add some"
+              "to your favourites today!")
         return redirect(url_for('profile', username=session["user"]))
 
     return render_template("register.html")
@@ -99,7 +101,7 @@ def sign_in():
             if check_password_hash(user_exists["password"],
                                    request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                flash("Welcome {}!".format(request.form.get(
+                flash("Welcome back{}!".format(request.form.get(
                     "username").title()))
                 return redirect(url_for('profile', username=session["user"]))
             else:
