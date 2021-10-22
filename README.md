@@ -223,8 +223,9 @@ ______
     - Used to generate a mockup of the site on multiple devices
 
    ___
-
-
+## **TESTING**
+    Full testing documentation found in separate file (TESTING.md(-TESTING.md])
+    ___
 ## **DEPLOYMENT**
 
 #### Deployed using Heroku
@@ -232,9 +233,8 @@ ______
 - **Instructions**
   1. Open the [repository](https://github.com/annemarie293/CellarClub) in GitHub, then launch in GitPod
   2. Create an env.py file, and ensure it is added to .gitignore file as this will contain sensitive info that should not be pushed to the server.
-  3. In env.py:
-  
-    ```
+  3. In env.py add the following
+  ```
     import os 
     os.environ.setdefault("IP", "0.0.0.0") 
     os.environ.setdefault("PORT", "5000")
@@ -243,25 +243,26 @@ ______
     os.environ.setdefault("MONGO_DBNAME", "") 
     ```
 
-4. Use your own secret key, ideally from a random passoword generator, and add your own Mongo URI, password and DB name from your mongo database
-2. Install Flask, flask-pymongo and dnspython using ```pip3 install``` command
-  3. To tell Heroku which dependencies are needed to run your app run:
-        ```pip3 freeze --local > requirements.txt``` 
+
+    4. Use your own secret key, ideally from a random passoword generator, and add your own Mongo URI, password and DB name from your mongo database
+    5. Install Flask, flask-pymongo and dnspython using ```pip3 install``` command
+    6. To tell Heroku which dependencies are needed to run your app run:
+        ```pip3 freeze --local > requirements.txt``` and 
         ```echo web: python app.py > Procfile``` 
-  4. Ensure these files are pushed to git before deploy
-  4. Login or create a new account on Heroku.
-  5. Create a new app, choosing app name and region
-  6. Choose "GitHub" as the deployment method, add your GitHub repo name and click search to connect.
-  7. Before clicking "Enable automatic deploys" on the deploy tab, go to "reveal config vars" on the settings tab
-  8. Add the below key/value pairs:
-  
-   |     Key  | Value | 
-    | -------- | --------- | 
-    |IP    | 0.0.0.0 | 
-    |PORT | 5000 | 
-    |SECRET_KEY| copy from env.py  | 
-    |MONGO_URI | copy from env.py  | 
-    |MONGO_DBNAME | copy from env.py   | 
+    7. Ensure these files are pushed to git before deploy
+    8. Login or create a new account on Heroku.
+    9. Create a new app, choosing app name and region
+    10. Choose "GitHub" as the deployment method, add your GitHub repo name and click search to connect.
+    11. Before clicking "Enable automatic deploys" on the deploy tab, go to "reveal config vars" on the settings tab
+    12. Add the below key/value pairs:
+    
+     |     Key  | Value | 
+     | -------- | --------- | 
+     |IP    | 0.0.0.0 | 
+     |PORT | 5000 | 
+     |SECRET_KEY| copy from env.py  | 
+     |MONGO_URI | copy from env.py  | 
+     |MONGO_DBNAME | copy from env.py   | 
 
   5. click on "hide config vars"
   6. Return to "deploy" tab and click "Enable automatic deploys"
@@ -287,19 +288,18 @@ ______
   7. Change the current working directory to the location where you want the cloned directory.
   8. Type `git clone`, and then paste the URL you copied earlier.
 
-`
-    $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
-`
+`$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
+
   9. Press Enter to create your local clone.
 
-`
-  $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
-  > Cloning into `Spoon-Knife`...
-  > remote: Counting objects: 10, done.
-  > remote: Compressing objects: 100% (8/8), done.
-  > remove: Total 10 (delta 1), reused 10 (delta 1)
-  > Unpacking objects: 100% (10/10), done.
- `
+```
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+> Cloning into `Spoon-Knife`...
+> remote: Counting objects: 10, done.
+> remote: Compressing objects: 100% (8/8), done.
+> remove: Total 10 (delta 1), reused 10 (delta 1)
+> Unpacking objects: 100% (10/10), done.
+```
  
   10. For more detailed info on this process please click [here](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 
@@ -323,7 +323,7 @@ All code written by myself using lessons from the Code Institute back end develo
 
 - [Home Page image](https://www.shutterstock.com/image-photo/collection-wines-store-elite-alcohol-bottles-1316148788)
 - [Image for generic wine bottles](https://www.shutterstock.com/image-vector/set-wine-bottles-isolated-on-transparent-574585954)
-- - [Image for generic champagne bottles](https://www.shutterstock.com/image-vector/vector-realistic-illustration-champagne-bottles-on-1959046075)
+- [Image for generic champagne bottles](https://www.shutterstock.com/image-vector/vector-realistic-illustration-champagne-bottles-on-1959046075)
 - **Image urls submitted by users and displayed in the wine modal section may not be from free image sites**
 
 #### Acknowledgements
