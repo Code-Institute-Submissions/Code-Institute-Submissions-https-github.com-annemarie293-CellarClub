@@ -8,30 +8,30 @@ HTML Validation
     - As a modal for each wine is written to the DOM, input and label IDs were duplicated, also causing HTML errors. Once the inputs were changed to 'type=hidden', labels could be removed to resolve this.
     - The remainging warning from the validator only advises that a section lacks a heading, however, this is the empty section used for the flash messages, and a h3 heading is displayed in the child div.
  - [W3C Markup Validator](https://validator.w3.org/) : 
-    - [View Results - Home page]()
-    - [View Results - Sign Up page]()
-    - [View Results - Sign In page]()
-    - [View Results - Profile page]()
-    - [View Results - Wines page]()
-    - [View Results - Add Wine page]()
-    - [View Results - Add Review page]()
+    - [View Results - Home page](static/images/validation-screenshots/html-home.png)
+    - [View Results - Sign Up page](static/images/validation-screenshots/html-sign-up.png)
+    - [View Results - Sign In page](static/images/validation-screenshots/html-sign-in.png)
+    - [View Results - Profile page](static/images/validation-screenshots/html-profile.png)
+    - [View Results - Wines page](static/images/validation-screenshots/html-wines.png)
+    - [View Results - Add Wine page](static/images/validation-screenshots/html-add-wine.png)
+    - [View Results - Add Review page](static/images/validation-screenshots/html-add-review.png)
  
 CSS Validation
 - No errors found
- - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) : [View Results]()
+ - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) : [View Results](static/images/validation-screenshots/CSS.png)
  
 JS Validation
 Javascript validation carried out using [JS hint](https://jshint.com/)
  - home.js
     - Initial verification found some warnings "arrow function syntax (= )' is only available in es6 (use 'esversion 6').(w119)", searching [stackoverflow](https://stackoverflow.com/questions/42866159/arrow-function-syntax-is-only-available-in-es6-use-esversion-6), I found advice to use `/*globals $:false */` as comments at the top of the file to resolve this
-    [Errors Screenshot](/workspace/SomethingForTheWeekend/assets/images/readme/jshint-home-errors.jpg)
+    [Errors Screenshot](static/images/validation-screenshots/JSHINT-error.png)
     - No errors found following this fix.
-    [Validated Screenshot](/workspace/SomethingForTheWeekend/assets/images/readme/jshint-home-final.jpg)
+    [Validated Screenshot](static/images/validation-screenshots/JSHINT-resolved.png)
 
 PEP8 compliance
 Python validation carried out using [PEP8 checker](http://pep8online.com/)
 - No errors found.
-- [Validated Screenshot]()
+- [Validated Screenshot](static/images/validation-screenshots/PEP8.png)
 
  ### User Stories Testing
 
@@ -39,40 +39,70 @@ Python validation carried out using [PEP8 checker](http://pep8online.com/)
 
 1. As a new user, I want to be able to create a member account
     1. From the home/landing page, the user can either click on 'sign up' link in the nav bar, or else click on the central text over the hero image to be directed to the registration page.
+    ![user story screenshot](static/images/user-stories/us1-1.png "user story screenshot")
     2. Form validation ensure all the required details are entered.
+    ![user story screenshot](static/images/user-stories/us1-2.png "user story screenshot")
     3. If no user exists with this username, the account is created for the new member.
+    ![user story screenshot](static/images/user-stories/us1-3.png "user story screenshot")
 2. As a new user, I want to view the wine collection easily
      1. Once the user has created an account, the 'wines' link is clearly visible on the navbar.
+     ![user story screenshot](static/images/user-stories/us2-1.png "user story screenshot")
      2. On the wines page, the user can explore the collection using the filter and search functions.
+     ![user story screenshot](static/images/user-stories/us2-2.2png "user story screenshot")
+     3. USer can click on a wine card to display the wine modal with more details and reviews
+     ![user story screenshot](static/images/user-stories/us2-3.png "user story screenshot")
 3. As a new user, I want to add reviews to existing wines
       1. From the 'view wine' modal, the user can selet the button to add a review to the wine.
+      ![user story screenshot](static/images/user-stories/us3-1.png "user story screenshot")
       2. If they have not previously added a review for this wine/vintage, the review will be added to the wine.
+      ![user story screenshot](static/images/user-stories/us3-2.png "user story screenshot")
+      ![user story screenshot](static/images/user-stories/us3-2.1.png "user story screenshot")
 4. As a new user, I want to add wines to my favourites
       1. From the 'view wine' modal, the user can selet the button to add the wine to their 'favourites'.
+      ![user story screenshot](static/images/user-stories/us4-1.png "user story screenshot")
       2. If they have not previously added this wine to their favourites, the action will be completed.
+      ![user story screenshot](static/images/user-stories/us4-2.png "user story screenshot")
 5. As a new user, I want to add a new wine to the collection
       1. From any page, the user can click on the navbar link to 'add wine'
+      ![user story screenshot](static/images/user-stories/us5-1.png "user story screenshot")
       2. Once all required details are submitted and the wine/vintage pair is not already found in the collection, the wine will be added.
+      ![user story screenshot](static/images/user-stories/us5-2.png "user story screenshot")
 
  - **Returning Users**
 
 1. As a returning user, I want to be able to log in to my account
     1. From the home page, the user can click on the 'sign in' link on the navbar.
+    ![user story screenshot](static/images/user-stories/rus1-1.png "user story screenshot")
     2. If they click on the central text on the hero image, they will be taken to the 'sign-up' page, where there is also a link to the 'sign-in' page.
+    ![user story screenshot](static/images/user-stories/rus1-2.png "user story screenshot")
     3. Once the user submits their username and password, and the details match the ones in the database, the user will be logged into the session.
+    ![user story screenshot](static/images/user-stories/rus1-3.png "user story screenshot")
+    ![user story screenshot](static/images/user-stories/rus1-3.1.png "user story screenshot")
 2. As a returning user, I want to view the reviews I have made
     1. When the user has signed in, they are taken to their profile page, which displays a list of their reviews on the page.
+    ![user story screenshot](static/images/user-stories/rus2-1.png "user story screenshot")
     2. The user can also see their review for a wine on the modal display for the wine. 
+    ![user story screenshot](static/images/user-stories/rus2-2.png "user story screenshot")
 3. As a returning user, I want to edit/remove the reviews I have made
      1. The user can find the review they want to enter on their profile page, or else on the modal display for the wine
-     2. Clicking on the 'edit' button takes the user to the 'edit review' page where they caqn make changes to their review text and/or star rating and submit the update.
+     ![user story screenshot](static/images/user-stories/rus3-1.png "user story screenshot")
+     ![user story screenshot](static/images/user-stories/rus3-1.1.png "user story screenshot")
+     2. Clicking on the 'edit' button takes the user to the 'edit review' page where they can make changes to their review text and/or star rating and submit the update.
+     ![user story screenshot](static/images/user-stories/rus3-2.png "user story screenshot")
      3. Clicking on the 'delete' button prompts a confirmation box to ask the user if they are sure they want to remove the review. Clicking ok will remove the review from the database.
+     ![user story screenshot](static/images/user-stories/rus3-3.png "user story screenshot")
+     ![user story screenshot](static/images/user-stories/rus3-3.1.png "user story screenshot")
 4. As a returning user, I want to view the wines in my favourites list
     1. When the user has signed in, they are taken to their profile page, which displays a list of the wines they have added to their favourites list.
+    ![user story screenshot](static/images/user-stories/rus4-1.png "user story screenshot")
     2. The user can click on the 'view' button for each wine to display all the details, or else click on the 'remove' button to remove the wine from their favourites.
+    ![user story screenshot](static/images/user-stories/rus4-2.png "user story screenshot")
+    ![user story screenshot](static/images/user-stories/rus4-2.1.png "user story screenshot")
 5. As a returning user, I want to view the wines I have submitted
     1. When the user has signed in, they are taken to their profile page, which displays a list of the wines they have submitted to the collection.
+    ![user story screenshot](static/images/user-stories/rus5-1.png "user story screenshot")
     2. The user can click on the 'view' button for each wine to display all the details.
+    ![user story screenshot](static/images/user-stories/rus5-2.png "user story screenshot")
 
  - **Admin Users**
 1. As an admin user, I want to be able to removes wines from the website
@@ -388,16 +418,17 @@ Testing was carried out by myself using Chrome DevTools while writing the code, 
     
 ### Lighthouse Testing
 Results
- |     Page   | Wireframe | Wireframe |
-    | ----------- | ----------- | ----------- |
-    |Home page| [Desktop](static/images/lighthouse/desk-home.png) | [Mobile](static/images/lighthouse/mobile-home.png)|
-    |Sign up page   | [Desktop](static/images/lighthouse/desk-sign-up.png) | [Mobile](static/images/lighthouse/mobile-sign-up.png)|
-    |Sign in page   | [Desktop](static/images/lighthouse/desk-sign-in.png) | [Mobile](static/images/lighthouse/mobile-sign-in.png) |
-    |Wines page     | [Desktop](static/images/lighthouse/desk-wines.png)   | [Mobile](static/images/lighthouse/mobile-wines.png) |
-    |Add wine page  | [Desktop](static/images/lighthouse/desk-add-wine.png) | [Mobile](static/images/lighthouse/mobile-add-wine.png) |
-    |Add wine page  | [Desktop](static/images/lighthouse/desk-add-wine.png) | [Mobile](static/images/lighthouse/mobile-add-wine.png) |
-    |Add/edit review page| [Desktop](static/images/lighthouse/desk-add-review.png)| [Mobile](static/images/lighthouse/mobile-add-review.png)|
-    |Profile page   | [Desktop](static/images/lighthouse/desk-profile.png)  | [Mobile](static/images/lighthouse/mobile-profile.png)|
+
+|     Page           | Wireframe                                              | Wireframe                                               |
+| -----------        | -----------                                            | -----------                                             |
+|Home page           | [Desktop](static/images/lighthouse/desk-home.png)      | [Mobile](static/images/lighthouse/mobile-home.png)      |
+|Sign up page        | [Desktop](static/images/lighthouse/desk-sign-up.png)   | [Mobile](static/images/lighthouse/mobile-sign-up.png)   |
+|Sign in page        | [Desktop](static/images/lighthouse/desk-sign-in.png)   | [Mobile](static/images/lighthouse/mobile-sign-in.png)   |
+|Wines page          | [Desktop](static/images/lighthouse/desk-wines.png)     | [Mobile](static/images/lighthouse/mobile-wines.png)     |
+|Add wine page       | [Desktop](static/images/lighthouse/desk-add-wine.png)  | [Mobile](static/images/lighthouse/mobile-add-wine.png)  |
+|Add wine page       | [Desktop](static/images/lighthouse/desk-add-wine.png)  | [Mobile](static/images/lighthouse/mobile-add-wine.png)  |
+|Add/edit review page| [Desktop](static/images/lighthouse/desk-add-review.png)| [Mobile](static/images/lighthouse/mobile-add-review.png)|
+|Profile page        | [Desktop](static/images/lighthouse/desk-profile.png)   | [Mobile](static/images/lighthouse/mobile-profile.png)   |
 
 #### Performance
 Green scores on all pages except mobile wines and mobile home in mid 70s. Some room for improvement with image types and sizes which I did not have time for.

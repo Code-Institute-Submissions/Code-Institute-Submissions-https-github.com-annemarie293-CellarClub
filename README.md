@@ -52,38 +52,46 @@ Admin Users
 
 Wireframes showing the each page across small, medium and large screen sizes.
 
- |     Page   | Wireframe | Wireframe | Wireframe |
-    | ----------- | ----------- | ----------- | ----------- |
-    |Sign up page     | [Large]() | [Medium]()   | [Small]()   |
-    |Sign in page   | [Large]() | [Medium]()   | [Small]()   |
-    |Profile page   |  [Large]() | [Medium]()   | [Small]()   |
-    |Wines page  |  [Large]() | [Medium]()   | [Small]()   |
-    |Wine Modal  |  [Large]() | [Medium]()   | [Small]()   |
-    |Add wine page   |  [Large]() | [Medium]()   | [Small]()   |
-    |Add/edit review page   | [Large]() | [Medium]()   | [Small]()   |
-    |Profile page  | [Large]() | [Medium]()   | [Small]()   |
+|     Page   | Wireframe | Wireframe | Wireframe |
+| ----------- | ----------- | ----------- | ----------- |
+|Sign up page     | [Large](static/images/wireframes/large-sign-up.png) | [Medium](static/images/wireframes/med-sign-up.png)   | [Small](static/images/wireframes/small-sign-up.png)   |
+|Sign in page   | [Large](static/images/wireframes/large-sign-in.png) | [Medium](static/images/wireframes/med-sign-in.png)   | [Small](static/images/wireframes/small-sign-in.png)   |
+|Home page   |  [Large](static/images/wireframes/large-home.png) | [Medium](static/images/wireframes/med-home.png)   | [Small](static/images/wireframes/small-profile.png)   |
+|Wines page  |  [Large](static/images/wireframes/large-wines.png) | [Medium](static/images/wireframes/med-wines.png)   | [Small](static/images/wireframes/small-wines.png)   |
+|Wine Modal  | [Large](static/images/wireframes/large-wine-modal.png) | [Medium](static/images/wireframes/med-wine-modal.png) | [Small](static/images/wireframes/small-wine-modal.png)|
+|Add wine page   |  [Large](static/images/wireframes/large-add-wine.png) | [Medium](static/images/wireframes/med-add-wine.png)   | [Small](static/images/wireframes/small-add-wine.png)   |
+|Add/edit review page   | [Large](static/images/wireframes/large-add-review.png) | [Medium](static/images/wireframes/small-add-review.png)   | [Small](/workspace/CellarClub/static/images/wireframes/small-add-review.png)   |
+|Profile page  | [Large](static/images/wireframes/large-profile.png) | [Medium](static/images/wireframes/med-profile.png)   | [Small](static/images/wireframes/small-profile.png)   |
 
 ### Database Schema
 The Cellar-club database is stored in MongoDB Atlas, made up of 3 collections.
 
  - Wine_type:
-    ![image wine-type collection](/assets/images/readme/sftw-mockup.jpg "wine_type collection")
+
+    ![image wine-type collection](static/images/db-schema/wine-type.png "wine_type collection")
+
     This comprises 4 documents, one for each wine type. Collection is uneditable as these types will not change.
 
  - Users:
    - Document in the collection:
-    ![image users collection](/assets/images/readme/sftw-mockup.jpg "users collection")
+
+    ![image users collection](static/images/db-schema/users.png "users collection")
+
     - This collection holds all the data submitted for each new user.
     - User favourites are stored as dictionary ojects in the "favourites" key array.
     - Value for the "wine_id" key in each of the favourites dictionaries corresponds to the value for the "_id" ObjectID of the favourited wine in the "Wines" collection and can be used to cross reference the collections.
-    - 
+    
  - Wines:
     - Document in the collection:
-    ![image wines collection](/assets/images/readme/sftw-mockup.jpg "wines collection")
+
+    ![image wines collection](static/images/db-schema/wines.png "wines collection")
+
     - This collection holds all the data submitted for each new wine.
     - Wine reviews are stored as dictionaries in the "reviews" key array.
     - Value for the "reviewed_by" key in each of the favourites dictionaries corresponds to the value for the "username" key in the "Users" collection and can be used to cross reference the collections.
-___
+
+______
+
 
 ## **FEATURES**
 
@@ -226,14 +234,14 @@ ___
   2. Create an env.py file, and ensure it is added to .gitignore file as this will contain sensitive info that should not be pushed to the server.
   3. In env.py:
   
-```
+    ```
     import os 
     os.environ.setdefault("IP", "0.0.0.0") 
     os.environ.setdefault("PORT", "5000")
     os.environ.setdefault("SECRET_KEY", " ")
     os.environ.setdefault("MONGO_URI", "mongodb+srv://userannemarie:PASSWORD@myfirstcluster.1ccbb.mongodb.net/DB-NAME?retryWrites=true&w=majority")
     os.environ.setdefault("MONGO_DBNAME", "") 
-```
+    ```
 
 4. Use your own secret key, ideally from a random passoword generator, and add your own Mongo URI, password and DB name from your mongo database
 2. Install Flask, flask-pymongo and dnspython using ```pip3 install``` command
