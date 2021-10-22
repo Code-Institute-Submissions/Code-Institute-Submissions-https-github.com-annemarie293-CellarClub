@@ -40,31 +40,44 @@ Python validation carried out using [PEP8 checker](http://pep8online.com/)
 1. As a new user, I want to be able to create a member account
     1. From the home/landing page, the user can either click on 'sign up' link in the nav bar, or else click on the central text over the hero image to be directed to the registration page.
     ![user story screenshot](static/images/user-stories/us1-1.png "user story screenshot")
+
     2. Form validation ensure all the required details are entered.
     ![user story screenshot](static/images/user-stories/us1-2.png "user story screenshot")
+
     3. If no user exists with this username, the account is created for the new member.
     ![user story screenshot](static/images/user-stories/us1-3.png "user story screenshot")
+
 2. As a new user, I want to view the wine collection easily
      1. Once the user has created an account, the 'wines' link is clearly visible on the navbar.
      ![user story screenshot](static/images/user-stories/us2-1.png "user story screenshot")
+
      2. On the wines page, the user can explore the collection using the filter and search functions.
-     ![user story screenshot](static/images/user-stories/us2-2.2png "user story screenshot")
+     ![user story screenshot](static/images/user-stories/us2-2.png "user story screenshot")
+     ![user story screenshot](static/images/user-stories/us2-2.2.png "user story screenshot")
+
      3. USer can click on a wine card to display the wine modal with more details and reviews
      ![user story screenshot](static/images/user-stories/us2-3.png "user story screenshot")
+
 3. As a new user, I want to add reviews to existing wines
       1. From the 'view wine' modal, the user can selet the button to add a review to the wine.
       ![user story screenshot](static/images/user-stories/us3-1.png "user story screenshot")
+
       2. If they have not previously added a review for this wine/vintage, the review will be added to the wine.
       ![user story screenshot](static/images/user-stories/us3-2.png "user story screenshot")
+
       ![user story screenshot](static/images/user-stories/us3-2.1.png "user story screenshot")
+
 4. As a new user, I want to add wines to my favourites
       1. From the 'view wine' modal, the user can selet the button to add the wine to their 'favourites'.
       ![user story screenshot](static/images/user-stories/us4-1.png "user story screenshot")
+
       2. If they have not previously added this wine to their favourites, the action will be completed.
       ![user story screenshot](static/images/user-stories/us4-2.png "user story screenshot")
+
 5. As a new user, I want to add a new wine to the collection
       1. From any page, the user can click on the navbar link to 'add wine'
       ![user story screenshot](static/images/user-stories/us5-1.png "user story screenshot")
+
       2. Once all required details are submitted and the wine/vintage pair is not already found in the collection, the wine will be added.
       ![user story screenshot](static/images/user-stories/us5-2.png "user story screenshot")
 
@@ -73,42 +86,65 @@ Python validation carried out using [PEP8 checker](http://pep8online.com/)
 1. As a returning user, I want to be able to log in to my account
     1. From the home page, the user can click on the 'sign in' link on the navbar.
     ![user story screenshot](static/images/user-stories/rus1-1.png "user story screenshot")
+
     2. If they click on the central text on the hero image, they will be taken to the 'sign-up' page, where there is also a link to the 'sign-in' page.
     ![user story screenshot](static/images/user-stories/rus1-2.png "user story screenshot")
     3. Once the user submits their username and password, and the details match the ones in the database, the user will be logged into the session.
     ![user story screenshot](static/images/user-stories/rus1-3.png "user story screenshot")
+
     ![user story screenshot](static/images/user-stories/rus1-3.1.png "user story screenshot")
+
 2. As a returning user, I want to view the reviews I have made
     1. When the user has signed in, they are taken to their profile page, which displays a list of their reviews on the page.
     ![user story screenshot](static/images/user-stories/rus2-1.png "user story screenshot")
+
     2. The user can also see their review for a wine on the modal display for the wine. 
     ![user story screenshot](static/images/user-stories/rus2-2.png "user story screenshot")
+
 3. As a returning user, I want to edit/remove the reviews I have made
      1. The user can find the review they want to enter on their profile page, or else on the modal display for the wine
      ![user story screenshot](static/images/user-stories/rus3-1.png "user story screenshot")
+
      ![user story screenshot](static/images/user-stories/rus3-1.1.png "user story screenshot")
+
      2. Clicking on the 'edit' button takes the user to the 'edit review' page where they can make changes to their review text and/or star rating and submit the update.
      ![user story screenshot](static/images/user-stories/rus3-2.png "user story screenshot")
+
      3. Clicking on the 'delete' button prompts a confirmation box to ask the user if they are sure they want to remove the review. Clicking ok will remove the review from the database.
      ![user story screenshot](static/images/user-stories/rus3-3.png "user story screenshot")
+
      ![user story screenshot](static/images/user-stories/rus3-3.1.png "user story screenshot")
+
 4. As a returning user, I want to view the wines in my favourites list
     1. When the user has signed in, they are taken to their profile page, which displays a list of the wines they have added to their favourites list.
     ![user story screenshot](static/images/user-stories/rus4-1.png "user story screenshot")
+
     2. The user can click on the 'view' button for each wine to display all the details, or else click on the 'remove' button to remove the wine from their favourites.
     ![user story screenshot](static/images/user-stories/rus4-2.png "user story screenshot")
+
     ![user story screenshot](static/images/user-stories/rus4-2.1.png "user story screenshot")
+
 5. As a returning user, I want to view the wines I have submitted
     1. When the user has signed in, they are taken to their profile page, which displays a list of the wines they have submitted to the collection.
     ![user story screenshot](static/images/user-stories/rus5-1.png "user story screenshot")
+
     2. The user can click on the 'view' button for each wine to display all the details.
     ![user story screenshot](static/images/user-stories/rus5-2.png "user story screenshot")
+
 
  - **Admin Users**
 1. As an admin user, I want to be able to removes wines from the website
     1. When the user has signed in as an Admin, they will be able to see a 'delete' button on the modal for each wine.
+     ![user story screenshot](static/images/user-stories/aus1.png "user story screenshot")
+
+     ![user story screenshot](static/images/user-stories/aus2.png "user story screenshot")
+
     2. Once clicked, a popup is displayed to ask for confirmation to delete.
-    3. The user can click ok to remove the wine from the database, and it will be no longer visible on the webiste.
+    ![user story screenshot](static/images/user-stories/aus3.png "user story screenshot")
+
+    3. The user can click ok to remove the wine from the database, and it will be no longer visible on the website.
+    ![user story screenshot](static/images/user-stories/aus4.png "user story screenshot")
+    ![user story screenshot](static/images/user-stories/aus5.png "user story screenshot")
 
 ### Manual Testing of All Elements
 
