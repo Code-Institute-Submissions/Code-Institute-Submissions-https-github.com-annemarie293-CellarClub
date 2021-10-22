@@ -78,8 +78,8 @@ def register():
         # Add the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Thanks for joining our club!"
-              "Browse our wines and add some"
-              "to your favourites today!")
+              " Browse our wines and add some"
+              " to your favourites today!")
         return redirect(url_for('profile', username=session["user"]))
 
     return render_template("register.html")
@@ -226,7 +226,7 @@ def add_review(wine_id):
             reviewer = "other"
     if reviewer == session["user"]:
         flash("You have already reviewed this wine, "
-              "please edit your review instead")
+              " please edit your review instead")
         return redirect(url_for('view_wines'))
 
     if request.method == "POST":
@@ -305,15 +305,15 @@ def add_favourite():
 
     # To find if check if user already has created favourites,
     # and if wine exists in favourites
-    #if "favourites" in user:
-    #    existing_favourites = user["favourites"]
-    #    if existing_favourites:
-    #        for favourite in existing_favourites:
-    #            if favourite["wine_id"] == request.form.get("wine_id"):
-     #               flash("This wine was was already"
-    #                      "added to your favourites list")
-     #               return redirect(url_for('view_wines'))
-    if request.method == "POST":                       
+    if "favourites" in user:
+        existing_favourites = user["favourites"]
+        if existing_favourites:
+            for favourite in existing_favourites:
+                if favourite["wine_id"] == request.form.get("wine_id"):
+                    flash("This wine was was already"
+                          " added to your favourites list")
+                    return redirect(url_for('view_wines'))
+    if request.method == "POST":
         # To add the wine to user favourites
         favourite = {
             "wine_id": request.form.get("wine_id"),
