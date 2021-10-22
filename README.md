@@ -1,108 +1,330 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# CellarClub
 
-Welcome annemarie293,
+View the deployed site [here](http://cellar-club.herokuapp.com/ "CellarClub")
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## PROJECT INTRODUCTION
+Cellar Club is a website desisgned for members of a wine appreciation group. Members can create an account on the site to view the collection of wines, add reviews and ratings to wines in the collection, and also add new wines to the collection. Members can also add the wines to a 'favourites' list for future reference.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+![image of home page site mock-ups on various screen sizes](/workspace/CellarClub/static/images/mock-ups/mock-screens.png "Mock Up")
+![image of wines pagesite mock-ups on various screen sizes](/workspace/CellarClub/static/images/mock-ups/mock-screens-wines.png "Mock Up")
+___
 
-## Gitpod Reminders
+## **USER EXPERIENCE (UX)**
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+###  Strategy
+ - **User Stories**
 
-`python3 -m http.server`
+New Users
 
-A blue button should appear to click: _Make Public_,
+1. As a new user, I want to be able to create a member account
+2. As a new user, I want to view the wine collection easily
+3. As a new user, I want to add reviews to existing wines
+4. As a new user, I want to add wines to my favourites
+5. As a new user, I want to add a new wine to the collection
 
-Another blue button should appear to click: _Open Browser_.
+Returning Users
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+1. As a returning user, I want to be able to log in to my account
+2. As a returning user, I want to view the reviews I have made
+3. As a returning user, I want to edit/remove the reviews I have made
+4. As a returning user, I want to view the wines in my favourites list
+5. As a returning user, I want to view the wines I have submitted
 
-A blue button should appear to click: _Make Public_,
+Admin Users
+1. As an admin user, I want to be able to removes wines from the website
 
-Another blue button should appear to click: _Open Browser_.
+### Design
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+ - **Colour Scheme**
 
-To log into the Heroku toolbelt CLI:
+   - The site is a deisgned with a retro classic feel with mainly black and white colours, while accents are in shades of amber and burgundy.
+   
+ - **Font**
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+   - In keeping with the retro feel, 'Corben' from google fonts has been used for this site. The large rounded bubble letters of the 700 weight are used for the logo and headers, while the lighter 400 weight is used for the body
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
 
-------
+- **Images**
 
-## Release History
+  - All images taken from open source sites, or from free download allowance on subscription sites. The large hero image on the home page was chosen to echo the 'cellar' theme and lead users into the site. The custom background graphic was created as slight background in line with the sites theme, proviving some contrast for the card elements but not distracting or competing. The generic wine bottle images used for the wine cards were chosen to ensure a uniform size and look, while the user can submit an image of the actual wine to be displayed in the pop up modal.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### Wireframes
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+Wireframes showing the each page across small, medium and large screen sizes.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+ |     Page   | Wireframe | Wireframe | Wireframe |
+    | ----------- | ----------- | ----------- | ----------- |
+    |Sign up page     | [Large]() | [Medium]()   | [Small]()   |
+    |Sign in page   | [Large]() | [Medium]()   | [Small]()   |
+    |Profile page   |  [Large]() | [Medium]()   | [Small]()   |
+    |Wines page  |  [Large]() | [Medium]()   | [Small]()   |
+    |Wine Modal  |  [Large]() | [Medium]()   | [Small]()   |
+    |Add wine page   |  [Large]() | [Medium]()   | [Small]()   |
+    |Add/edit review page   | [Large]() | [Medium]()   | [Small]()   |
+    |Profile page  | [Large]() | [Medium]()   | [Small]()   |
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Database Schema
+The Cellar-club database is stored in MongoDB Atlas, made up of 3 collections.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+ - Wine_type:
+    ![image wine-type collection](/assets/images/readme/sftw-mockup.jpg "wine_type collection")
+    This comprises 4 documents, one for each wine type. Collection is uneditable as these types will not change.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+ - Users:
+   - Document in the collection:
+    ![image users collection](/assets/images/readme/sftw-mockup.jpg "users collection")
+    - This collection holds all the data submitted for each new user.
+    - User favourites are stored as dictionary ojects in the "favourites" key array.
+    - Value for the "wine_id" key in each of the favourites dictionaries corresponds to the value for the "_id" ObjectID of the favourited wine in the "Wines" collection and can be used to cross reference the collections.
+    - 
+ - Wines:
+    - Document in the collection:
+    ![image wines collection](/assets/images/readme/sftw-mockup.jpg "wines collection")
+    - This collection holds all the data submitted for each new wine.
+    - Wine reviews are stored as dictionaries in the "reviews" key array.
+    - Value for the "reviewed_by" key in each of the favourites dictionaries corresponds to the value for the "username" key in the "Users" collection and can be used to cross reference the collections.
+___
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+## **FEATURES**
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+###  Current Features
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+  - All pages:
+    - Full width header containing navbar links to all pages on the site.
+    - Responsive and interactive navbar which collapses to hamburger menu with dropdown menu for smaller screen sizes
+    - Navbar only shows 'Sign Up' and 'Sign In' links to new users (or if signed out)
+    - Once signed in, navabr shows links to 'Wines', 'Add wine' and 'Profile' pages, as well as a link to sign out of session.
+    - Page headings in a yellow banner with the title of the page
+    - Footer with contact info and links to social media sites.
+  - Home Page:
+    - Large full width, viewport height hero image, of a wine cellar, inviting the user to join the club
+    - Clicking the central text takes users to the registration page
+    - If the user is not yet logged in, the only navbar links displayed are for 'Sign Up' or 'Sign In'
+ - Sign Up Page:
+    - User is invited to enter their username, pasword, date of birth and full name in the registration form.
+    - All fields are required and form validation is in place.
+    - There is a second password verification field to ensure the user has typed their password correctly - the form will not sumbit unless passwords are matching.
+    - The form will not submit if the user age, as calcuated from the date of birth input field, is under 18. A flashed message at the top of the screen displays a message confirming this.
+    - On successfull completion of the form, the user details are added to the "users" collection in MongoDB, and the user profile page is opened.
+    - Below the 'Register' submit button, there is a section to direct users who already have an account to the 'sign in' page instead.
+ - Sign In Page:
+    - User is invited to enter their username and password in the sign in form.
+    - If the details match the user details in the 'users' collection, the user is signed in to a new session on the site.
+    - If the details do not match, a flashed message ar the top of the screen advises the username/password is incorrect.
+    - Below the 'Sign In' submit button, there is a section to direct users who do not already have an account to the 'sign up' page instead.
+ - Profile Page:
+    - Only accessible to users once signed in. 
+    - Top section of the page displays two cards (side by side on med/alrge screens, stacked on small screens)
+    - The first card shows a list of wines which have been submitted by the user.
+    - Each row in the list shows the wine name and vintage, and a button to view the wine details in the pop up modal.
+    - The second card shows a list of wines which have been added to the users 'favourites' array in the "users" collection.
+    - Each row in the list shows the wine name and vintage, and a button to view the wine details in the pop up modal, also an "x" icon button to remove the wine from the user favourites,
+    - Below this section is a full width card showing a list of all reviews the user has submitted for wines in the site collection.
+    - Each row in the list shows the wine name and vintage, then the review text, along with the rating (1-5 stars) the user has awared the wine.
+    - Each review also displays a button to edit the review, delete the review, or view the wine in the wine modal.
+ - Wines Page:
+    - At the top of the page there is a dropdown selector to filter the wines according to wine type: Red, White, Rosé or Sparkling.
+    - There is a second input box to search the filter by desired keywords.
+    - The details for each wine are displayed in individual cards, full width on small screens or in a 3x3 grid on medium screens and larger.
+    - Depending on the wine type, there is an image of a corresponding generic red/white/rosé/sparkling wine bottle on the left of each card. 
+    - The right hand side of the card displays the name, vintage year, grape variety and country for the wine.
+    - Below the details, there is a 5 star rating display which shows the average rating of the wine calculated from the user reviews.
+    - On hover of the card, a thin burgundy border is applied, and a "view" button appears on the card, clicking the card displays the wine modal.
+ - Wine Modal Section:
+    - The wine modal displays all details for each wine along with the user reviews.
+    - The modal header displays the wine name in the site logo font style
+    - The modal body displays the wine vintage year, grape variety, country and region (if submitted).
+    - A link to purchase the wine through https://www.wine-searcher.com/ is also displayed.
+    - If there was an image url included on submission of the wine, this image is dsplayed beside the wine details. If no image was submitted, and image of generic wine bottles is displayed instead.
+    - Below the wine details, the user reviews are displayed.
+    - Each review shows the username who sumbitted, the review text, and the star rating awarded.
+    - If the review was submitted by the current user, they will also see buttons to edit or display their review.
+    - The modal footer displays buttons to add the wine to the users favourites, or to adda review to the wine, along with a button to close the modal.
+    - An admin user will also see a button to delete the wine. This feature is restricted to admins only, since modifying/deleting the wine following submission would affect other users reviews and favourites lists. Admins can remove the wine if there are any issues.
+ - Add Wine Page:
+    - Form invites the user to enter details to add a wine to the collection.
+    - Required details are wine type (from dropdown selector displaing only red/white/rosé/sparkling), wine name, vintage, grape variety, country, user review and rating (1-5 stars).
+    - Optional details are the country region and image url.
+    - Multiple wines with the same name can be submitted to the collection, but only one vintage for each wine is allowed.
+    - If a user tries to submit an existing wine/vintage paring, the submission is rejected and the user is advised to submit a review instead via a flashed message.
+    - Once the wine is submitted, the user is returned to the wines page.
+ - Add Review Page:
+    - A user can review each wine/vintage pair only once.
+    - If a user clicks the 'add review' button and they have already added a review, they cannot access the 'add review' page and are advised to submit a review instead via a flashed message.
+    - On the 'add review' page, the wine name and vintage inputs are already populated with the corresponding details and are displayed as read only.
+    - The user must add their review to the textarea input, and their rating from 1-5 stars.
+    - Once the review is submitted, the user is returned to the wines page.
+ - Edit Review Page:
+    - The 'edit review' page is displayed identical to the 'add review' page, except the details from the existing review are populated into the 'review' and 'rating' input fields.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+ - Site is fully responsive (using bootstrap and CSS) to adapt to all display sizes - mobiles,  tablets and large monitors/laptop screens.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+### Potential future features
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+ - The site could incorporate a shop feature to sell the wines directly to the users.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+ ____
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+ ## **TECHNOLOGIES USED**
 
-------
+ ### Languages
 
-## FAQ about the uptime script
+  - [Html5](https://en.wikipedia.org/wiki/HTML5)
+  - [CSS3](https://en.wikipedia.org/wiki/CSS)
+  - [Javascript](https://www.javascript.com/)
+  - [Python](https://www.python.org/)
 
-**Why have you added this script?**
+ ### Frameworks, libraries and tools used
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+  - [Bootstrap v5.02](https://getbootstrap.com/)
+    - Bootstrap was used for navbar, grid layout, form structure, responsive layout, margins, padding etc on all screen sizes.
+  - [JQuery](https://jquery.com/)
+    - JQuery library used for JS scripts
+  - [Jinja templating engine](https://jinja.palletsprojects.com/en/3.0.x/)
+    - Used to create html base template, and additional pages, also allows  writing code similar to Python syntax. Then the template is passed data to render the final document.
+  - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
+    - Framework used to build the webapp (depends on the Jinja template engine and the Werkzeug WSGI toolkit)
+  - [Mongo DB Atlas](https://www.mongodb.com/)
+    - Used to store and manage the database collections
+  - [dnspython](https://www.dnspython.org/)
+    - DNS toolkit for Python used for queries
+  - [Flask-PyMongo](https://flask-pymongo.readthedocs.io/en/latest/)
+    - Tool to  bridge   Flask and PyMongo
+  - [Gitpod](https://www.gitpod.io/)
+    - Code was written in Gitpod, and version control was managed by commit and push to GitHub.
+  - [GitHub](https://github.com/)
+    - Used to store the project repository
+  - [Heroku](http://www.heroku.com/)
+    - Used to deploy the project
+  - [Font Awesome](https://fontawesome.com/)
+    - Used to display social media icons.
+  - [Google Fonts](https://fonts.google.com/)
+    - Used to import the Josefin Sans font used throughout the site.
+  - [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
+    - Used for testing code output, especially to view various display sizes during the site creation.
+  - [Balsamiq](https://balsamiq.com/)
+    - Wireframes were created using the balsamiq app.
+  - [JPEGmini Pro](https://www.jpegmini.com/)
+    - Used to reduce file size of images while preserving quality, to improve page loading times.
+ - [Image Compressor](https://imagecompressor.com/)
+    - Used to reduce file size of images while preserving quality, to improve page loading times.
+ - [Canva](http://www.canva.com/r)
+    - Graphic design platform used to create the custom background image.
+ - [Moqups website mockup generator](https://websitemockupgenerator.com/)
+    - Used to generate a mockup of the site on multiple devices
 
-**How will this affect me?**
+   ___
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+## **DEPLOYMENT**
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+#### Deployed using Heroku
 
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
+- **Instructions**
+  1. Open the [repository](https://github.com/annemarie293/CellarClub) in GitHub, then launch in GitPod
+  2. Create an env.py file, and ensure it is added to .gitignore file as this will contain sensitive info that should not be pushed to the server.
+  3. In env.py:
+  
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+    import os 
+    os.environ.setdefault("IP", "0.0.0.0") 
+    os.environ.setdefault("PORT", "5000")
+    os.environ.setdefault("SECRET_KEY", " ")
+    os.environ.setdefault("MONGO_URI", "mongodb+srv://userannemarie:PASSWORD@myfirstcluster.1ccbb.mongodb.net/DB-NAME?retryWrites=true&w=majority")
+    os.environ.setdefault("MONGO_DBNAME", "") 
 ```
 
-**Anything more?**
+4. Use your own secret key, ideally from a random passoword generator, and add your own Mongo URI, password and DB name from your mongo database
+2. Install Flask, flask-pymongo and dnspython using ```pip3 install``` command
+  3. To tell Heroku which dependencies are needed to run your app run:
+        ```pip3 freeze --local > requirements.txt``` 
+        ```echo web: python app.py > Procfile``` 
+  4. Ensure these files are pushed to git before deploy
+  4. Login or create a new account on Heroku.
+  5. Create a new app, choosing app name and region
+  6. Choose "GitHub" as the deployment method, add your GitHub repo name and click search to connect.
+  7. Before clicking "Enable automatic deploys" on the deploy tab, go to "reveal config vars" on the settings tab
+  8. Add the below key/value pairs:
+  
+   |     Key  | Value | 
+    | -------- | --------- | 
+    |IP    | 0.0.0.0 | 
+    |PORT | 5000 | 
+    |SECRET_KEY| copy from env.py  | 
+    |MONGO_URI | copy from env.py  | 
+    |MONGO_DBNAME | copy from env.py   | 
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+  5. click on "hide config vars"
+  6. Return to "deploy" tab and click "Enable automatic deploys"
+  7. Then click "Deploy Branch" to deploy your app.
 
----
+#### Forking the Repository
 
-Happy coding!
+- **Instructions**
+  1. Open the [repository](https://github.com/annemarie293/CellarClub) in GitHub
+  2. Click on the “fork” button at the top right hand side of the page, just below the navbar.
+  3. A copy of the original repository will be created to your own GitHub account.
+
+
+#### Cloning the Repository
+
+- **Instructions**
+  1. Open the [repository](https://github.com/annemarie293/CellarClub)
+  2. Click on the “code” button to the left of the green “Gitpod” button.
+  3. To clone the repository using HTTPS, under "Clone with HTTPS", click the clipboard icon. 
+  4. To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click Use SSH, then click the clipboard icon . 
+  5. To clone a repository using GitHub CLI, click Use GitHub CLI, then click the clipboard icon.
+  6. Open Git Bash.
+  7. Change the current working directory to the location where you want the cloned directory.
+  8. Type `git clone`, and then paste the URL you copied earlier.
+
+`
+    $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+`
+  9. Press Enter to create your local clone.
+
+`
+  $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+  > Cloning into `Spoon-Knife`...
+  > remote: Counting objects: 10, done.
+  > remote: Compressing objects: 100% (8/8), done.
+  > remove: Total 10 (delta 1), reused 10 (delta 1)
+  > Unpacking objects: 100% (10/10), done.
+ `
+ 
+  10. For more detailed info on this process please click [here](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
+
+___
+
+## **CODE**
+
+#### Credits
+
+All code written by myself using lessons from the Code Institute back end development module as a kicking off point, with the exception of:
+ 
+- [Flash Alert CSS](Source: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_alert)
+
+ 
+
+#### Content
+  - The text content for this site was all written by myself, Anne Marie Murphy.
+
+#### Media
+- **The photos used in this site were freely obtained from below image sites:**
+
+- [Home Page image](https://www.shutterstock.com/image-photo/collection-wines-store-elite-alcohol-bottles-1316148788)
+- [Image for generic wine bottles](https://www.shutterstock.com/image-vector/set-wine-bottles-isolated-on-transparent-574585954)
+- - [Image for generic champagne bottles](https://www.shutterstock.com/image-vector/vector-realistic-illustration-champagne-bottles-on-1959046075)
+- **Image urls submitted by users and displayed in the wine modal section may not be from free image sites**
+
+#### Acknowledgements
+
+   - I received inspiration for this project from our course material, and help with issues from the below resources:
+     - [W3schools](https://www.w3schools.com/)
+     - [Stackoverlfow](https://stackoverflow.com/)
+     - [CSS-Tricks](https://css-tricks.com/)
+     - [Mozilla developer](https://developer.mozilla.org/en-US/) 
+     - Code Institute slack channel
+
+   - Thanks also to my mentor Rahul Lakhanpal for all his help and support throughout this project. 
